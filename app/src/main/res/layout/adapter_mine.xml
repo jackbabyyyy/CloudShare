@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView
+        android:background="@drawable/qmui_divider_bottom_bitmap"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:gravity="center_vertical"
+        android:id="@+id/tv"
+        android:drawableRight="@drawable/ic_chevron_right_black_24dp"
+        tools:text="shfshef"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"/>
+
+
+
+</LinearLayout>

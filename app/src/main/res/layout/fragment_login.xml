@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<com.qmuiteam.qmui.widget.QMUIWindowInsetLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.qmuiteam.qmui.widget.QMUITopBarLayout
+        app:qmui_topbar_title_color="@color/qmui_config_color_pure_black"
+        app:qmui_topbar_need_separator="false"
+        app:qmui_topbar_text_btn_color_state_list="@color/qmui_config_color_60_pure_black"
+        app:qmui_topbar_bg_color="@color/qmui_config_color_white"
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"/>
+    
+    <LinearLayout
+        android:fitsSystemWindows="true"
+        android:layout_marginTop="?attr/qmui_topbar_height"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        
+        <ImageView
+            android:layout_marginBottom="24dp"
+            android:layout_marginTop="24dp"
+            android:src="@mipmap/logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        
+        <EditText
+
+            android:id="@+id/account"
+            style="@style/input"
+            android:hint="输入账号或手机号"
+            android:drawableLeft="@mipmap/account"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"/>
+
+        <EditText
+
+
+            android:id="@+id/password"
+            style="@style/input"
+            android:drawableRight="@mipmap/password_close"
+            android:hint="输入密码"
+            android:drawableLeft="@mipmap/password"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"/>
+
+        <RelativeLayout
+
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="48dp"
+            android:layout_marginLeft="48dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+                app:qmui_borderColor="@color/app_color_blue_2"
+                android:textColor="@color/qmui_config_color_white"
+                app:qmui_backgroundColor="@color/app_color_blue_2"
+                android:id="@+id/login"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="26dp"
+
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+
+                android:text="登录"
+                app:qmui_isRadiusAdjustBounds="true"/>
+
+            <TextView
+
+                android:id="@+id/forget"
+                android:paddingTop="10dp"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/login"
+                android:text="忘记密码？"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </RelativeLayout>
+
+
+
+
+
+
+
+
+    </LinearLayout>
+
+
+    <ImageView
+        android:layout_gravity="bottom"
+        android:src="@mipmap/waterwave"
+        android:scaleType="fitXY"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    
+  
+
+</com.qmuiteam.qmui.widget.QMUIWindowInsetLayout>
