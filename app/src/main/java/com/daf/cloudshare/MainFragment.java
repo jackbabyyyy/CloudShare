@@ -90,7 +90,7 @@ public class MainFragment extends BaseFragment {
     }
 
     private void initPagers() {
-        mViewPager.setSwipeable(false);
+        mViewPager.setSwipeable(true);
         QMUIPagerAdapter adapter = new QMUIPagerAdapter() {
             private FragmentTransaction mCurrentTransaction;
             private Fragment mCurrentPrimaryItem = null;

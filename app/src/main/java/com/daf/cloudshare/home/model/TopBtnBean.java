@@ -46,7 +46,7 @@ public class TopBtnBean {
         /**
          * title : 信用卡
          * icon : https://www.dafyun.cn/Public/images/app/m1.png
-         * type : view
+         *          * type : view
          * url :
          */
 

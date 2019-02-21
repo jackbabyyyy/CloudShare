@@ -6,13 +6,29 @@
               android:background="#ffffff"
               android:layout_height="match_parent">
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
     <com.youth.banner.Banner
         app:image_scale_type="fit_xy"
         android:id="@+id/banner"
         android:layout_width="match_parent"
-        android:layout_height="120dp">
+        android:layout_height="200dp">
+
+
 
     </com.youth.banner.Banner>
+
+        <!--<com.qmuiteam.qmui.widget.QMUITopBarLayout-->
+            <!--app:qmui_topbar_bg_color="@android:color/transparent"-->
+            <!--app:qmui_topbar_need_separator="false"-->
+            <!--android:id="@+id/topbar"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--/>-->
+    </FrameLayout>
 
     <android.support.v7.widget.RecyclerView
         android:layout_marginTop="18dp"
@@ -37,14 +53,14 @@
                 android:textColor="#333333"
                 android:padding="10dp"
                 android:textStyle="bold"
-                android:text="借贷精选"
+                android:text="最新上架"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <TextView
                 android:id="@+id/tvMore"
                 android:padding="10dp"
                 android:textColor="#888888"
-                android:text="更多"
+                android:text="更多>>"
                 android:layout_alignParentRight="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
@@ -86,7 +102,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-
+        <TextView
+            android:id="@+id/tvMore2"
+            android:padding="10dp"
+            android:textColor="#888888"
+            android:text="更多>>"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
     </RelativeLayout>
 
 

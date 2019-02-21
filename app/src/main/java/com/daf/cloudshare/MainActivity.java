@@ -9,6 +9,7 @@ import com.daf.cloudshare.base.BaseFragmentActivity;
 import com.daf.cloudshare.home.HomeFragment;
 import com.qmuiteam.qmui.arch.QMUIActivity;
 import com.qmuiteam.qmui.arch.QMUIFragment;
+import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 
 public class MainActivity extends BaseFragmentActivity {
 
@@ -20,6 +21,7 @@ public class MainActivity extends BaseFragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (savedInstanceState == null) {
             BaseFragment fragment =new MainFragment();
 

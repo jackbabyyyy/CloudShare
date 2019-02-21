@@ -143,10 +143,10 @@ public class LoginFragment extends BaseFragment {
             return;
         }
 //        HashMap hashMap=new HashMap();
-//        hashMap.put("username",account);
+//        hashMap.put("telephone",account);
 //        hashMap.put("password",password);
         OkGo.post(AppUrl.login)
-                .params("username",account)
+                .params("telephone",account)
                 .params("password",password)
 //                .upJson(new JSONObject(hashMap))
                 .execute(new StringCallback() {
