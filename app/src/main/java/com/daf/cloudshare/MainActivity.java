@@ -22,6 +22,9 @@ public class MainActivity extends BaseFragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+
+
         if (savedInstanceState == null) {
             BaseFragment fragment =new MainFragment();
 
@@ -35,6 +38,9 @@ public class MainActivity extends BaseFragmentActivity {
 
 
     }
+
+
+
 
 
 

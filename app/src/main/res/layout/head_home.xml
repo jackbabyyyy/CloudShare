@@ -1,76 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:background="#ffffff"
-              android:layout_height="match_parent">
+
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical">
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
 
-    <com.youth.banner.Banner
-        app:image_scale_type="fit_xy"
-        android:id="@+id/banner"
-        android:layout_width="match_parent"
-        android:layout_height="200dp">
+        <com.youth.banner.Banner
+            android:id="@+id/banner"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:image_scale_type="fit_xy">
 
 
-
-    </com.youth.banner.Banner>
+        </com.youth.banner.Banner>
 
         <!--<com.qmuiteam.qmui.widget.QMUITopBarLayout-->
-            <!--app:qmui_topbar_bg_color="@android:color/transparent"-->
-            <!--app:qmui_topbar_need_separator="false"-->
-            <!--android:id="@+id/topbar"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--/>-->
+        <!--app:qmui_topbar_bg_color="@android:color/transparent"-->
+        <!--app:qmui_topbar_need_separator="false"-->
+        <!--android:id="@+id/topbar"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--/>-->
     </FrameLayout>
 
     <android.support.v7.widget.RecyclerView
-        android:layout_marginTop="18dp"
         android:id="@+id/recycle_top"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp">
 
     </android.support.v7.widget.RecyclerView>
 
     <View
-        android:background="#fff7f7f7"
         android:layout_width="match_parent"
-        android:layout_height="10dp"/>
+        android:layout_height="10dp"
+        android:background="#fff7f7f7"/>
+
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <TextView
-                android:textColor="#333333"
-                android:padding="10dp"
-                android:textStyle="bold"
-                android:text="最新上架"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="最新上架"
+                android:textColor="#333333"
+                android:textStyle="bold"/>
+
             <TextView
                 android:id="@+id/tvMore"
-                android:padding="10dp"
-                android:textColor="#888888"
-                android:text="更多>>"
-                android:layout_alignParentRight="true"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:padding="10dp"
+                android:text="更多>>"
+                android:textColor="#888888"/>
 
         </RelativeLayout>
 
         <View
-            android:background="#ffdddddd"
             android:layout_width="match_parent"
-            android:layout_height="1px"/>
+            android:layout_height="1px"
+            android:background="#ffdddddd"/>
 
 
         <android.support.v7.widget.RecyclerView
@@ -82,36 +88,37 @@
         </android.support.v7.widget.RecyclerView>
 
 
-
     </LinearLayout>
 
 
     <View
-        android:background="#fff7f7f7"
+
         android:layout_width="match_parent"
-        android:layout_height="10dp"/>
+        android:layout_height="10dp"
+        android:background="#fff7f7f7"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <TextView
-            android:textColor="#333333"
-            android:padding="10dp"
-            android:textStyle="bold"
-            android:text="热门推荐"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="热门推荐"
+            android:textColor="#333333"
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/tvMore2"
-            android:padding="10dp"
-            android:textColor="#888888"
-            android:text="更多>>"
-            android:layout_alignParentRight="true"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:padding="10dp"
+            android:text="更多>>"
+            android:textColor="#888888"/>
     </RelativeLayout>
 
 
-
 </LinearLayout>
+

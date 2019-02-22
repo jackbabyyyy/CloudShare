@@ -20,9 +20,10 @@ public class MyApplication extends Application {
         OkGo.init(this);
 
         HttpHeaders headers = new HttpHeaders();
-        headers.put("token",SP.get(this,Const.token,"").toString());
-        headers.put("commonHeaderKey1", "commonHeaderValue1");
+//        headers.put("token",SP.get(this,Const.token,"").toString());
         OkGo.getInstance().debug("daf").addCommonHeaders(headers);
+
+
 
         QMUISwipeBackActivityManager.init(this);
 

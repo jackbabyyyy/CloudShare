@@ -10,6 +10,7 @@ import com.daf.cloudshare.base.BaseFragmentActivity;
 import com.daf.cloudshare.login.LoginFragment;
 import com.daf.cloudshare.utils.Const;
 import com.daf.cloudshare.utils.SP;
+import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 
 public class LoginActivity extends BaseFragmentActivity {
 
@@ -21,6 +22,7 @@ public class LoginActivity extends BaseFragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
         //判断是否登录
         if (!TextUtils.isEmpty(SP.get(this,Const.token,"").toString())){

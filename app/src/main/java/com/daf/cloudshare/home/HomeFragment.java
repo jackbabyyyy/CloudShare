@@ -22,6 +22,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.alibaba.fastjson.JSON;
@@ -29,18 +30,22 @@ import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.daf.cloudshare.R;
 import com.daf.cloudshare.base.BaseFragment;
-import com.daf.cloudshare.home.adapter.HomeAdapter;
+
+import com.daf.cloudshare.base.BaseProductAdapter;
 import com.daf.cloudshare.home.adapter.NewPrjAdapter;
 import com.daf.cloudshare.home.adapter.TopBtnAdapter;
 import com.daf.cloudshare.home.model.BannerBean;
-import com.daf.cloudshare.home.model.HotPrjBean;
-import com.daf.cloudshare.home.model.NewPrjBean;
+
 import com.daf.cloudshare.home.model.TopBtnBean;
+import com.daf.cloudshare.model.ProductBean;
 import com.daf.cloudshare.net.AppUrl;
 import com.daf.cloudshare.utils.Const;
+import com.daf.cloudshare.utils.SP;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
+import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
+import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 import com.youth.banner.Banner;
 import com.youth.banner.listener.OnBannerListener;
 import com.youth.banner.loader.ImageLoader;
@@ -67,14 +72,15 @@ public class HomeFragment extends BaseFragment {
 
     @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
+    @BindView(R.id.topbar)
+    QMUITopBarLayout mTopBar;
 
 
-
-    private List<HotPrjBean.DataBean> mData=new ArrayList<>();
+    private List<ProductBean.DataBean> mData=new ArrayList<>();
     private Banner mBanner;
     private RecyclerView mTop;
     private RecyclerView mNew;
-    private HomeAdapter homeAdapter;
+    private BaseProductAdapter homeAdapter;
 
 
     @Override
@@ -82,18 +88,27 @@ public class HomeFragment extends BaseFragment {
         View root = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_home, null);
         ButterKnife.bind(this, root);
 
+
         init();
         return root ;
     }
 
     private void init() {
 
+        //状态栏
+        int height=QMUIStatusBarHelper.getStatusbarHeight(getActivity());
+        ViewGroup.LayoutParams layoutParams=mTopBar.getLayoutParams();
+        layoutParams.height=height;
+
+        mTopBar.setLayoutParams(layoutParams);
+
+
 
 
         mRecyclerView.setNestedScrollingEnabled(false);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        homeAdapter = new HomeAdapter(mData);
+        homeAdapter = new BaseProductAdapter(mData);
         mRecyclerView.setAdapter(homeAdapter);
         homeAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
@@ -102,13 +117,14 @@ public class HomeFragment extends BaseFragment {
             }
         });
         OkGo.post(AppUrl.hotPrj)
+                .headers("token", SP.getToken(getActivity()))
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
                         try {
                             JSONObject jsonObject=new JSONObject(s);
                             if (jsonObject.getString("code").equals(Const.body_success)){
-                                HotPrjBean hotPrjBean=JSON.parseObject(s,HotPrjBean.class);
+                                ProductBean hotPrjBean=JSON.parseObject(s,ProductBean.class);
                                 homeAdapter.setNewData(hotPrjBean.getData());
                             }
                         } catch (JSONException e) {
@@ -144,17 +160,18 @@ public class HomeFragment extends BaseFragment {
 
     private void initNew() {
         mNew.setLayoutManager(new GridLayoutManager(getActivity(),4));
-        List<NewPrjBean.DataBean> data=new ArrayList<>();
+        List<ProductBean.DataBean> data=new ArrayList<>();
         final NewPrjAdapter adapter=new NewPrjAdapter(data);
         mNew.setAdapter(adapter);
         OkGo.post(AppUrl.newPrj)
+                .headers("token",SP.getToken(getActivity()))
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
                         try {
                             JSONObject jsonObject=new JSONObject(s);
                             if (jsonObject.getString("code").equals(Const.body_success)){
-                                NewPrjBean newPrjBean=JSON.parseObject(s,NewPrjBean.class);
+                                ProductBean newPrjBean=JSON.parseObject(s,ProductBean.class);
                                 adapter.setNewData(newPrjBean.getData().subList(0,4));
                             }
                         } catch (JSONException e) {
@@ -173,6 +190,7 @@ public class HomeFragment extends BaseFragment {
         final TopBtnAdapter topBtnAdapter=new TopBtnAdapter(data);
         mTop.setAdapter(topBtnAdapter);
         OkGo.post(AppUrl.topBtn)
+                .headers("token",SP.getToken(getActivity()))
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
@@ -198,6 +216,7 @@ public class HomeFragment extends BaseFragment {
 
 
         OkGo.post(AppUrl.banner)
+                .headers("token",SP.getToken(getActivity()))
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {

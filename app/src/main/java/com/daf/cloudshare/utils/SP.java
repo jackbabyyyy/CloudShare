@@ -95,4 +95,8 @@ public class SP {
         return sp.getAll();
     }
 
+    public static String  getToken(Context context){
+        return SP.get(context,Const.token,"").toString();
+    }
+
 }

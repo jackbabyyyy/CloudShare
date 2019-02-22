@@ -20,6 +20,7 @@ import com.daf.cloudshare.utils.Const;
 import com.daf.cloudshare.utils.SP;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
+import com.lzy.okgo.model.HttpHeaders;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 import com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton;
@@ -158,6 +159,8 @@ public class LoginFragment extends BaseFragment {
                                 LoginBean loginBean= JSON.parseObject(s,LoginBean.class);
                                 //save token
                                 SP.put(getActivity(),Const.token,loginBean.getData().getToken());
+
+
                                 startActivity(new Intent(getActivity(),MainActivity.class));
                                 getActivity().finish();
                             }else{

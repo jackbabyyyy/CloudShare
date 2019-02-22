@@ -67,13 +67,13 @@ public class MainFragment extends BaseFragment {
 
 
         QMUITabSegment.Tab tab=new QMUITabSegment.Tab(getActivity().getDrawable(R.mipmap.tab),
-                getActivity().getDrawable(R.mipmap.tab),"首页",true);
+                getActivity().getDrawable(R.mipmap.tab),"首页",false);
         QMUITabSegment.Tab tab2=new QMUITabSegment.Tab(getActivity().getDrawable(R.mipmap.tab2),
-                getActivity().getDrawable(R.mipmap.tab2),"产品",true);
+                getActivity().getDrawable(R.mipmap.tab2),"产品",false);
         QMUITabSegment.Tab tab3=new QMUITabSegment.Tab(getActivity().getDrawable(R.mipmap.tab),
-                getActivity().getDrawable(R.mipmap.tab),"工具",true);
+                getActivity().getDrawable(R.mipmap.tab),"工具",false);
         QMUITabSegment.Tab tab4=new QMUITabSegment.Tab(getActivity().getDrawable(R.mipmap.tab4),
-                getActivity().getDrawable(R.mipmap.tab4),"我的",true);
+                getActivity().getDrawable(R.mipmap.tab4),"我的",false);
 
 
 
@@ -90,7 +90,7 @@ public class MainFragment extends BaseFragment {
     }
 
     private void initPagers() {
-        mViewPager.setSwipeable(true);
+        mViewPager.setSwipeable(false);
         QMUIPagerAdapter adapter = new QMUIPagerAdapter() {
             private FragmentTransaction mCurrentTransaction;
             private Fragment mCurrentPrimaryItem = null;
