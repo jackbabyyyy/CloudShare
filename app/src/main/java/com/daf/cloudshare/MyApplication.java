@@ -19,9 +19,10 @@ public class MyApplication extends Application {
         super.onCreate();
         OkGo.init(this);
 
-        HttpHeaders headers = new HttpHeaders();
-//        headers.put("token",SP.get(this,Const.token,"").toString());
-        OkGo.getInstance().debug("daf").addCommonHeaders(headers);
+
+        OkGo.getInstance().debug("daf");
+
+
 
 
 
