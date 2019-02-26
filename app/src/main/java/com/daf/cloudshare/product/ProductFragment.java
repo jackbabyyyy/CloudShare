@@ -12,21 +12,25 @@ import com.daf.cloudshare.base.BaseFragment;
 import com.daf.cloudshare.base.BaseProductAdapter;
 import com.daf.cloudshare.model.ProductBean;
 import com.daf.cloudshare.net.AppUrl;
+import com.daf.cloudshare.net.HttpUtil;
 import com.daf.cloudshare.utils.Const;
 import com.daf.cloudshare.utils.SP;
-import com.lzy.okgo.OkGo;
-import com.lzy.okgo.callback.StringCallback;
+
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import okhttp3.Call;
+import okhttp3.Request;
 import okhttp3.Response;
 
 /**
@@ -85,31 +89,37 @@ public class ProductFragment extends BaseFragment implements BaseQuickAdapter.Re
     }
 
     private void getData() {
-        OkGo.post(AppUrl.prjList)
-                .headers("token", SP.getToken(getActivity()))
-                .params("page", mPage)
-                .execute(new StringCallback() {
-                    @Override
-                    public void onSuccess(String s, Call call, Response response) {
-                        try {
-                            JSONObject jsonObject = new JSONObject(s);
-                            if (jsonObject.getString("code").equals(Const.body_success)) {
-                                ProductBean productBean = JSON.parseObject(s, ProductBean.class);
-                                if (productBean.getData().size() != 0) {
-                                    mAdapter.addData(productBean.getData());
-                                    mAdapter.loadMoreComplete();
-                                } else {
-                                    mAdapter.loadMoreEnd();
-                                }
+        Map<String,String> map=new HashMap<>();
+        map.put("page",mPage+"");
+        HttpUtil.getInstance(getActivity()).postForm(AppUrl.prjList, map, new HttpUtil.ResultCallback() {
+            @Override
+            public void onError(Request request, Exception e) {
 
-                            } else {
-                                mAdapter.loadMoreEnd();
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Response response) throws IOException {
+                try {
+                    String s=response.body().string();
+                    JSONObject jsonObject = new JSONObject(s);
+                    if (jsonObject.getString("code").equals(Const.body_success)) {
+                        ProductBean productBean = JSON.parseObject(s, ProductBean.class);
+                        if (productBean.getData().size() != 0) {
+                            mAdapter.addData(productBean.getData());
+                            mAdapter.loadMoreComplete();
+                        } else {
+                            mAdapter.loadMoreEnd();
                         }
 
+                    } else {
+                        mAdapter.loadMoreEnd();
                     }
-                });
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+
     }
 }

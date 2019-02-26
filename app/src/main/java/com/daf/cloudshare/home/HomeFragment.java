@@ -20,6 +20,7 @@ import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,11 +40,10 @@ import com.daf.cloudshare.home.model.BannerBean;
 import com.daf.cloudshare.home.model.TopBtnBean;
 import com.daf.cloudshare.model.ProductBean;
 import com.daf.cloudshare.net.AppUrl;
+import com.daf.cloudshare.net.HttpUtil;
 import com.daf.cloudshare.utils.Const;
 import com.daf.cloudshare.utils.SP;
-import com.lzy.okgo.OkGo;
-import com.lzy.okgo.callback.StringCallback;
-import com.qmuiteam.qmui.util.QMUIDisplayHelper;
+
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 import com.youth.banner.Banner;
@@ -53,12 +53,14 @@ import com.youth.banner.loader.ImageLoader;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import okhttp3.Call;
+import okhttp3.Request;
 import okhttp3.Response;
 
 /**
@@ -116,12 +118,19 @@ public class HomeFragment extends BaseFragment {
 
             }
         });
-        OkGo.post(AppUrl.hotPrj)
-                .headers("token", SP.getToken(getActivity()))
-                .execute(new StringCallback() {
+
+        HttpUtil.getInstance(getActivity())
+                .postForm(AppUrl.hotPrj, null, new HttpUtil.ResultCallback() {
                     @Override
-                    public void onSuccess(String s, Call call, Response response) {
+                    public void onError(Request request, Exception e) {
+
+                    }
+
+                    @Override
+                    public void onResponse(Response response) throws IOException {
                         try {
+                            String s=response.body().string();
+                            Log.d(TAG, "onResponse: "+s);
                             JSONObject jsonObject=new JSONObject(s);
                             if (jsonObject.getString("code").equals(Const.body_success)){
                                 ProductBean hotPrjBean=JSON.parseObject(s,ProductBean.class);
@@ -132,6 +141,7 @@ public class HomeFragment extends BaseFragment {
                         }
                     }
                 });
+
 
 
         initHead();
@@ -163,12 +173,18 @@ public class HomeFragment extends BaseFragment {
         List<ProductBean.DataBean> data=new ArrayList<>();
         final NewPrjAdapter adapter=new NewPrjAdapter(data);
         mNew.setAdapter(adapter);
-        OkGo.post(AppUrl.newPrj)
-                .headers("token",SP.getToken(getActivity()))
-                .execute(new StringCallback() {
+
+        HttpUtil.getInstance(getActivity())
+                .postForm(AppUrl.newPrj, null, new HttpUtil.ResultCallback() {
                     @Override
-                    public void onSuccess(String s, Call call, Response response) {
+                    public void onError(Request request, Exception e) {
+
+                    }
+
+                    @Override
+                    public void onResponse(Response response) throws IOException {
                         try {
+                            String s=response.body().string();
                             JSONObject jsonObject=new JSONObject(s);
                             if (jsonObject.getString("code").equals(Const.body_success)){
                                 ProductBean newPrjBean=JSON.parseObject(s,ProductBean.class);
@@ -182,6 +198,8 @@ public class HomeFragment extends BaseFragment {
 
 
 
+
+
     }
 
     private void initTop() {
@@ -189,12 +207,18 @@ public class HomeFragment extends BaseFragment {
         List<TopBtnBean.DataBean> data=new ArrayList<>();
         final TopBtnAdapter topBtnAdapter=new TopBtnAdapter(data);
         mTop.setAdapter(topBtnAdapter);
-        OkGo.post(AppUrl.topBtn)
-                .headers("token",SP.getToken(getActivity()))
-                .execute(new StringCallback() {
+
+        HttpUtil.getInstance(getActivity())
+                .postForm(AppUrl.topBtn, null, new HttpUtil.ResultCallback() {
                     @Override
-                    public void onSuccess(String s, Call call, Response response) {
+                    public void onError(Request request, Exception e) {
+
+                    }
+
+                    @Override
+                    public void onResponse(Response response) throws IOException {
                         try {
+                            String s=response.body().string();
                             JSONObject jsonObject=new JSONObject(s);
                             if (jsonObject.getString("code").equals(Const.body_success)){
                                 TopBtnBean topBtnBean=JSON.parseObject(s,TopBtnBean.class);
@@ -203,9 +227,9 @@ public class HomeFragment extends BaseFragment {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-
                     }
                 });
+
 
 
 
@@ -215,12 +239,17 @@ public class HomeFragment extends BaseFragment {
     private void initBanner() {
 
 
-        OkGo.post(AppUrl.banner)
-                .headers("token",SP.getToken(getActivity()))
-                .execute(new StringCallback() {
+        HttpUtil.getInstance(getActivity())
+                .postForm(AppUrl.banner, null, new HttpUtil.ResultCallback() {
                     @Override
-                    public void onSuccess(String s, Call call, Response response) {
+                    public void onError(Request request, Exception e) {
+
+                    }
+
+                    @Override
+                    public void onResponse(Response response) throws IOException {
                         try {
+                            String s=response.body().string();
                             JSONObject json=new JSONObject(s);
                             if (json.getString("code").equals(Const.body_success)){
                                 BannerBean bannerBean= JSON.parseObject(s,BannerBean.class);
@@ -251,9 +280,10 @@ public class HomeFragment extends BaseFragment {
                             e.printStackTrace();
                         }
 
-
                     }
                 });
+
+
 
     }
 

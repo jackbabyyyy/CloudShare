@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -16,24 +17,28 @@ import com.daf.cloudshare.MainActivity;
 import com.daf.cloudshare.R;
 import com.daf.cloudshare.base.BaseFragment;
 import com.daf.cloudshare.net.AppUrl;
+import com.daf.cloudshare.net.HttpUtil;
 import com.daf.cloudshare.utils.Const;
 import com.daf.cloudshare.utils.SP;
-import com.lzy.okgo.OkGo;
-import com.lzy.okgo.callback.StringCallback;
-import com.lzy.okgo.model.HttpHeaders;
-import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
+
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 import com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 /**
@@ -54,6 +59,8 @@ public class LoginFragment extends BaseFragment {
     TextView mForget;
 
     private boolean canSee;
+
+
     @Override
     protected View onCreateView() {
         View root = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_login, null);
@@ -132,7 +139,7 @@ public class LoginFragment extends BaseFragment {
     }
 
     @OnClick(R.id.login)
-    public void login(){
+    public void login()  {
         String account=mAccount.getText().toString();
         String password=mPassword.getText().toString();
         if (TextUtils.isEmpty(account)){
@@ -143,41 +150,51 @@ public class LoginFragment extends BaseFragment {
             showToast("密码为空!");
             return;
         }
-//        HashMap hashMap=new HashMap();
-//        hashMap.put("telephone",account);
-//        hashMap.put("password",password);
-        OkGo.post(AppUrl.login)
-                .params("telephone",account)
-                .params("password",password)
-//                .upJson(new JSONObject(hashMap))
-                .execute(new StringCallback() {
-                    @Override
-                    public void onSuccess(String s, Call call, Response response) {
-                        try {
-                            JSONObject login=new JSONObject(s);
-                            if (login.getString("code").equals(Const.login_success)){
-                                LoginBean loginBean= JSON.parseObject(s,LoginBean.class);
-                                //save token
-                                SP.put(getActivity(),Const.token,loginBean.getData().getToken());
+        HashMap hashMap=new HashMap();
+        hashMap.put("telephone",account);
+        hashMap.put("password",password);
 
 
-                                startActivity(new Intent(getActivity(),MainActivity.class));
-                                getActivity().finish();
-                            }else{
-                                showToast(login.getString("msg"));
+        HttpUtil.getInstance(getActivity()).postForm(AppUrl.login, hashMap, new HttpUtil.ResultCallback() {
+            @Override
+            public void onError(Request request, Exception e) {
 
-                            }
+            }
 
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+            @Override
+            public void onResponse(Response response) throws IOException {
+                try {
+                    String s=response.body().string();
+
+                    JSONObject login=new JSONObject(s);
+                    if (login.getString("code").equals(Const.login_success)){
+                        LoginBean loginBean= JSON.parseObject(s,LoginBean.class);
+                        //save token
+                        SP.put(getActivity(),Const.token,loginBean.getData().getToken());
+
+
+                        startActivity(new Intent(getActivity(),MainActivity.class));
+                        getActivity().finish();
+                    }else{
+                        showToast(login.getString("msg"));
 
                     }
-                });
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
+
 
 
 
     }
+
+
+
 
 
 

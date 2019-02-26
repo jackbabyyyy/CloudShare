@@ -39,7 +39,6 @@ import butterknife.ButterKnife;
 
 public abstract class BaseFragment extends QMUIFragment {
 
-
     public BaseFragment() {
     }
 
