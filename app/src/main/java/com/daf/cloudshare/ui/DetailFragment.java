@@ -27,6 +27,8 @@ import okhttp3.Request;
 
 /**
  * Created by PP on 2019/2/27.
+ *
+ * 产品详情页
  */
 public class DetailFragment extends BaseFragment {
 

@@ -102,7 +102,10 @@ public class HttpUtil {
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
                     if (response.isSuccessful()&&response != null){
-                        sendSuccessCallback(response.body().string(),callback);
+                        String s=response.body().string();
+                        Log.d("http", "request: "+request.url());
+                        Log.d("http", "response: "+s);
+                        sendSuccessCallback(s,callback);
                     }
                 }
             });

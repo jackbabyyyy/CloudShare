@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Created by PP on 2019/2/27.
  */
-public class PrjDataListBean {
+public class MyPrjDataListBean {
 
 
     /**

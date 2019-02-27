@@ -9,6 +9,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.daf.cloudshare.AppData;
 import com.daf.cloudshare.R;
 import com.daf.cloudshare.base.BaseFragment;
+import com.daf.cloudshare.ui.MyPrjFragment;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 
 import butterknife.BindView;
@@ -50,6 +51,8 @@ public class MineFragment extends BaseFragment {
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 switch (position){
                     case 0:
+
+                        startFragment(new MyPrjFragment());
                         break;
                     case 1:
                         break;

@@ -75,8 +75,6 @@ public class HomeFragment extends BaseFragment {
 
     @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
-    @BindView(R.id.topbar)
-    QMUITopBarLayout mTopBar;
 
 
     private List<ProductBean.DataBean> mData=new ArrayList<>();
@@ -93,21 +91,17 @@ public class HomeFragment extends BaseFragment {
 
 
         init();
+       // initHead(root);
         return root ;
     }
 
     private void init() {
 
-        //状态栏
-        int height=QMUIStatusBarHelper.getStatusbarHeight(getActivity());
-        ViewGroup.LayoutParams layoutParams=mTopBar.getLayoutParams();
-        layoutParams.height=height;
-
-        mTopBar.setLayoutParams(layoutParams);
 
 
 
 
+        mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setNestedScrollingEnabled(false);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -155,7 +149,7 @@ public class HomeFragment extends BaseFragment {
     }
 
     private void initHead() {
-        View v= LayoutInflater.from(getActivity()).inflate(R.layout.head_home,null);
+       View v= LayoutInflater.from(getActivity()).inflate(R.layout.head_home,null);
         mBanner=v.findViewById(R.id.banner);
         mTop=v.findViewById(R.id.recycle_top);
         mNew=v.findViewById(R.id.recycle_new);
@@ -164,7 +158,7 @@ public class HomeFragment extends BaseFragment {
         initTop();
         initNew();
 
-        homeAdapter.addHeaderView(v);
+       homeAdapter.addHeaderView(v);
 
 
 

@@ -20,6 +20,7 @@ import com.daf.cloudshare.tool.ToolFragment;
 import com.daf.cloudshare.utils.Const;
 import com.daf.cloudshare.utils.SP;
 import com.qmuiteam.qmui.util.QMUIResHelper;
+import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 import com.qmuiteam.qmui.widget.QMUIPagerAdapter;
 import com.qmuiteam.qmui.widget.QMUITabSegment;
 import com.qmuiteam.qmui.widget.QMUIViewPager;
@@ -47,6 +48,7 @@ public class MainFragment extends BaseFragment {
         ButterKnife.bind(this, layout);
         initTabs();
         initPagers();
+
 
 
 

@@ -5,6 +5,7 @@ import android.view.View;
 
 import com.daf.cloudshare.R;
 import com.daf.cloudshare.base.BaseFragment;
+import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 
 import butterknife.ButterKnife;
 
@@ -14,6 +15,8 @@ import butterknife.ButterKnife;
 public class ToolFragment extends BaseFragment {
     @Override
     protected View onCreateView() {
+
+
         View root = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_tool, null);
         ButterKnife.bind(this, root);
         return root ;
