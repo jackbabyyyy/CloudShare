@@ -41,6 +41,7 @@ import com.daf.cloudshare.home.model.TopBtnBean;
 import com.daf.cloudshare.model.ProductBean;
 import com.daf.cloudshare.net.AppUrl;
 import com.daf.cloudshare.net.HttpUtil;
+import com.daf.cloudshare.ui.DetailFragment;
 import com.daf.cloudshare.utils.Const;
 import com.daf.cloudshare.utils.SP;
 
@@ -116,6 +117,9 @@ public class HomeFragment extends BaseFragment {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 
+                 String pid=((List<ProductBean.DataBean>)adapter.getData()).get(position).getP_id();
+                 startFragment(DetailFragment.getInstance(pid));
+
             }
         });
 
@@ -127,9 +131,9 @@ public class HomeFragment extends BaseFragment {
                     }
 
                     @Override
-                    public void onResponse(Response response) throws IOException {
+                    public void onResponse(String s) throws IOException {
                         try {
-                            String s=response.body().string();
+
                             Log.d(TAG, "onResponse: "+s);
                             JSONObject jsonObject=new JSONObject(s);
                             if (jsonObject.getString("code").equals(Const.body_success)){
@@ -182,9 +186,9 @@ public class HomeFragment extends BaseFragment {
                     }
 
                     @Override
-                    public void onResponse(Response response) throws IOException {
+                    public void onResponse(String s) throws IOException {
                         try {
-                            String s=response.body().string();
+
                             JSONObject jsonObject=new JSONObject(s);
                             if (jsonObject.getString("code").equals(Const.body_success)){
                                 ProductBean newPrjBean=JSON.parseObject(s,ProductBean.class);
@@ -216,9 +220,9 @@ public class HomeFragment extends BaseFragment {
                     }
 
                     @Override
-                    public void onResponse(Response response) throws IOException {
+                    public void onResponse(String s) throws IOException {
                         try {
-                            String s=response.body().string();
+
                             JSONObject jsonObject=new JSONObject(s);
                             if (jsonObject.getString("code").equals(Const.body_success)){
                                 TopBtnBean topBtnBean=JSON.parseObject(s,TopBtnBean.class);
@@ -247,9 +251,9 @@ public class HomeFragment extends BaseFragment {
                     }
 
                     @Override
-                    public void onResponse(Response response) throws IOException {
+                    public void onResponse(String s) throws IOException {
                         try {
-                            String s=response.body().string();
+
                             JSONObject json=new JSONObject(s);
                             if (json.getString("code").equals(Const.body_success)){
                                 BannerBean bannerBean= JSON.parseObject(s,BannerBean.class);

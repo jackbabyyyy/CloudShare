@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.daf.cloudshare.AppData;
 import com.daf.cloudshare.R;
 import com.daf.cloudshare.base.BaseFragment;
@@ -43,6 +44,19 @@ public class MineFragment extends BaseFragment {
         adapter.addFooterView(foot);
 
         mRecyclerView.setAdapter(adapter);
+
+        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                switch (position){
+                    case 0:
+                        break;
+                    case 1:
+                        break;
+
+                }
+            }
+        });
 
     }
 }

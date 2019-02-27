@@ -15,6 +15,8 @@ public class AppUrl {
     public static final String hotPrj=base+"api.php?c=project&a=getHotProject";
 
     public static final String prjList=base+"api.php?c=project&a=getProjectList";
+    public static final String prjInfo=base+"api.php?c=project&a=getProjectInfo";
+
 
 
 }

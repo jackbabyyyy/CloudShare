@@ -162,9 +162,9 @@ public class LoginFragment extends BaseFragment {
             }
 
             @Override
-            public void onResponse(Response response) throws IOException {
+            public void onResponse(String s) throws IOException {
                 try {
-                    String s=response.body().string();
+
 
                     JSONObject login=new JSONObject(s);
                     if (login.getString("code").equals(Const.login_success)){

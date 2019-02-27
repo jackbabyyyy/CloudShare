@@ -98,9 +98,9 @@ public class ProductFragment extends BaseFragment implements BaseQuickAdapter.Re
             }
 
             @Override
-            public void onResponse(Response response) throws IOException {
+            public void onResponse(String s) throws IOException {
                 try {
-                    String s=response.body().string();
+
                     JSONObject jsonObject = new JSONObject(s);
                     if (jsonObject.getString("code").equals(Const.body_success)) {
                         ProductBean productBean = JSON.parseObject(s, ProductBean.class);

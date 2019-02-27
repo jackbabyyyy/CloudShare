@@ -67,7 +67,7 @@ public class HttpUtil {
  
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                sendSuccessCallback(response,callback);
+                sendSuccessCallback(response.body().string(),callback);
             }
         });
     }
@@ -102,7 +102,7 @@ public class HttpUtil {
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
                     if (response.isSuccessful()&&response != null){
-                        sendSuccessCallback(response,callback);
+                        sendSuccessCallback(response.body().string(),callback);
                     }
                 }
             });
@@ -131,7 +131,7 @@ public class HttpUtil {
      * @param response  返回的数据
      * @param callback 回调的接口
      */
-    private void sendSuccessCallback(final Response response, final ResultCallback callback){
+    private void sendSuccessCallback(final String response, final ResultCallback callback){
         mHandler.post(new Runnable() {
             @Override
             public void run() {
@@ -150,7 +150,7 @@ public class HttpUtil {
     //创建接口，回调给调用者
     public  interface ResultCallback{
         void onError(Request request,Exception e);
-        void onResponse(Response response) throws IOException;
+        void onResponse(String response) throws IOException;
     }
  
 }
