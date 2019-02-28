@@ -13,6 +13,7 @@ import com.daf.cloudshare.base.BaseProductAdapter;
 import com.daf.cloudshare.model.ProductBean;
 import com.daf.cloudshare.net.AppUrl;
 import com.daf.cloudshare.net.HttpUtil;
+import com.daf.cloudshare.ui.DetailFragment;
 import com.daf.cloudshare.utils.Const;
 import com.daf.cloudshare.utils.SP;
 
@@ -71,6 +72,13 @@ public class ProductFragment extends BaseFragment implements BaseQuickAdapter.Re
             }
         });
         mRecyclerView.setAdapter(mAdapter);
+        mAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                String pid=((List<ProductBean.DataBean>)adapter.getData()).get(position).getP_id();
+                startFragment(DetailFragment.getInstance(pid));
+            }
+        });
 
 
         getData();

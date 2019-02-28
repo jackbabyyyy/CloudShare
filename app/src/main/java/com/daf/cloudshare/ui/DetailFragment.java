@@ -12,6 +12,7 @@ import com.daf.cloudshare.model.DetailBean;
 import com.daf.cloudshare.net.AppUrl;
 import com.daf.cloudshare.net.HttpUtil;
 import com.daf.cloudshare.utils.Const;
+import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 import com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton;
 
 import org.json.JSONException;
@@ -52,6 +53,9 @@ public class DetailFragment extends BaseFragment {
     @BindView(R.id.login)
     QMUIRoundButton mLogin;
 
+    @BindView(R.id.topbar)
+    QMUITopBarLayout mTopBarLayout;
+
 
     @Override
     protected View onCreateView() {
@@ -76,6 +80,15 @@ public class DetailFragment extends BaseFragment {
 
 
     private void init() {
+
+        mTopBarLayout.setTitle("产品详情");
+        mTopBarLayout.addLeftBackImageButton().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popBackStack();
+            }
+        });
+
 
        String  id = getArguments().getString(PID);
         Map<String, String> map = new HashMap<>();
@@ -122,7 +135,7 @@ public class DetailFragment extends BaseFragment {
         mTvRange.setText("额度范围："+detailBean.getData().getP_limitdown()+"-"+detailBean.getData().getP_limitup()+"万元");
 
         for (int i=0;i<detailBean.getData().getP_label().size();i++){
-            mTvLabel.append(detailBean.getData().getP_label().get(i));
+            mTvLabel.append(detailBean.getData().getP_label().get(i)+"、");
         }
         mTvName.setText("项目名称："+detailBean.getData().getP_name());
         mTvNum.setText("项目编号："+detailBean.getData().getP_number());

@@ -1,10 +1,19 @@
 package com.daf.cloudshare.net;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.daf.cloudshare.LoginActivity;
+import com.daf.cloudshare.base.BaseFragment;
+import com.daf.cloudshare.utils.Const;
 import com.daf.cloudshare.utils.SP;
+import com.qmuiteam.qmui.arch.QMUIFragment;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,6 +34,10 @@ public class HttpUtil {
     private OkHttpClient client;
     private Handler mHandler;
     private Context mContext;
+
+
+
+
     //私有化构造方法
     private HttpUtil(Context context){
         mContext=context;
@@ -93,9 +106,11 @@ public class HttpUtil {
         }
             Request request = new Request.Builder().url(url).post(body)
                     .addHeader("token", SP.getToken(mContext)).build();//采用post提交数据
+
             client.newCall(request).enqueue(new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {
+                        Log.d("http", "fail: "+request.url());
                         sendFailedCallback(call,e,callback);
                 }
  
@@ -105,12 +120,41 @@ public class HttpUtil {
                         String s=response.body().string();
                         Log.d("http", "request: "+request.url());
                         Log.d("http", "response: "+s);
-                        sendSuccessCallback(s,callback);
+                        try {
+                            JSONObject jsonObject=new JSONObject(s);
+
+                            if (jsonObject.getString("code").equals(Const.token_error)){
+                                //重新登录
+                                handleTokenError();
+                              return;
+                            }
+
+                            sendSuccessCallback(s,callback);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+
                     }
                 }
             });
 //        }
  
+    }
+
+    private void handleTokenError(){
+
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                Log.d("chenzhiyuan", "token 过期 ");
+                SP.put(mContext,Const.token,"");
+                Toast.makeText(mContext,"登录已过期，请重新登录",Toast.LENGTH_SHORT).show();
+                mContext.startActivity(new Intent(mContext, LoginActivity.class));
+
+            }
+        });
     }
  
     /**当请求失败时，都会调用这个方法

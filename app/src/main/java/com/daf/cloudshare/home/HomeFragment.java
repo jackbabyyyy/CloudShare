@@ -17,6 +17,8 @@
 package com.daf.cloudshare.home;
 
 import android.content.Context;
+import android.graphics.Rect;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -106,16 +108,20 @@ public class HomeFragment extends BaseFragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         homeAdapter = new BaseProductAdapter(mData);
-        mRecyclerView.setAdapter(homeAdapter);
-        homeAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 
-                 String pid=((List<ProductBean.DataBean>)adapter.getData()).get(position).getP_id();
-                 startFragment(DetailFragment.getInstance(pid));
+        mRecyclerView.setAdapter(homeAdapter);
+        homeAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+
+                String pid=((List<ProductBean.DataBean>)adapter.getData()).get(position).getP_id();
+                startFragment(DetailFragment.getInstance(pid));
 
             }
         });
+
+
+
 
         HttpUtil.getInstance(getActivity())
                 .postForm(AppUrl.hotPrj, null, new HttpUtil.ResultCallback() {

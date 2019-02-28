@@ -2,13 +2,14 @@
 
 <RelativeLayout
     android:layout_width="match_parent"
-    android:layout_height="64dp"
+    android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@android:color/white"
     android:gravity="center"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <ImageView
+        android:layout_marginTop="12dp"
         android:id="@+id/iv_pic"
         android:layout_width="36dp"
         android:layout_height="36dp"
@@ -16,12 +17,14 @@
         tools:src="@drawable/ic_launcher_background" />
 
     <TextView
+
+        android:layout_marginBottom="12dp"
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/iv_pic"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="6dp"
         android:text="@{model.title}"
         android:textSize="10sp"
         tools:text="电脑数码" />

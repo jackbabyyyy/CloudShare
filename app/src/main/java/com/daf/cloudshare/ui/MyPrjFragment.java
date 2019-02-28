@@ -15,6 +15,7 @@ import com.daf.cloudshare.model.ProductBean;
 import com.daf.cloudshare.net.AppUrl;
 import com.daf.cloudshare.net.HttpUtil;
 import com.daf.cloudshare.utils.Const;
+import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,6 +37,8 @@ public class MyPrjFragment extends BaseFragment implements BaseQuickAdapter.Requ
 
     @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
+    @BindView(R.id.topbar)
+    QMUITopBarLayout mTopBarLayout;
 
     private int PAGE=1;
 
@@ -53,6 +56,14 @@ public class MyPrjFragment extends BaseFragment implements BaseQuickAdapter.Requ
     }
 
     private void init() {
+
+        mTopBarLayout.setTitle("我的订单");
+        mTopBarLayout.addLeftBackImageButton().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popBackStack();
+            }
+        });
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mAdapter = new MyPrjAdapter(mDatas);
         mAdapter.setOnLoadMoreListener(this,mRecyclerView);

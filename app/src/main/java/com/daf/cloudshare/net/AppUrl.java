@@ -21,5 +21,4 @@ public class AppUrl {
     public static final String myPrjDataList=base+"api.php?c=project&a=getDataList";
 
 
-
 }
