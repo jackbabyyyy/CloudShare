@@ -8,12 +8,7 @@
 
 
 
-    <com.qmuiteam.qmui.widget.QMUITopBarLayout
-        app:qmui_topbar_need_separator="false"
-        android:id="@+id/topbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fitsSystemWindows="true"/>
+
 
 
     <android.support.v7.widget.RecyclerView
@@ -23,6 +18,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </android.support.v7.widget.RecyclerView>
+
+    <com.qmuiteam.qmui.widget.QMUITopBarLayout
+        app:qmui_topbar_need_separator="false"
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"/>
 
 
 

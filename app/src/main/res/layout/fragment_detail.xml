@@ -11,13 +11,7 @@
     android:layout_height="match_parent">
 
 
-    <com.qmuiteam.qmui.widget.QMUITopBarLayout
-        android:id="@+id/topbar"
-        android:fitsSystemWindows="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
-    </com.qmuiteam.qmui.widget.QMUITopBarLayout>
 
     <ScrollView
         android:layout_marginTop="?attr/qmui_topbar_height"
@@ -261,6 +255,14 @@
     </LinearLayout>
 
     </ScrollView>
+
+    <com.qmuiteam.qmui.widget.QMUITopBarLayout
+        android:id="@+id/topbar"
+        android:fitsSystemWindows="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </com.qmuiteam.qmui.widget.QMUITopBarLayout>
 
 
 

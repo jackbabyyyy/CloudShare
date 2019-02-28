@@ -80,6 +80,7 @@
         <item name="qmui_topbar_text_btn_color_state_list">@color/s_topbar_btn_color</item>
         <item name="qmui_topbar_height">48dp</item>
         <item name="qmui_topbar_image_btn_height">48dp</item>
+        <item name="qmui_topbar_need_separator">false</item>
     </style>
 
     <style name="QDRadiusButton" parent="@style/Button.Compat">
