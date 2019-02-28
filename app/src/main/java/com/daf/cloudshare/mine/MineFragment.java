@@ -37,6 +37,7 @@ public class MineFragment extends BaseFragment {
     private void init() {
         mTopBar.setTitle("我的");
 
+
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         MineAdapter adapter=new MineAdapter(AppData.getMineBody());
         View head=LayoutInflater.from(getActivity()).inflate(R.layout.head_mine,null);

@@ -15,6 +15,7 @@ import com.daf.cloudshare.model.MyPrjDataListBean;
 import com.daf.cloudshare.net.AppUrl;
 import com.daf.cloudshare.net.HttpUtil;
 import com.daf.cloudshare.utils.Const;
+import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,6 +35,9 @@ public class MyPrjDataListFragment extends BaseFragment implements BaseQuickAdap
     private static final String PID = "PID";
     @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
+
+    @BindView(R.id.topbar)
+    QMUITopBarLayout mTopBar;
 
     private List<MyPrjDataListBean.DataBean> mDatas=new ArrayList<>();
     private MyPrjDataListAdapter mAdapter;
@@ -59,6 +63,14 @@ public class MyPrjDataListFragment extends BaseFragment implements BaseQuickAdap
     }
 
     private void init() {
+        mTopBar.setTitle("订单列表");
+        mTopBar.addLeftBackImageButton().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popBackStack();
+            }
+        });
+
         mPid = getArguments().getString(PID);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mAdapter = new MyPrjDataListAdapter(mDatas);
