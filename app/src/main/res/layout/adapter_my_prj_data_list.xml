@@ -1,26 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+
+    <LinearLayout
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:visibility="gone"
+            tools:text="微额贷"
+            android:textSize="18sp"
+            android:id="@+id/tvPrj"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <View
+
+            android:visibility="gone"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#ffdddddd"/>
+
+
+
     <TextView
 
+        android:text="sjdfbsjfb"
+        android:textSize="16sp"
         android:id="@+id/tvName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <TextView
 
+        android:layout_marginTop="4dp"
+        tools:text="121212212"
+        android:textColor="#9b9b9b"
         android:id="@+id/tvCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <TextView
-
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="12dp"
+        tools:text="121212212"
+        android:textColor="#9b9b9b"
         android:id="@+id/tvId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+    </LinearLayout>
+    <View
+        android:background="#f1f1f1"
+        android:layout_width="match_parent"
+        android:layout_height="6dp"/>
 
 
 

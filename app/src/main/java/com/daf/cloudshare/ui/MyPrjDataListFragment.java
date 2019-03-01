@@ -33,6 +33,7 @@ import okhttp3.Request;
 public class MyPrjDataListFragment extends BaseFragment implements BaseQuickAdapter.RequestLoadMoreListener {
 
     private static final String PID = "PID";
+    private static final String TITLE = "TITLE";
     @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
 
@@ -44,10 +45,11 @@ public class MyPrjDataListFragment extends BaseFragment implements BaseQuickAdap
     private int mPage=1;
     private String mPid;
 
-    public static MyPrjDataListFragment getInstance(String pid){
+    public static MyPrjDataListFragment getInstance(String pid,String title){
         // 通过bundle传递数据
         Bundle bundle = new Bundle();
         bundle.putString(PID, pid);
+        bundle.putString(TITLE,title);
         MyPrjDataListFragment fragment = new MyPrjDataListFragment();
         fragment.setArguments(bundle);
         return fragment;
@@ -63,7 +65,8 @@ public class MyPrjDataListFragment extends BaseFragment implements BaseQuickAdap
     }
 
     private void init() {
-        mTopBar.setTitle("订单列表");
+        String title=getArguments().getString(TITLE);
+        mTopBar.setTitle(title+"订单");
         mTopBar.addLeftBackImageButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -110,7 +110,7 @@ public class HttpUtil {
             client.newCall(request).enqueue(new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {
-                        Log.d("http", "fail: "+request.url());
+                        Log.d("http", "fail: "+request.url()+"-----"+e.getMessage());
                         sendFailedCallback(call,e,callback);
                 }
  

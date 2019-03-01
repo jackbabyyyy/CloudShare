@@ -17,9 +17,9 @@ public class MyPrjDataListAdapter extends BaseQuickAdapter<MyPrjDataListBean.Dat
     @Override
     protected void convert(BaseViewHolder helper, MyPrjDataListBean.DataBean item) {
 
-        helper.setText(R.id.tvName,item.getName()+"  "+item.getMobile())
-                .setText(R.id.tvCard,item.getIdcard())
-                .setText(R.id.tvId,item.getId());
+        helper.setText(R.id.tvName,item.getName()+"    "+item.getMobile())
+                .setText(R.id.tvCard,"身份证: "+item.getIdcard())
+                .setText(R.id.tvId,"订单编号: "+item.getId());
 
 
     }

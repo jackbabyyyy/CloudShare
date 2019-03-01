@@ -19,7 +19,7 @@ public class MyPrjAdapter extends BaseQuickAdapter<MyPrjBean.DataBean, BaseViewH
     @Override
     protected void convert(BaseViewHolder helper, MyPrjBean.DataBean item) {
         Glide.with(mContext).load(item.getP_logo()).into((ImageView) helper.getView(R.id.imageView));
-        helper.setText(R.id.tvName,item.getP_name()+"人已报单")
-                .setText(R.id.tvBody,item.getP_quantity());
+        helper.setText(R.id.tvName,item.getP_name())
+                .setText(R.id.tvBody,item.getP_quantity()+"人已报单");
     }
 }

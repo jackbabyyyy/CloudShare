@@ -72,7 +72,8 @@ public class MyPrjFragment extends BaseFragment implements BaseQuickAdapter.Requ
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 String pid=((List<MyPrjBean.DataBean>)adapter.getData()).get(position).getP_id();
-                startFragment(MyPrjDataListFragment.getInstance(pid));
+                String title=((List<MyPrjBean.DataBean>)adapter.getData()).get(position).getP_name();
+                startFragment(MyPrjDataListFragment.getInstance(pid,title));
             }
         });
 

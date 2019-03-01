@@ -74,6 +74,11 @@ public class LoginFragment extends BaseFragment {
 
     private void init() {
 
+        if (!TextUtils.isEmpty(SP.getUser(getActivity())[0])){
+            mAccount.setText(SP.getUser(getActivity())[0]);
+            mPassword.setText(SP.getUser(getActivity())[1]);
+        }
+
         final Drawable eye=getResources().getDrawable(R.mipmap.password_open);
         final Drawable noEye=getResources().getDrawable(R.mipmap.password_close);
         final Drawable password=getResources().getDrawable(R.mipmap.password);
@@ -171,6 +176,7 @@ public class LoginFragment extends BaseFragment {
                         LoginBean loginBean= JSON.parseObject(s,LoginBean.class);
                         //save token
                         SP.put(getActivity(),Const.token,loginBean.getData().getToken());
+                        SP.saveUser(getActivity(),account,password);
 
 
                         startActivity(new Intent(getActivity(),MainActivity.class));

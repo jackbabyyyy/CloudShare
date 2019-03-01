@@ -27,6 +27,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.bumptech.glide.Glide;
@@ -150,8 +151,6 @@ public class HomeFragment extends BaseFragment {
 
         initHead();
 
-
-
     }
 
     private void initHead() {
@@ -159,6 +158,23 @@ public class HomeFragment extends BaseFragment {
         mBanner=v.findViewById(R.id.banner);
         mTop=v.findViewById(R.id.recycle_top);
         mNew=v.findViewById(R.id.recycle_new);
+
+        TextView newMore=v.findViewById(R.id.tvMore);
+        TextView hotMore=v.findViewById(R.id.tvMore2);
+
+        newMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+            }
+        });
+        hotMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         initBanner();
         initTop();
