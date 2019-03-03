@@ -129,14 +129,16 @@ public class LoginFragment extends BaseFragment {
                 getActivity().finish();
             }
         });
-        mTopBar.addLeftTextButton("注册",R.id.topbar_left_text_button)
-                .setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
 
-                    }
-                })
-        ;
+
+//        mTopBar.addLeftTextButton("注册",R.id.topbar_left_text_button)
+//                .setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//
+//                    }
+//                })
+//        ;
 
 
 

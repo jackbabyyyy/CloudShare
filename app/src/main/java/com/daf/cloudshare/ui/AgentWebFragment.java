@@ -15,15 +15,33 @@ import com.daf.cloudshare.base.BaseFragment;
 import com.just.agentweb.AgentWeb;
 import com.just.agentweb.AgentWebConfig;
 import com.just.agentweb.DefaultWebClient;
+import com.qmuiteam.qmui.widget.QMUITopBarLayout;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class AgentWebFragment extends BaseFragment {
 	private static final String URL="URL";
 	public AgentWeb mAgentWeb;
+
+
+	@BindView(R.id.topbar)
+	QMUITopBarLayout mTopBarLayout;
  
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.fragment_agent_webview, container, false);
+
+		View v=inflater.inflate(R.layout.fragment_agent_webview, container, false);
+		ButterKnife.bind(this,v);
+
+		mTopBarLayout.addLeftBackImageButton().setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				popBackStack();
+			}
+		});
+		return v;
 	}
 
 	@Override

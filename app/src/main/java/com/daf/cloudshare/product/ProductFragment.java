@@ -25,6 +25,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -40,6 +41,9 @@ import okhttp3.Response;
  * Created by PP on 2019/2/19.
  */
 public class ProductFragment extends BaseFragment implements BaseQuickAdapter.RequestLoadMoreListener {
+    private static final String TITLE = "TITLE";
+    private static final String TYPE = "TYPE";
+    private static final String URL="URL";
 
     @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
@@ -50,6 +54,9 @@ public class ProductFragment extends BaseFragment implements BaseQuickAdapter.Re
     private List<ProductBean.DataBean> mProductBeanList = new ArrayList<>();
     private BaseProductAdapter mAdapter;
     private int mPage = 1;
+    private String mTitle="";
+    private String mType="";
+    private String mUrl;
 
 
     @Override
@@ -60,11 +67,13 @@ public class ProductFragment extends BaseFragment implements BaseQuickAdapter.Re
         return root;
     }
 
-    public static ProductFragment getInstance(String pid, String title){
+    public static ProductFragment getInstance( String title,String type,String url ){
         // 通过bundle传递数据
         Bundle bundle = new Bundle();
-//        bundle.putString(PID, pid);
-//        bundle.putString(TITLE,title);
+
+        bundle.putString(TITLE,title);
+        bundle.putString(TYPE,type);
+        bundle.putString(URL,url);
         ProductFragment fragment = new ProductFragment();
         fragment.setArguments(bundle);
         return fragment;
@@ -73,7 +82,21 @@ public class ProductFragment extends BaseFragment implements BaseQuickAdapter.Re
 
     private void init() {
 
-        mTopBar.setTitle("产品");
+        mTitle = getArguments().getString(TITLE);
+        mType = getArguments().getString(TYPE);
+        mUrl = getArguments().getString(URL);
+
+        mTopBar.setTitle(mTitle);
+        if (!mTitle.equals("产品")){
+            mTopBar.addLeftBackImageButton().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    popBackStack();
+                }
+            });
+        }
+
+
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mAdapter = new BaseProductAdapter(mProductBeanList);
@@ -112,7 +135,8 @@ public class ProductFragment extends BaseFragment implements BaseQuickAdapter.Re
     private void getData() {
         Map<String,String> map=new HashMap<>();
         map.put("page",mPage+"");
-        HttpUtil.getInstance(getActivity()).postForm(AppUrl.prjList, map, new HttpUtil.ResultCallback() {
+        map.put("type",mType);
+        HttpUtil.getInstance(getActivity()).postForm(mUrl, map, new HttpUtil.ResultCallback() {
             @Override
             public void onError(Request request, Exception e) {
 

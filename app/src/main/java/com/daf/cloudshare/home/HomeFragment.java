@@ -44,6 +44,7 @@ import com.daf.cloudshare.home.model.TopBtnBean;
 import com.daf.cloudshare.model.ProductBean;
 import com.daf.cloudshare.net.AppUrl;
 import com.daf.cloudshare.net.HttpUtil;
+import com.daf.cloudshare.product.ProductFragment;
 import com.daf.cloudshare.ui.DetailFragment;
 import com.daf.cloudshare.utils.Const;
 import com.daf.cloudshare.utils.SP;
@@ -104,8 +105,8 @@ public class HomeFragment extends BaseFragment {
 
 
 
-        mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setNestedScrollingEnabled(false);
+
+
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         homeAdapter = new BaseProductAdapter(mData);
@@ -166,12 +167,14 @@ public class HomeFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
 
+                startFragment(ProductFragment.getInstance("最新上架","",AppUrl.newPrj));
 
             }
         });
         hotMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                startFragment(ProductFragment.getInstance("热门推荐","",AppUrl.hotPrj));
 
             }
         });
@@ -227,6 +230,13 @@ public class HomeFragment extends BaseFragment {
         List<TopBtnBean.DataBean> data=new ArrayList<>();
         final TopBtnAdapter topBtnAdapter=new TopBtnAdapter(data);
         mTop.setAdapter(topBtnAdapter);
+        topBtnAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                String tilte=((List<TopBtnBean.DataBean>)adapter.getData()).get(position).getTitle();
+             //   startFragment(ProductFragment.getInstance());
+            }
+        });
 
         HttpUtil.getInstance(getActivity())
                 .postForm(AppUrl.topBtn, null, new HttpUtil.ResultCallback() {

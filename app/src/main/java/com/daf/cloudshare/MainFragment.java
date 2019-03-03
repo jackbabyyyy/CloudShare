@@ -15,6 +15,7 @@ import com.daf.cloudshare.base.BaseFragment;
 import com.daf.cloudshare.home.HomeFragment;
 import com.daf.cloudshare.login.LoginFragment;
 import com.daf.cloudshare.mine.MineFragment;
+import com.daf.cloudshare.net.AppUrl;
 import com.daf.cloudshare.product.ProductFragment;
 import com.daf.cloudshare.tool.ToolFragment;
 import com.daf.cloudshare.utils.Const;
@@ -103,7 +104,7 @@ public class MainFragment extends BaseFragment {
                     case 0:
                         return new HomeFragment();
                     case 1:
-                        return new ProductFragment();
+                        return  ProductFragment.getInstance("产品","", AppUrl.prjList);
                     case 2:
                         return new ToolFragment();
                     case 3:

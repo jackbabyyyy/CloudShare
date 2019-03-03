@@ -32,17 +32,21 @@ public class BaseProductAdapter extends BaseQuickAdapter<ProductBean.DataBean, B
         String label3 = "";
 
 
-        if (labels.size() == 1) {
-            label = labels.get(0);
-        }
-        if (labels.size() == 2) {
-            label = labels.get(0);
-            label2 = labels.get(1);
-        }
-        if (labels.size() == 3) {
-            label = labels.get(0);
-            label2 = labels.get(1);
-            label3 = labels.get(2);
+        if(labels!=null) {
+
+
+            if (labels.size() == 1) {
+                label = labels.get(0);
+            }
+            if (labels.size() == 2) {
+                label = labels.get(0);
+                label2 = labels.get(1);
+            }
+            if (labels.size() == 3) {
+                label = labels.get(0);
+                label2 = labels.get(1);
+                label3 = labels.get(2);
+            }
         }
 
         Glide.with(mContext).load(item.getP_logo()).into((ImageView) helper.getView(R.id.iv));

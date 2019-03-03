@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        dafyun {
+            keyAlias 'dafyun'
+            keyPassword 'dafyun'
+            storeFile file('/Users/PP/Desktop/dafyun')
+            storePassword 'dafyun'
+        }
+    }
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.daf.cloudshare"
@@ -16,16 +24,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
     //指定jdk版本
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
-
-
-
 }
 
 dependencies {
@@ -42,7 +45,7 @@ dependencies {
     //recycler
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.15'
     //http
-//    implementation 'com.lzy.net:okgo:2.1.4'
+    //    implementation 'com.lzy.net:okgo:2.1.4'
     //json
     implementation 'com.alibaba:fastjson:1.2.54'
     //dpi
@@ -55,10 +58,12 @@ dependencies {
     //banner
     implementation 'com.youth.banner:banner:1.4.10'
     //http
-    implementation("com.squareup.okhttp3:okhttp:3.13.1")
+    implementation 'com.squareup.okhttp3:okhttp:3.13.1'
     //webview
-    implementation 'com.just.agentweb:agentweb:4.0.2' // (必选)
-    implementation 'com.just.agentweb:download:4.0.2' // (可选)
-    implementation 'com.just.agentweb:filechooser:4.0.2'// (可选)
-
+    implementation 'com.just.agentweb:agentweb:4.0.2'
+    // (必选)
+    implementation 'com.just.agentweb:download:4.0.2'
+    // (可选)
+    implementation 'com.just.agentweb:filechooser:4.0.2'
+    // (可选)
 }
