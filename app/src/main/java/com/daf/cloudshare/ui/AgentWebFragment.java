@@ -35,12 +35,7 @@ public class AgentWebFragment extends BaseFragment {
 		View v=inflater.inflate(R.layout.fragment_agent_webview, container, false);
 		ButterKnife.bind(this,v);
 
-		mTopBarLayout.addLeftBackImageButton().setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				popBackStack();
-			}
-		});
+
 		return v;
 	}
 
@@ -74,7 +69,8 @@ public class AgentWebFragment extends BaseFragment {
 				.ready()//设置 WebSettings。
 				.go(url); //WebView载入该url地址的页面并显示。
  
- 
+
+		initTopBar(view);
 		AgentWebConfig.debug();
  
 		// AgentWeb 4.0 开始，删除该类以及删除相关的API
@@ -129,7 +125,24 @@ public class AgentWebFragment extends BaseFragment {
 			}
 		});
 	}
- 
+
+	private void initTopBar(View view) {
+
+//		mTopBarLayout.addLeftBackImageButton().setOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				popBackStack();
+//			}
+//		});
+
+		mTopBarLayout.addLeftTextButton("返回",R.id.topbar_left_text_button).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				popBackStack();
+			}
+		});
+	}
+
 	@Override
 	public void onResume() {
 		mAgentWeb.getWebLifeCycle().onResume();//恢复
