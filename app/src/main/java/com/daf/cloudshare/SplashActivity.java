@@ -29,7 +29,7 @@ public class SplashActivity extends BaseActivity {
             public void run() {
                 jumpToLogin();
             }
-        }, 2000);
+        }, 1500);
     }
 
     public void jumpToLogin() {

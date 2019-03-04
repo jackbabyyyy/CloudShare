@@ -21,10 +21,15 @@ public class ToolAdapter extends BaseQuickAdapter<ToolListBean.DataBean, BaseVie
 
     @Override
     protected void convert(BaseViewHolder helper, ToolListBean.DataBean item) {
+
+
         Glide.with(mContext).load(item.getIcon()).into((ImageView)helper.getView(R.id.iv_pic));
         helper.setText(R.id.tv_title,item.getTitle());
 
 
 
     }
+
+
+
 }

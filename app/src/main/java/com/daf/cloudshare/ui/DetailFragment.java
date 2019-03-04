@@ -143,7 +143,8 @@ public class DetailFragment extends BaseFragment {
         mLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startFragment(AgentWebFragment.getInstance(detailBean.getData().getP_jumpurl()));
+
+              startFragment(WebFragment.getInstance(detailBean.getData().getP_jumpurl()));
 
             }
         });

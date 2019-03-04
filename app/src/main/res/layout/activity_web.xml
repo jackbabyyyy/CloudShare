@@ -2,24 +2,23 @@
 <com.qmuiteam.qmui.widget.QMUIWindowInsetLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/linearLayout"
+    android:fitsSystemWindows="true"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
 
-    <android.support.v7.widget.RecyclerView
-        android:background="#f0f0f0"
-
-        android:fitsSystemWindows="true"
+    <FrameLayout
+        android:id="@+id/web"
         android:layout_marginTop="?attr/qmui_topbar_height"
-        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </android.support.v7.widget.RecyclerView>
-
+    </FrameLayout>
 
     <com.qmuiteam.qmui.widget.QMUITopBarLayout
-        android:id="@+id/topbar"
         android:fitsSystemWindows="true"
+        android:id="@+id/topbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 

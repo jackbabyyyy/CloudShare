@@ -22,5 +22,11 @@ public class AppUrl {
     public static final String myPrj=base+"api.php?c=project&a=getMyProject";
     public static final String myPrjDataList=base+"api.php?c=project&a=getDataList";
 
+    public static final String myQr=base+"api.php?c=user&a=shareQRCode";
+    public static final String modifyPass=base+"api.php?c=user&a=changePassword";
+    public static final String addAdvice=base+"api.php?c=common&a=addAdvice";
+
+    public static final String checkVersion=base+"api.php?c=public&a=checkVersion";
+
 
 }

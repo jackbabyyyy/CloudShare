@@ -57,6 +57,7 @@ public class ProductFragment extends BaseFragment implements BaseQuickAdapter.Re
     private String mTitle="";
     private String mType="";
     private String mUrl;
+    private boolean mIsNew=false;
 
 
     @Override
@@ -85,6 +86,8 @@ public class ProductFragment extends BaseFragment implements BaseQuickAdapter.Re
         mTitle = getArguments().getString(TITLE);
         mType = getArguments().getString(TYPE);
         mUrl = getArguments().getString(URL);
+
+        mIsNew = getArguments().getBoolean("new");
 
         mTopBar.setTitle(mTitle);
         if (!mTitle.equals("产品")){
@@ -136,6 +139,11 @@ public class ProductFragment extends BaseFragment implements BaseQuickAdapter.Re
         Map<String,String> map=new HashMap<>();
         map.put("page",mPage+"");
         map.put("type",mType);
+        if (mIsNew){
+            map.put("order","3");
+        }
+
+
         HttpUtil.getInstance(getActivity()).postForm(mUrl, map, new HttpUtil.ResultCallback() {
             @Override
             public void onError(Request request, Exception e) {

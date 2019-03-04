@@ -14,8 +14,8 @@ android {
         applicationId "com.daf.cloudshare"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "1.0.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -28,6 +28,15 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    //打包version1
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            // 输出apk名称为great_v1.0_wandoujia.apk
+            def fileName = "dafyun_v${defaultConfig.versionName}.apk"
+            outputFileName = fileName
+        }
     }
 }
 

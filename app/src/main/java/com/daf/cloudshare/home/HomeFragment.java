@@ -18,10 +18,12 @@ package com.daf.cloudshare.home;
 
 import android.content.Context;
 import android.graphics.Rect;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,6 +48,7 @@ import com.daf.cloudshare.net.AppUrl;
 import com.daf.cloudshare.net.HttpUtil;
 import com.daf.cloudshare.product.ProductFragment;
 import com.daf.cloudshare.ui.DetailFragment;
+import com.daf.cloudshare.ui.WebFragment;
 import com.daf.cloudshare.utils.Const;
 import com.daf.cloudshare.utils.SP;
 
@@ -167,7 +170,15 @@ public class HomeFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
 
-                startFragment(ProductFragment.getInstance("最新上架","",AppUrl.newPrj));
+                Bundle bundle=new Bundle();
+                bundle.putBoolean("new",true);
+                bundle.putString("TITLE","最新上架");
+                bundle.putString("TYPE","");
+                bundle.putString("URL",AppUrl.newPrj);
+                ProductFragment productFragment= new ProductFragment();
+                productFragment.setArguments(bundle);
+
+                startFragment(productFragment);
 
             }
         });
@@ -175,6 +186,7 @@ public class HomeFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 startFragment(ProductFragment.getInstance("热门推荐","",AppUrl.hotPrj));
+
 
             }
         });
@@ -197,6 +209,15 @@ public class HomeFragment extends BaseFragment {
         final NewPrjAdapter adapter=new NewPrjAdapter(data);
         mNew.setAdapter(adapter);
 
+        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+
+                List<ProductBean.DataBean> list=adapter.getData();
+                startFragment(DetailFragment.getInstance(list.get(position).getP_id()));
+
+            }
+        });
         HttpUtil.getInstance(getActivity())
                 .postForm(AppUrl.newPrj, null, new HttpUtil.ResultCallback() {
                     @Override
@@ -233,15 +254,25 @@ public class HomeFragment extends BaseFragment {
         topBtnAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                String tilte=((List<TopBtnBean.DataBean>)adapter.getData()).get(position).getTitle();
-             //   startFragment(ProductFragment.getInstance());
+
+                String type=((List<TopBtnBean.DataBean>)adapter.getData()).get(position).getUrl().getType()+"";
+
+
+                String title=((List<TopBtnBean.DataBean>)adapter.getData()).get(position).getTitle();
+
+                startFragment(ProductFragment.getInstance(title,type,AppUrl.prjList));
+
+
             }
         });
+
+
 
         HttpUtil.getInstance(getActivity())
                 .postForm(AppUrl.topBtn, null, new HttpUtil.ResultCallback() {
                     @Override
                     public void onError(Request request, Exception e) {
+
 
                     }
 
@@ -300,6 +331,12 @@ public class HomeFragment extends BaseFragment {
                                     @Override
                                     public void OnBannerClick(int position) {
                                         //点击
+                                        String url=mDatas.get(position).getUrl();
+                                        if (!TextUtils.isEmpty(url)){
+                                            startFragment(WebFragment.getInstance(url));
+                                        }
+
+
                                     }
                                 }).start();
 

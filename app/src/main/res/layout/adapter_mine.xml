@@ -6,16 +6,26 @@
     android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:background="@drawable/qmui_divider_bottom_bitmap"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:gravity="center_vertical"
-        android:id="@+id/tv"
-        android:drawableRight="@drawable/ic_chevron_right_black_24dp"
-        tools:text="shfshef"
+
+    <FrameLayout
+        android:background="@color/white"
         android:layout_width="match_parent"
-        android:layout_height="48dp"/>
+        android:layout_height="wrap_content">
+
+        <TextView
+
+            android:background="@drawable/qmui_divider_bottom_bitmap"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:gravity="center_vertical"
+            android:id="@+id/tv"
+            android:drawableRight="@drawable/ic_chevron_right_black_24dp"
+            tools:text="shfshef"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"/>
+
+    </FrameLayout>
+
 
 
 

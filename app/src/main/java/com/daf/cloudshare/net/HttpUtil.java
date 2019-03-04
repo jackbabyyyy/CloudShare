@@ -126,10 +126,22 @@ public class HttpUtil {
                             if (jsonObject.getString("code").equals(Const.token_error)){
                                 //重新登录
                                 handleTokenError();
-                              return;
+                                return;
+                            }
+
+                            if (jsonObject.getString("code").equals(Const.body_success)){
+                                sendSuccessCallback(s,callback);
+                                return;
+                            }
+
+                            if (jsonObject.getString("code").equals(Const.login_success)){
+                                sendSuccessCallback(s,callback);
+                                return;
                             }
 
                             sendSuccessCallback(s,callback);
+
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -141,6 +153,10 @@ public class HttpUtil {
             });
 //        }
  
+    }
+
+    public void downdload(){
+
     }
 
     private void handleTokenError(){

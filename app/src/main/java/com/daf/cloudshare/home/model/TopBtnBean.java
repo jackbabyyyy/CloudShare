@@ -11,7 +11,7 @@ public class TopBtnBean {
     /**
      * code : 80001
      * msg : 获取数据成功！
-     * data : [{"title":"信用卡","icon":"https://www.dafyun.cn/Public/images/app/m1.png","type":"view","url":""},{"title":"现金贷","icon":"https://www.dafyun.cn/Public/images/app/m2.png","type":"view","url":""},{"title":"信用贷","icon":"https://www.dafyun.cn/Public/images/app/m3.png","type":"view","url":""},{"title":"车房抵","icon":"https://www.dafyun.cn/Public/images/app/m4.png","type":"view","url":""},{"title":"担保","icon":"https://www.dafyun.cn/Public/images/app/m5.png","type":"view","url":""},{"title":"其他","icon":"https://www.dafyun.cn/Public/images/app/m6.png","type":"view","url":""}]
+     * data : [{"title":"信用卡","icon":"https://www.dafyun.cn/Public/images/app/m1.png","type":"param","url":{"url":"projectList","type":"5"}},{"title":"大额","icon":"https://www.dafyun.cn/Public/images/app/m3.png","type":"param","url":{"url":"projectList","type":"4"}},{"title":"小额","icon":"https://www.dafyun.cn/Public/images/app/m2.png","type":"param","url":{"url":"projectList","type":"3"}},{"title":"车房抵","icon":"https://www.dafyun.cn/Public/images/app/m4.png","type":"param","url":{"url":"projectList","type":"1"}},{"title":"直营","icon":"https://www.dafyun.cn/Public/images/app/m5.png","type":"param","url":{"url":"projectList","type":"2"}},{"title":"更多","icon":"https://www.dafyun.cn/Public/images/app/m6.png","type":"param","url":{"url":"projectList"}}]
      */
 
     private String code;
@@ -46,14 +46,14 @@ public class TopBtnBean {
         /**
          * title : 信用卡
          * icon : https://www.dafyun.cn/Public/images/app/m1.png
-         *          * type : view
-         * url :
+         * type : param
+         * url : {"url":"projectList","type":"5"}
          */
 
         private String title;
         private String icon;
         private String type;
-        private String url;
+        private UrlBean url;
 
         public String getTitle() {
             return title;
@@ -79,12 +79,38 @@ public class TopBtnBean {
             this.type = type;
         }
 
-        public String getUrl() {
+        public UrlBean getUrl() {
             return url;
         }
 
-        public void setUrl(String url) {
+        public void setUrl(UrlBean url) {
             this.url = url;
+        }
+
+        public static class UrlBean {
+            /**
+             * url : projectList
+             * type : 5
+             */
+
+            private String url;
+            private String type;
+
+            public String getUrl() {
+                return url;
+            }
+
+            public void setUrl(String url) {
+                this.url = url;
+            }
+
+            public String getType() {
+                return type;
+            }
+
+            public void setType(String type) {
+                this.type = type;
+            }
         }
     }
 }
