@@ -59,6 +59,10 @@ public class ProductFragment extends BaseFragment implements BaseQuickAdapter.Re
     private String mUrl;
     private boolean mIsNew=false;
 
+    @Override
+    protected boolean canDragBack() {
+        return false;
+    }
 
     @Override
     protected View onCreateView() {

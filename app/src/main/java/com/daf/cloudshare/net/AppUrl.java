@@ -27,6 +27,8 @@ public class AppUrl {
     public static final String addAdvice=base+"api.php?c=common&a=addAdvice";
 
     public static final String checkVersion=base+"api.php?c=public&a=checkVersion";
+    public static final String saveAvatar=base+"api.php?c=user&a=saveAvatar";
+    public static final String getMyInfo=base+"api.php?c=user&a=getMyInfo";
 
 
 }

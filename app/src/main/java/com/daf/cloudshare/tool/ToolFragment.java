@@ -44,6 +44,11 @@ public class ToolFragment extends BaseFragment {
     private ToolAdapter mAdapter;
 
     @Override
+    protected boolean canDragBack() {
+        return false;
+    }
+
+    @Override
     protected View onCreateView() {
 
 

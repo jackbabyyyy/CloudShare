@@ -14,6 +14,7 @@
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"></uses-permission>
 
     <application
+        android:usesCleartextTraffic="true"
         android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/icon"
@@ -46,6 +47,21 @@
             >
 
         </activity>
+
+        <!--@style/PhotoTheme是图片选择界面样式，文档有提供，不要漏掉添加到values/styles里-->
+        <activity
+            android:name="com.walkermanx.photopicker.PhotoPickerActivity"
+            android:screenOrientation="portrait"
+        />
+
+        <activity
+            android:name="com.walkermanx.photopicker.PhotoPagerActivity"
+            android:screenOrientation="portrait"
+         />
+
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:screenOrientation="portrait"/>
 
 
     </application>

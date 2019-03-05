@@ -18,6 +18,7 @@
 <resources>
     <dimen name="home_tab_height">49dp</dimen>
     <dimen name="common_content_spacing">@dimen/qmui_content_spacing_horizontal</dimen>
+    <dimen name="grid_expected_size">40dp</dimen>
 
     <!-- ListView -->
     <dimen name="list_divider_height">1px</dimen>

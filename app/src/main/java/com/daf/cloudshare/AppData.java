@@ -7,7 +7,7 @@ import java.util.List;
  * Created by PP on 2019/2/20.
  */
 public class AppData {
-    public static final String[] MINE_BODY = {"我的订单", "我的二维码", "修改密码", "投诉建议"};
+    public static final String[] MINE_BODY = {"我的订单", "我的二维码", "修改密码", "投诉建议","清除缓存"};
 
     public static List<String> getMineBody() {
         List<String> list = new ArrayList<>();

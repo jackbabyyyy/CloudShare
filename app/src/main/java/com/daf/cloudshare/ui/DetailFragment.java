@@ -1,6 +1,8 @@
 package com.daf.cloudshare.ui;
 
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -18,7 +20,9 @@ import com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -46,16 +50,20 @@ public class DetailFragment extends BaseFragment {
     TextView mTvRange;
     @BindView(R.id.tv_label)
     TextView mTvLabel;
-    @BindView(R.id.tv_name)
-    TextView mTvName;
-    @BindView(R.id.tv_num)
-    TextView mTvNum;
+
+
     @BindView(R.id.login)
     QMUIRoundButton mLogin;
 
     @BindView(R.id.topbar)
     QMUITopBarLayout mTopBarLayout;
 
+
+    @BindView(R.id.recyclerView)
+    RecyclerView mRecyclerView;
+
+    private List<DetailBean.DataBean.PAppShowBean> mData=new ArrayList<>();
+    private DetailDesAdapter adapter;
 
     @Override
     protected View onCreateView() {
@@ -89,6 +97,13 @@ public class DetailFragment extends BaseFragment {
             }
         });
 
+        mRecyclerView.setNestedScrollingEnabled(false);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        adapter = new DetailDesAdapter(mData);
+        mRecyclerView.setAdapter(adapter);
+
+
+
 
        String  id = getArguments().getString(PID);
         Map<String, String> map = new HashMap<>();
@@ -108,6 +123,7 @@ public class DetailFragment extends BaseFragment {
                                 DetailBean detailBean = JSON.parseObject(response, DetailBean.class);
                                 //
 
+                                adapter.setNewData(detailBean.getData().getP_appShow());
                                 setView(detailBean);
 
 
@@ -137,8 +153,7 @@ public class DetailFragment extends BaseFragment {
         for (int i=0;i<detailBean.getData().getP_label().size();i++){
             mTvLabel.append(detailBean.getData().getP_label().get(i)+"、");
         }
-        mTvName.setText("项目名称："+detailBean.getData().getP_name());
-        mTvNum.setText("项目编号："+detailBean.getData().getP_number());
+
 
         mLogin.setOnClickListener(new View.OnClickListener() {
             @Override
