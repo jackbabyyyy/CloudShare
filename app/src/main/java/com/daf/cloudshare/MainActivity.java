@@ -31,8 +31,6 @@ public class MainActivity extends BaseFragmentActivity {
 
 
 
-
-
         if (savedInstanceState == null) {
             BaseFragment fragment =new MainFragment();
 

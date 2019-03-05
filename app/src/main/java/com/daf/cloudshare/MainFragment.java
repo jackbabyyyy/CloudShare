@@ -70,13 +70,13 @@ public class MainFragment extends BaseFragment {
 
 
         QMUITabSegment.Tab tab=new QMUITabSegment.Tab(getActivity().getDrawable(R.mipmap.tab),
-                getActivity().getDrawable(R.mipmap.tab),"首页",false);
+                getActivity().getDrawable(R.mipmap.tab_),"首页",false);
         QMUITabSegment.Tab tab2=new QMUITabSegment.Tab(getActivity().getDrawable(R.mipmap.tab2),
-                getActivity().getDrawable(R.mipmap.tab2),"产品",false);
-        QMUITabSegment.Tab tab3=new QMUITabSegment.Tab(getActivity().getDrawable(R.mipmap.tab),
-                getActivity().getDrawable(R.mipmap.tab),"工具",false);
+                getActivity().getDrawable(R.mipmap.tab2_),"产品",false);
+        QMUITabSegment.Tab tab3=new QMUITabSegment.Tab(getActivity().getDrawable(R.mipmap.tab3),
+                getActivity().getDrawable(R.mipmap.tab3_),"工具",false);
         QMUITabSegment.Tab tab4=new QMUITabSegment.Tab(getActivity().getDrawable(R.mipmap.tab4),
-                getActivity().getDrawable(R.mipmap.tab4),"我的",false);
+                getActivity().getDrawable(R.mipmap.tab4_),"我的",false);
 
 
 
