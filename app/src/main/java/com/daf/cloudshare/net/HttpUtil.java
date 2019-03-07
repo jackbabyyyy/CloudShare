@@ -107,6 +107,7 @@ public class HttpUtil {
             Request request = new Request.Builder().url(url).post(body)
                     .addHeader("token", SP.getToken(mContext)).build();//采用post提交数据
 
+
             client.newCall(request).enqueue(new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {
@@ -116,6 +117,12 @@ public class HttpUtil {
  
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
+
+                    if (response==null||!response.isSuccessful()){
+                        Log.d("http", "onResponse: is null or fail"
+                                        +response.body().string()
+                         );
+                    }
                     if (response.isSuccessful()&&response != null){
                         String s=response.body().string();
                         Log.d("http", "request: "+request.url());

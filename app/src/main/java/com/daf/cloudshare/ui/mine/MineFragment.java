@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -48,7 +49,7 @@ import top.zibin.luban.OnCompressListener;
  * Created by PP on 2019/2/19.
  */
 public class MineFragment extends BaseFragment {
-    private static final int REQUEST_CODE_CHOOSE = 999;
+
     private int mCurrentDialogStyle = com.qmuiteam.qmui.R.style.QMUI_Dialog;
 
     @BindView(R.id.recyclerView)
@@ -240,10 +241,9 @@ public class MineFragment extends BaseFragment {
 
 
                         String base64=ImageUtils.file2Base64(file.getAbsolutePath());
-
-
+                        Log.d("chenzhiyuan", "base64: "+base64);
                         Map<String,String> map=new HashMap<>();
-                        map.put("avatar",base64 );
+                        map.put("avatar",base64);
                         HttpUtil.getInstance(getActivity())
                                 .postForm(AppUrl.saveAvatar, map, new HttpUtil.ResultCallback() {
                                     @Override
