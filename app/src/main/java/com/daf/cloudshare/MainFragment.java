@@ -1,27 +1,20 @@
 package com.daf.cloudshare;
 
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.daf.cloudshare.base.BaseFragment;
-import com.daf.cloudshare.home.HomeFragment;
-import com.daf.cloudshare.login.LoginFragment;
-import com.daf.cloudshare.mine.MineFragment;
+import com.daf.cloudshare.ui.home.HomeFragment;
+import com.daf.cloudshare.ui.mine.MineFragment;
 import com.daf.cloudshare.net.AppUrl;
-import com.daf.cloudshare.product.ProductFragment;
-import com.daf.cloudshare.tool.ToolFragment;
-import com.daf.cloudshare.utils.Const;
-import com.daf.cloudshare.utils.SP;
+import com.daf.cloudshare.ui.product.ProductFragment;
+import com.daf.cloudshare.ui.tool.ToolFragment;
 import com.qmuiteam.qmui.util.QMUIResHelper;
-import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 import com.qmuiteam.qmui.widget.QMUIPagerAdapter;
 import com.qmuiteam.qmui.widget.QMUITabSegment;
 import com.qmuiteam.qmui.widget.QMUIViewPager;

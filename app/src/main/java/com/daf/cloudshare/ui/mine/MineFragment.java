@@ -1,4 +1,4 @@
-package com.daf.cloudshare.mine;
+package com.daf.cloudshare.ui.mine;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -53,6 +54,8 @@ public class MineFragment extends BaseFragment {
     @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
     private CircleImageView mHeadView;
+    private TextView mTvName;
+    private TextView mTvMoney;
 
 
     @Override
@@ -69,6 +72,8 @@ public class MineFragment extends BaseFragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         MineAdapter adapter=new MineAdapter(AppData.getMineBody());
         View head=LayoutInflater.from(getActivity()).inflate(R.layout.head_mine,null);
+        mTvName = head.findViewById(R.id.tvName);
+        mTvMoney = head.findViewById(R.id.tvMoney);
         mHeadView = head.findViewById(R.id.head);
         mHeadView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -170,6 +175,11 @@ public class MineFragment extends BaseFragment {
                             JSONObject jsonObject=new JSONObject(response);
                             JSONObject data=new JSONObject(jsonObject.getString("data"));
                             String s=data.getString("u_avatar");
+
+                            String name=data.getString("u_name");
+                            String money=data.getString("u_money");
+                            mTvName.setText(name);
+                            mTvMoney.setText(money);
 
                             Glide.with(getActivity()).load(ImageUtils.stringToBitmap(s)).into(mHeadView);
 

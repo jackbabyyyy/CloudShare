@@ -1,4 +1,4 @@
-package com.daf.cloudshare.home.model;
+package com.daf.cloudshare.ui.home.model;
 
 import java.util.List;
 

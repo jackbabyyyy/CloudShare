@@ -1,4 +1,4 @@
-package com.daf.cloudshare.home.adapter;
+package com.daf.cloudshare.ui.home.adapter;
 
 import android.support.annotation.Nullable;
 import android.widget.ImageView;
@@ -8,7 +8,6 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.daf.cloudshare.R;
 
-import com.daf.cloudshare.home.model.TopBtnBean;
 import com.daf.cloudshare.model.ProductBean;
 
 

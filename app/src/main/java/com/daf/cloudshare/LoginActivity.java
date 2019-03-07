@@ -1,16 +1,14 @@
 package com.daf.cloudshare;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 
 import com.daf.cloudshare.base.BaseFragment;
 import com.daf.cloudshare.base.BaseFragmentActivity;
-import com.daf.cloudshare.login.LoginFragment;
+import com.daf.cloudshare.ui.login.LoginFragment;
 import com.daf.cloudshare.utils.Const;
 import com.daf.cloudshare.utils.SP;
-import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 
 public class LoginActivity extends BaseFragmentActivity {
 

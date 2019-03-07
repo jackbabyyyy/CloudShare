@@ -14,12 +14,10 @@
  * limitations under the License.
  */
 
-package com.daf.cloudshare.home;
+package com.daf.cloudshare.ui.home;
 
 import android.content.Context;
-import android.graphics.Rect;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -27,7 +25,6 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -38,22 +35,19 @@ import com.daf.cloudshare.R;
 import com.daf.cloudshare.base.BaseFragment;
 
 import com.daf.cloudshare.base.BaseProductAdapter;
-import com.daf.cloudshare.home.adapter.NewPrjAdapter;
-import com.daf.cloudshare.home.adapter.TopBtnAdapter;
-import com.daf.cloudshare.home.model.BannerBean;
+import com.daf.cloudshare.ui.home.adapter.NewPrjAdapter;
+import com.daf.cloudshare.ui.home.adapter.TopBtnAdapter;
+import com.daf.cloudshare.ui.home.model.BannerBean;
 
-import com.daf.cloudshare.home.model.TopBtnBean;
+import com.daf.cloudshare.ui.home.model.TopBtnBean;
 import com.daf.cloudshare.model.ProductBean;
 import com.daf.cloudshare.net.AppUrl;
 import com.daf.cloudshare.net.HttpUtil;
-import com.daf.cloudshare.product.ProductFragment;
+import com.daf.cloudshare.ui.product.ProductFragment;
 import com.daf.cloudshare.ui.DetailFragment;
 import com.daf.cloudshare.ui.WebFragment;
 import com.daf.cloudshare.utils.Const;
-import com.daf.cloudshare.utils.SP;
 
-import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
-import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 import com.youth.banner.Banner;
 import com.youth.banner.listener.OnBannerListener;
 import com.youth.banner.loader.ImageLoader;
@@ -67,9 +61,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import okhttp3.Call;
 import okhttp3.Request;
-import okhttp3.Response;
 
 /**
  * @author cginechen

@@ -1,4 +1,4 @@
-package com.daf.cloudshare.mine;
+package com.daf.cloudshare.ui.mine;
 
 import android.support.annotation.Nullable;
 

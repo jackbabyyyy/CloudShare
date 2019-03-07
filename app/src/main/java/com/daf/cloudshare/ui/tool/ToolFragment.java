@@ -1,6 +1,5 @@
-package com.daf.cloudshare.tool;
+package com.daf.cloudshare.ui.tool;
 
-import android.content.Intent;
 import android.graphics.Rect;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;

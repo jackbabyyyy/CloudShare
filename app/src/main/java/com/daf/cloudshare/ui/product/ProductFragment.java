@@ -1,4 +1,4 @@
-package com.daf.cloudshare.product;
+package com.daf.cloudshare.ui.product;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,12 +12,9 @@ import com.daf.cloudshare.R;
 import com.daf.cloudshare.base.BaseFragment;
 import com.daf.cloudshare.base.BaseProductAdapter;
 import com.daf.cloudshare.model.ProductBean;
-import com.daf.cloudshare.net.AppUrl;
 import com.daf.cloudshare.net.HttpUtil;
 import com.daf.cloudshare.ui.DetailFragment;
-import com.daf.cloudshare.ui.MyPrjDataListFragment;
 import com.daf.cloudshare.utils.Const;
-import com.daf.cloudshare.utils.SP;
 
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 
@@ -25,7 +22,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -33,9 +29,7 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import okhttp3.Call;
 import okhttp3.Request;
-import okhttp3.Response;
 
 /**
  * Created by PP on 2019/2/19.

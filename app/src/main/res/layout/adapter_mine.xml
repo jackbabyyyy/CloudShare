@@ -13,7 +13,6 @@
         android:layout_height="wrap_content">
 
         <TextView
-
             android:background="@drawable/qmui_divider_bottom_bitmap"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
