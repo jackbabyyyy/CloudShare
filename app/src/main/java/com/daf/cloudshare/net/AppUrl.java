@@ -31,4 +31,7 @@ public class AppUrl {
     public static final String getMyInfo=base+"api.php?c=user&a=getMyInfo";
 
 
+    public static final String getProType=base+"api.php?c=project&a=getProType";
+
+
 }
