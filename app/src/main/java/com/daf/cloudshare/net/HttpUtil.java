@@ -6,11 +6,11 @@ import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.daf.cloudshare.LoginActivity;
-import com.daf.cloudshare.base.BaseFragment;
+import com.daf.cloudshare.ui.login.LoginActivity;
+
 import com.daf.cloudshare.utils.Const;
 import com.daf.cloudshare.utils.SP;
-import com.qmuiteam.qmui.arch.QMUIFragment;
+
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -107,6 +107,7 @@ public class HttpUtil {
             Request request = new Request.Builder().url(url).post(body)
                     .addHeader("token", SP.getToken(mContext)).build();//采用post提交数据
 
+          Log.d("http", SP.getToken(mContext));
 
             client.newCall(request).enqueue(new Callback() {
                 @Override

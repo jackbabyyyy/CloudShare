@@ -1,20 +1,19 @@
-package com.daf.cloudshare.ui;
+package com.daf.cloudshare.ui.mine;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 
 import com.alibaba.fastjson.JSON;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.daf.cloudshare.R;
 import com.daf.cloudshare.base.BaseFragment;
-import com.daf.cloudshare.model.MyPrjBean;
 import com.daf.cloudshare.model.MyPrjDataListBean;
 import com.daf.cloudshare.net.AppUrl;
 import com.daf.cloudshare.net.HttpUtil;
 import com.daf.cloudshare.utils.Const;
+import com.daf.cloudshare.utils.MyLoadMoreView;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 
 import org.json.JSONException;
@@ -27,7 +26,6 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import okhttp3.Request;
 
 public class MyPrjDataListFragment extends BaseFragment implements BaseQuickAdapter.RequestLoadMoreListener {
@@ -56,15 +54,14 @@ public class MyPrjDataListFragment extends BaseFragment implements BaseQuickAdap
     }
 
     @Override
-    protected View onCreateView() {
-        View root = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_my_prj, null);
-        ButterKnife.bind(this, root);
-        init();
-
-        return root;
+    protected int getLayoutId() {
+        return R.layout.fragment_my_prj;
     }
 
-    private void init() {
+
+
+    @Override
+    protected void init() {
         String title=getArguments().getString(TITLE);
         mTopBar.setTitle(title+"订单");
         mTopBar.addLeftBackImageButton().setOnClickListener(new View.OnClickListener() {
@@ -79,6 +76,13 @@ public class MyPrjDataListFragment extends BaseFragment implements BaseQuickAdap
         mAdapter = new MyPrjDataListAdapter(mDatas);
         mAdapter.setOnLoadMoreListener(this,mRecyclerView);
         mRecyclerView.setAdapter(mAdapter);
+        mAdapter.setLoadMoreView(new MyLoadMoreView());
+        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+
+            }
+        });
 
 
         getData();

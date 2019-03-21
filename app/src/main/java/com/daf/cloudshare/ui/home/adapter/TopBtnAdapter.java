@@ -7,7 +7,7 @@ import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.daf.cloudshare.R;
-import com.daf.cloudshare.ui.home.model.TopBtnBean;
+import com.daf.cloudshare.model.TopBtnBean;
 
 import java.util.List;
 

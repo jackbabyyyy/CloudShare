@@ -1,34 +1,299 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<LinearLayout
+
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:scrollbars="none"
+    android:layout_width="match_parent">
+    xmlns:android="http://schemas.android.com/apk/res/android"/>
+<LinearLayout
+android:clipChildren="false"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff"
-    android:orientation="vertical">
-
-    <FrameLayout
+    android:orientation="vertical"
+    >
+    <com.youth.banner.Banner
+        android:id="@+id/banner"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="200dp"
+        app:image_scale_type="fit_xy"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
 
-        <com.youth.banner.Banner
-            android:id="@+id/banner"
+    </com.youth.banner.Banner>
+    <LinearLayout
+        android:elevation="4dp"
+        android:layout_marginBottom="20dp"
+
+        android:layout_marginTop="-25dp"
+        android:background="@drawable/bg2"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:id="@+id/rootflipper"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="46dp">
+        <ImageView
+
+            android:layout_marginLeft="20dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="20dp"
+            android:src="@mipmap/ad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <ViewFlipper
+            android:inAnimation="@anim/roll_in"
+            android:outAnimation="@anim/roll_out"
+            android:id="@+id/flipper"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            app:image_scale_type="fit_xy">
+            android:layout_height="match_parent">
+
+        </ViewFlipper>
 
 
-        </com.youth.banner.Banner>
+    </LinearLayout>
 
-    </FrameLayout>
+
+    <LinearLayout
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <RelativeLayout
+            android:id="@+id/root"
+           android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:background="@mipmap/bg"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_marginBottom="24dp"
+                    tools:src="@mipmap/ic_photo"
+                    android:id="@+id/iv"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"/>
+                <TextView
+
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    tools:text="信用卡"
+                    android:id="@+id/tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:textSize="12sp"
+                    android:layout_marginTop="12dp"
+                    android:textColor="@color/white"
+                    tools:text="各大银行信用卡"
+                    android:id="@+id/tv_sub"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+
+            </LinearLayout>
+
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+
+
+            <RelativeLayout
+                android:layout_marginBottom="5dp"
+                android:id="@+id/root2"
+              android:layout_marginLeft="5dp"
+                android:layout_marginRight="10dp"
+                android:background="@mipmap/bg2"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+                <LinearLayout
+                    android:layout_centerInParent="true"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginBottom="24dp"
+                        tools:src="@mipmap/ic_photo"
+                        android:id="@+id/iv2"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"/>
+                    <LinearLayout
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="6dp"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/white"
+                            tools:text="信用卡"
+                            android:id="@+id/tv2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                        <TextView
+                            android:textSize="9sp"
+                            android:layout_marginTop="8dp"
+                            android:textColor="@color/white"
+                            tools:text="各大银行信用卡"
+                            android:id="@+id/tv_sub2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+                <RelativeLayout
+                    android:layout_marginLeft="5dp"
+
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/root3"
+
+                    android:background="@mipmap/bg3"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+
+                        android:orientation="vertical"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+
+                            android:layout_marginBottom="12dp"
+                            tools:src="@mipmap/ic_photo"
+                            android:id="@+id/iv3"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"/>
+                        <TextView
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/white"
+                            tools:text="信用卡"
+                            android:id="@+id/tv3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                        <TextView
+                            android:textSize="9sp"
+                            android:layout_marginTop="12dp"
+                            android:textColor="@color/white"
+                            tools:text="各大银行信用卡"
+                            android:id="@+id/tv_sub3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+                <RelativeLayout
+
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="10dp"
+                    android:id="@+id/root4"
+
+                    android:layout_marginTop="5dp"
+                    android:background="@mipmap/bg4"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:layout_marginBottom="12dp"
+                            tools:src="@mipmap/ic_photo"
+                            android:id="@+id/iv4"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"/>
+                        <TextView
+
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/white"
+                            tools:text="信用卡"
+                            android:id="@+id/tv4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                        <TextView
+                            android:textSize="9sp"
+                            android:layout_marginTop="12dp"
+                            android:textColor="@color/white"
+                            tools:text="各大银行信用卡"
+                            android:id="@+id/tv_sub4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
 
 
 
 
     <LinearLayout
+        android:layout_marginTop="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -38,6 +303,8 @@
             android:layout_height="wrap_content">
 
             <TextView
+                android:drawablePadding="6dp"
+                android:drawableRight="@mipmap/favorite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
@@ -66,9 +333,12 @@
 
         <android.support.v7.widget.RecyclerView
 
+
+            android:background="@color/white"
+            android:layout_marginBottom="60dp"
             android:id="@+id/recycler"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
         </android.support.v7.widget.RecyclerView>
 
@@ -80,6 +350,9 @@
 
 
 
-
 </LinearLayout>
+
+</ScrollView>
+
+
 

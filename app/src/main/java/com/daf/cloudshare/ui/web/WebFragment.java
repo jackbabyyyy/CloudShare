@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.daf.cloudshare.ui;
+package com.daf.cloudshare.ui.web;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -23,7 +23,6 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.webkit.DownloadListener;
 import android.webkit.WebChromeClient;
@@ -34,6 +33,7 @@ import android.widget.ZoomButtonsController;
 
 import com.daf.cloudshare.R;
 import com.daf.cloudshare.base.BaseFragment;
+
 import com.qmuiteam.qmui.util.QMUILangHelper;
 import com.qmuiteam.qmui.util.QMUIResHelper;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
@@ -48,7 +48,6 @@ import java.lang.reflect.Field;
 import java.net.URLDecoder;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by cgspine on 2017/12/4.
@@ -84,8 +83,16 @@ public class WebFragment extends BaseFragment {
         fragment.setArguments(bundle);
         return fragment;
     }
+
     @Override
-    protected View onCreateView() {
+    protected int getLayoutId() {
+        return R.layout.fragment_webview_explorer;
+    }
+
+
+
+    @Override
+    protected void init() {
         Bundle bundle = getArguments();
         if (bundle != null) {
             String url = bundle.getString(EXTRA_URL);
@@ -98,11 +105,9 @@ public class WebFragment extends BaseFragment {
 
         mProgressHandler = new ProgressHandler();
 
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.fragment_webview_explorer, null);
-        ButterKnife.bind(this, view);
         initTopbar();
         initWebView();
-        return view;
+
     }
 
     protected void initTopbar() {

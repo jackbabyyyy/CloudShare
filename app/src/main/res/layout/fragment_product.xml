@@ -8,28 +8,94 @@
 
 
 
+    <LinearLayout
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
         android:fitsSystemWindows="true"
-        android:background="@color/qmui_config_color_white"
-
         android:layout_marginTop="?attr/qmui_topbar_height"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </android.support.v7.widget.RecyclerView>
+
+        <LinearLayout
+
+
+
+            android:background="@color/app_color_blue"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="30dp">
+            
+            <TextView
+                android:id="@+id/index"
+                android:layout_gravity="center_vertical"
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:text="排序"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+            <View
+                android:layout_gravity="center_vertical"
+                android:background="@color/white"
+                android:layout_width="1dp"
+                android:layout_height="16dp"/>
+            <TextView
+                android:id="@+id/index2"
+                android:layout_gravity="center_vertical"
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                android:text="筛选"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:clipChildren="false"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <View
+                android:background="@color/app_color_blue"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                />
+
+
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_marginTop="-24dp"
+            android:id="@+id/recyclerView"
+
+            android:background="@color/divider_bg"
+
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </android.support.v7.widget.RecyclerView>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+
+
+
     <com.qmuiteam.qmui.widget.QMUITopBarLayout
-
-
         android:id="@+id/topbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true"/>
-
-
-
-
-
 
 </com.qmuiteam.qmui.widget.QMUIWindowInsetLayout>

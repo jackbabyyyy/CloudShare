@@ -34,18 +34,19 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.daf.cloudshare.R;
 import com.daf.cloudshare.base.BaseFragment;
 
+
 import com.daf.cloudshare.base.BaseProductAdapter;
 import com.daf.cloudshare.ui.home.adapter.NewPrjAdapter;
 import com.daf.cloudshare.ui.home.adapter.TopBtnAdapter;
-import com.daf.cloudshare.ui.home.model.BannerBean;
+import com.daf.cloudshare.model.BannerBean;
 
-import com.daf.cloudshare.ui.home.model.TopBtnBean;
+import com.daf.cloudshare.model.TopBtnBean;
 import com.daf.cloudshare.model.ProductBean;
 import com.daf.cloudshare.net.AppUrl;
 import com.daf.cloudshare.net.HttpUtil;
 import com.daf.cloudshare.ui.product.ProductFragment;
-import com.daf.cloudshare.ui.DetailFragment;
-import com.daf.cloudshare.ui.WebFragment;
+import com.daf.cloudshare.ui.product.DetailFragment;
+import com.daf.cloudshare.ui.web.WebFragment;
 import com.daf.cloudshare.utils.Const;
 
 import com.youth.banner.Banner;
@@ -60,7 +61,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import okhttp3.Request;
 
 /**
@@ -84,17 +84,14 @@ public class HomeFragment extends BaseFragment {
 
 
     @Override
-    protected View onCreateView() {
-        View root = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_home, null);
-        ButterKnife.bind(this, root);
-
-
-        init();
-       // initHead(root);
-        return root ;
+    protected int getLayoutId() {
+        return R.layout.fragment_home;
     }
 
-    private void init() {
+
+
+    @Override
+    protected void init() {
 
 
 
@@ -112,7 +109,8 @@ public class HomeFragment extends BaseFragment {
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
 
                 String pid=((List<ProductBean.DataBean>)adapter.getData()).get(position).getP_id();
-                startFragment(DetailFragment.getInstance(pid));
+                String name=((List<ProductBean.DataBean>)adapter.getData()).get(position).getP_name();
+                startFragment(DetailFragment.getInstance(pid,name));
 
             }
         });
@@ -206,7 +204,7 @@ public class HomeFragment extends BaseFragment {
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 
                 List<ProductBean.DataBean> list=adapter.getData();
-                startFragment(DetailFragment.getInstance(list.get(position).getP_id()));
+                startFragment(DetailFragment.getInstance(list.get(position).getP_id(),list.get(position).getP_name()));
 
             }
         });

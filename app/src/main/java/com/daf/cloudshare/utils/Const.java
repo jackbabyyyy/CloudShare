@@ -10,4 +10,7 @@ public class Const  {
     public static final String body_success="80001";
     public static final String token_error="90017";
 
+    public static final String favorite_ok="90000";
+    public static final String getFavorite_cancel="90006";
+
 }

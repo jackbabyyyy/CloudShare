@@ -7,7 +7,7 @@ public class AppUrl {
     public static final String base="https://www.dafyun.cn/";
     public static final String login=base+"api.php?c=public&a=checkLogin";
 
-    public static final String myInfo=base+"api.php?c=user&a=getMyInfo";
+
 
     public static final String banner=base+"api.php?c=common&a=getIndexBanner";
     public static final String topBtn=base+"api.php?c=common&a=getTopBtn";
@@ -32,6 +32,11 @@ public class AppUrl {
 
 
     public static final String getProType=base+"api.php?c=project&a=getProType";
+    public static final String getTopFavorite=base+"api.php?c=favorite&a=getTopFavorite";
+    public static final String addToFavorite=base+"api.php?c=favorite&a=addToFavorite";
+    public static final String cancelFavorite=base+"api.php?c=favorite&a=removeFromFavorite";
+    public static final String getFavorite=base+"api.php?c=favorite&a=getFavorite";
+    public static final String getIndexTip=base+"api.php?c=project&a=getIndexTip";
 
 
 }

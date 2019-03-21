@@ -1,4 +1,4 @@
-package com.daf.cloudshare.ui;
+package com.daf.cloudshare.ui.mine;
 
 import android.support.annotation.Nullable;
 import android.widget.ImageView;

@@ -1,20 +1,19 @@
-package com.daf.cloudshare.ui;
+package com.daf.cloudshare.ui.mine;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 
 import com.alibaba.fastjson.JSON;
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.loadmore.LoadMoreView;
 import com.daf.cloudshare.R;
 import com.daf.cloudshare.base.BaseFragment;
+
 import com.daf.cloudshare.model.MyPrjBean;
-import com.daf.cloudshare.model.ProductBean;
 import com.daf.cloudshare.net.AppUrl;
 import com.daf.cloudshare.net.HttpUtil;
 import com.daf.cloudshare.utils.Const;
+import com.daf.cloudshare.utils.MyLoadMoreView;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 
 import org.json.JSONException;
@@ -27,7 +26,6 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import okhttp3.Request;
 
 /**
@@ -46,16 +44,14 @@ public class MyPrjFragment extends BaseFragment implements BaseQuickAdapter.Requ
     private MyPrjAdapter mAdapter;
 
     @Override
-    protected View onCreateView() {
-        View root = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_my_prj, null);
-        ButterKnife.bind(this, root);
-        init();
-
-
-        return root;
+    protected int getLayoutId() {
+        return R.layout.fragment_my_prj;
     }
 
-    private void init() {
+
+
+    @Override
+    protected void init() {
 
         mTopBarLayout.setTitle("我的订单");
         mTopBarLayout.addLeftBackImageButton().setOnClickListener(new View.OnClickListener() {
@@ -76,6 +72,8 @@ public class MyPrjFragment extends BaseFragment implements BaseQuickAdapter.Requ
                 startFragment(MyPrjDataListFragment.getInstance(pid,title));
             }
         });
+
+        mAdapter.setLoadMoreView(new MyLoadMoreView());
 
         getData();
 

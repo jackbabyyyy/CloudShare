@@ -1,10 +1,13 @@
-package com.daf.cloudshare;
+package com.daf.cloudshare.ui.login;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 
+import com.daf.cloudshare.MainActivity;
+import com.daf.cloudshare.R;
 import com.daf.cloudshare.base.BaseFragment;
+
 import com.daf.cloudshare.base.BaseFragmentActivity;
 import com.daf.cloudshare.ui.login.LoginFragment;
 import com.daf.cloudshare.utils.Const;
@@ -24,7 +27,7 @@ public class LoginActivity extends BaseFragmentActivity {
 
         //判断是否登录
         if (!TextUtils.isEmpty(SP.get(this,Const.token,"").toString())){
-            startActivity(new Intent(this,MainActivity.class));
+            startActivity(new Intent(this, MainActivity.class));
             finish();
         }
 

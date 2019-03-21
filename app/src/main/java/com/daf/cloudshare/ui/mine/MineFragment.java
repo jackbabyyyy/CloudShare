@@ -13,15 +13,13 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.daf.cloudshare.AppData;
-import com.daf.cloudshare.LoginActivity;
+import com.daf.cloudshare.ui.login.LoginActivity;
 import com.daf.cloudshare.R;
 import com.daf.cloudshare.base.BaseFragment;
+
 import com.daf.cloudshare.net.AppUrl;
 import com.daf.cloudshare.net.HttpUtil;
-import com.daf.cloudshare.ui.ModifyPassFragment;
-import com.daf.cloudshare.ui.MyPrjFragment;
-import com.daf.cloudshare.ui.MyQrFragment;
-import com.daf.cloudshare.ui.SubmitFragment;
+import com.daf.cloudshare.ui.favorite.FavoriteFragment;
 import com.daf.cloudshare.utils.DataCleanManager;
 import com.daf.cloudshare.utils.ImageUtils;
 import com.daf.cloudshare.utils.SP;
@@ -38,7 +36,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.Request;
 import top.zibin.luban.CompressionPredicate;
@@ -51,24 +48,24 @@ import top.zibin.luban.OnCompressListener;
 public class MineFragment extends BaseFragment {
 
     private int mCurrentDialogStyle = com.qmuiteam.qmui.R.style.QMUI_Dialog;
-
     @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
     private CircleImageView mHeadView;
     private TextView mTvName;
     private TextView mTvMoney;
+    private String mS;
+    private String mName;
 
 
     @Override
-    protected View onCreateView() {
-        View root = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_mine, null);
-        ButterKnife.bind(this, root);
-
-        init();
-        return root ;
+    protected int getLayoutId() {
+        return R.layout.fragment_mine;
     }
 
-    private void init() {
+
+
+    @Override
+    protected void init() {
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         MineAdapter adapter=new MineAdapter(AppData.getMineBody());
@@ -79,9 +76,6 @@ public class MineFragment extends BaseFragment {
         mHeadView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-
 
               photoPicker();
 
@@ -106,26 +100,23 @@ public class MineFragment extends BaseFragment {
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 switch (position){
                     case 0:
-
-                        startFragment(new MyPrjFragment());
+                        startFragment(new FavoriteFragment());
                         break;
                     case 1:
-
-                        startFragment(new MyQrFragment());
-
+                        startFragment(new MyPrjFragment());
                         break;
-
                     case 2:
+                        startFragment( MyQrFragment.getInstance(mS,mName));
+                        break;
+                    case 3:
                         startFragment(new ModifyPassFragment());
                         break;
-
-                    case 3:
+                    case 4:
                         startFragment(new SubmitFragment());
                         break;
-                    case 4:
+                    case 5:
                         showClearDialog();
                         break;
-
                 }
             }
         });
@@ -173,16 +164,18 @@ public class MineFragment extends BaseFragment {
                     @Override
                     public void onResponse(String response) throws IOException {
                         try {
+
+
                             JSONObject jsonObject=new JSONObject(response);
                             JSONObject data=new JSONObject(jsonObject.getString("data"));
-                            String s=data.getString("u_avatar");
+                            mS = data.getString("u_avatar");
 
-                            String name=data.getString("u_name");
+                            mName = data.getString("u_name");
                             String money=data.getString("u_money");
-                            mTvName.setText(name);
+                            mTvName.setText(mName);
                             mTvMoney.setText(money);
 
-                            Glide.with(getActivity()).load(ImageUtils.stringToBitmap(s)).into(mHeadView);
+                            Glide.with(getActivity()).load(ImageUtils.stringToBitmap(mS)).into(mHeadView);
 
 
                         } catch (JSONException e) {

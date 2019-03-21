@@ -1,4 +1,4 @@
-package com.daf.cloudshare.ui.login;
+package com.daf.cloudshare.model;
 
 /**
  * Created by PP on 2019/2/20.

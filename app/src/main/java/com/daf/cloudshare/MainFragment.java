@@ -3,13 +3,12 @@ package com.daf.cloudshare;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 
 import com.daf.cloudshare.base.BaseFragment;
-import com.daf.cloudshare.ui.home.HomeFragment;
+
+import com.daf.cloudshare.ui.home.Home2Fragment;
 import com.daf.cloudshare.ui.mine.MineFragment;
 import com.daf.cloudshare.net.AppUrl;
 import com.daf.cloudshare.ui.product.ProductFragment;
@@ -20,13 +19,12 @@ import com.qmuiteam.qmui.widget.QMUITabSegment;
 import com.qmuiteam.qmui.widget.QMUIViewPager;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by PP on 2019/2/19.
  */
 public class MainFragment extends BaseFragment {
-    private final static String TAG = HomeFragment.class.getSimpleName();
+    private final static String TAG = MainFragment.class.getSimpleName();
 
 
     @BindView(R.id.pager)
@@ -35,21 +33,21 @@ public class MainFragment extends BaseFragment {
     QMUITabSegment mTabSegment;
 
 
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_main;
+    }
+
+
 
     @Override
-    protected View onCreateView() {
-        FrameLayout layout = (FrameLayout) LayoutInflater.from(getActivity()).inflate(R.layout.fragment_main, null);
-        ButterKnife.bind(this, layout);
+    protected void init() {
+
         initTabs();
         initPagers();
 
 
-
-
-        return layout;
     }
-
-
 
 
     private void initTabs() {
@@ -95,7 +93,7 @@ public class MainFragment extends BaseFragment {
             protected Object hydrate(ViewGroup container, int position) {
                 switch (position) {
                     case 0:
-                        return new HomeFragment();
+                        return new Home2Fragment();
                     case 1:
                         return  ProductFragment.getInstance("产品","", AppUrl.prjList);
                     case 2:
@@ -103,7 +101,7 @@ public class MainFragment extends BaseFragment {
                     case 3:
                         return new MineFragment();
                     default:
-                        return new HomeFragment();
+                        return new Home2Fragment();
 
                 }
             }

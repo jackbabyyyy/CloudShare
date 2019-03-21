@@ -3,14 +3,10 @@ package com.daf.cloudshare;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 
 import com.daf.cloudshare.base.BaseActivity;
+import com.daf.cloudshare.ui.login.LoginActivity;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
-
-
-import okhttp3.Call;
-import okhttp3.Response;
 
 public class SplashActivity extends BaseActivity {
 

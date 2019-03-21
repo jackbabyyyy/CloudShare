@@ -5,7 +5,6 @@ import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
@@ -15,11 +14,11 @@ import com.alibaba.fastjson.JSON;
 import com.daf.cloudshare.MainActivity;
 import com.daf.cloudshare.R;
 import com.daf.cloudshare.base.BaseFragment;
+import com.daf.cloudshare.model.LoginBean;
 import com.daf.cloudshare.net.AppUrl;
 import com.daf.cloudshare.net.HttpUtil;
 import com.daf.cloudshare.utils.Const;
 import com.daf.cloudshare.utils.SP;
-
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 import com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton;
 
@@ -30,7 +29,6 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import okhttp3.Request;
 
@@ -55,17 +53,21 @@ public class LoginFragment extends BaseFragment {
 
 
     @Override
-    protected View onCreateView() {
-        View root = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_login, null);
-        ButterKnife.bind(this, root);
-
-
-        initBar();
-        init();
-        return root ;
+    protected int getLayoutId() {
+        return R.layout.fragment_login;
     }
 
-    private void init() {
+
+    @Override
+    protected void init() {
+
+        mTopBar.setTitle("员工登录");
+        mTopBar.addRightImageButton(R.mipmap.close,R.id.topbar_right_close_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().finish();
+            }
+        });
 
         if (!TextUtils.isEmpty(SP.getUser(getActivity())[0])){
             mAccount.setText(SP.getUser(getActivity())[0]);
@@ -115,13 +117,7 @@ public class LoginFragment extends BaseFragment {
 
     private void initBar() {
 
-        mTopBar.setTitle("员工登录");
-        mTopBar.addRightImageButton(R.mipmap.close,R.id.topbar_right_close_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().finish();
-            }
-        });
+
 
 
 //        mTopBar.addLeftTextButton("注册",R.id.topbar_left_text_button)

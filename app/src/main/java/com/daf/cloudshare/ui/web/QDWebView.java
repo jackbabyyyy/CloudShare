@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.daf.cloudshare.ui;
+package com.daf.cloudshare.ui.web;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

@@ -4,18 +4,19 @@ import android.graphics.Rect;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 
 import com.alibaba.fastjson.JSON;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.daf.cloudshare.R;
 import com.daf.cloudshare.base.BaseFragment;
+
+import com.daf.cloudshare.model.ToolListBean;
 import com.daf.cloudshare.net.AppUrl;
 import com.daf.cloudshare.net.HttpUtil;
 
 
-import com.daf.cloudshare.ui.WebFragment;
+import com.daf.cloudshare.ui.web.WebFragment;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 
@@ -24,7 +25,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import okhttp3.Request;
 
 /**
@@ -48,17 +48,12 @@ public class ToolFragment extends BaseFragment {
     }
 
     @Override
-    protected View onCreateView() {
-
-
-        View root = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_tool, null);
-        ButterKnife.bind(this, root);
-
-        init();
-        return root;
+    protected int getLayoutId() {
+        return R.layout.fragment_tool;
     }
 
-    private void init() {
+   @Override
+   protected void init() {
 
 
 

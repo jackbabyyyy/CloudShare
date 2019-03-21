@@ -15,7 +15,6 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.daf.cloudshare.R;
 import com.daf.cloudshare.model.ProductBean;
-import com.daf.cloudshare.ui.DetailFragment;
 
 import java.util.List;
 
@@ -56,6 +55,7 @@ public class BaseProductAdapter extends BaseQuickAdapter<ProductBean.DataBean, B
                 .setText(R.id.tv_rate_type, item.getP_ratetype())
                 .setText(R.id.bottom, label)
                 .setText(R.id.bottom2, label2)
+                .setText(R.id.tv_over,item.getP_passrate())
                 .setText(R.id.tv_body, item.getP_quantity() + "人已借款")
                 .addOnClickListener(R.id.tv_apply);
 

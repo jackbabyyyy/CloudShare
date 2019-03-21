@@ -3,6 +3,7 @@ package com.daf.cloudshare;
 import android.os.Bundle;
 
 import com.daf.cloudshare.base.BaseFragment;
+
 import com.daf.cloudshare.base.BaseFragmentActivity;
 
 public class MainActivity extends BaseFragmentActivity {

@@ -1,4 +1,4 @@
-package com.daf.cloudshare.ui;
+package com.daf.cloudshare.ui.product;
 
 import android.support.annotation.Nullable;
 
@@ -16,7 +16,7 @@ public class DetailDesAdapter extends BaseQuickAdapter<DetailBean.DataBean.PAppS
 
     @Override
     protected void convert(BaseViewHolder helper, DetailBean.DataBean.PAppShowBean item) {
-        helper.setText(R.id.tv,item.getName()+":  "+item.getDesc());
+        helper.setText(R.id.tv,item.name+":  "+item.desc);
 
 
     }

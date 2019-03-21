@@ -1,12 +1,12 @@
-package com.daf.cloudshare.ui;
+package com.daf.cloudshare.ui.mine;
 
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.daf.cloudshare.R;
 import com.daf.cloudshare.base.BaseFragment;
+
 import com.daf.cloudshare.net.AppUrl;
 import com.daf.cloudshare.net.HttpUtil;
 import com.daf.cloudshare.utils.StringUtil;
@@ -20,7 +20,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import okhttp3.Request;
 
@@ -40,15 +39,14 @@ public class ModifyPassFragment extends BaseFragment {
     QMUITopBarLayout mTopbar;
 
     @Override
-    protected View onCreateView() {
-        View root = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_modify_pass, null);
-        ButterKnife.bind(this, root);
-        init();
-        return root;
-
+    protected int getLayoutId() {
+        return R.layout.fragment_modify_pass;
     }
 
-    private void init() {
+
+
+    @Override
+    protected void init() {
 
         mTopbar.setTitle("修改密码");
         mTopbar.addLeftBackImageButton().setOnClickListener(new View.OnClickListener() {

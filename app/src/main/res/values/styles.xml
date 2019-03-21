@@ -194,4 +194,8 @@
 
     </style>
 
+    <style name="pop">
+        <item name="android:windowEnterAnimation">@anim/pop</item>
+    </style>
+
 </resources>

@@ -9,6 +9,7 @@
 
     <LinearLayout
 
+        android:fitsSystemWindows="true"
         android:background="#f0f0f0"
 
         android:layout_marginTop="?attr/qmui_topbar_height"

@@ -70,6 +70,25 @@ public class ProductBean {
         private String p_limitup;
         private String p_quantity;
         private List<String> p_label;
+        private String p_resume;
+
+        private String p_passrate;
+
+        public String getP_passrate() {
+            return p_passrate;
+        }
+
+        public void setP_passrate(String p_passrate) {
+            this.p_passrate = p_passrate;
+        }
+
+        public String getP_resume() {
+            return p_resume;
+        }
+
+        public void setP_resume(String p_resume) {
+            this.p_resume = p_resume;
+        }
 
         public String getP_id() {
             return p_id;

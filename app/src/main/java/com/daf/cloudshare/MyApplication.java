@@ -6,6 +6,7 @@ import android.content.res.Resources;
 import com.daf.cloudshare.utils.Const;
 import com.daf.cloudshare.utils.SP;
 
+import com.mob.MobSDK;
 import com.qmuiteam.qmui.arch.QMUISwipeBackActivityManager;
 
 import java.util.ArrayList;
@@ -25,6 +26,9 @@ public class MyApplication extends Application {
         super.onCreate();
 
         QMUISwipeBackActivityManager.init(this);
+
+
+        MobSDK.init(this);
 
     }
 
