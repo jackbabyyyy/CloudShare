@@ -17,6 +17,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 
 import com.daf.cloudshare.R;
 import com.daf.cloudshare.base.BaseFragment;
+import com.daf.cloudshare.event.MessageFavorite;
 import com.daf.cloudshare.model.FavoriteBean;
 
 import com.daf.cloudshare.model.TipBean;
@@ -33,6 +34,9 @@ import com.youth.banner.Banner;
 import com.youth.banner.listener.OnBannerListener;
 import com.youth.banner.loader.ImageLoader;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -93,6 +97,8 @@ public class Home2Fragment extends BaseFragment {
 
     private List<FavoriteBean.DataBean> mData=new ArrayList<>();
     private TypeBean mBean;
+    private FavoriteHomeAdapter mAdapter;
+    private View mHeadView;
 
     @Override
     protected int getLayoutId() {
@@ -106,17 +112,19 @@ public class Home2Fragment extends BaseFragment {
         initType();
         initRecycler();
 
+        EventBus.getDefault().register(this);
+
     }
 
     private void initRecycler() {
 
 
         mRecycler.setLayoutManager(new GridLayoutManager(getActivity(),4));
-        FavoriteHomeAdapter adapter=new FavoriteHomeAdapter(mData);
-        mRecycler.setAdapter(adapter);
+        mAdapter = new FavoriteHomeAdapter(mData);
+        mRecycler.setAdapter(mAdapter);
 
-        View headView=LayoutInflater.from(getActivity()).inflate(R.layout.head_favorite,null);
-        headView.setOnClickListener(new View.OnClickListener() {
+        mHeadView = LayoutInflater.from(getActivity()).inflate(R.layout.head_favorite,null);
+        mHeadView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startFragment(ProductFragment.getInstance("产品列表","", AppUrl.prjList));
@@ -125,6 +133,21 @@ public class Home2Fragment extends BaseFragment {
 
 
 
+        getData();
+        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+
+                String id=((List<FavoriteBean.DataBean>)adapter.getData()).get(position).f_value;
+                String name=((List<FavoriteBean.DataBean>)adapter.getData()).get(position).f_name;
+                startFragment(DetailFragment.getInstance(id,name));
+
+            }
+        });
+
+    }
+
+    private void getData(){
         HttpUtil.getInstance(getActivity())
                 .postForm(AppUrl.getTopFavorite, null, new HttpUtil.ResultCallback() {
                     @Override
@@ -135,29 +158,19 @@ public class Home2Fragment extends BaseFragment {
                     @Override
                     public void onResponse(String response) throws IOException {
                         FavoriteBean bean=JSON.parseObject(response,FavoriteBean.class);
-                        if (bean.data.size()==0){
 
+
+                        if (bean.data.size()==0){
                             mTvMore.setVisibility(View.GONE);
-                            adapter.addHeaderView(headView);
+                            mAdapter.addHeaderView(mHeadView);
                         }else{
                             mTvMore.setVisibility(View.VISIBLE);
                         }
-                        adapter.setNewData(bean.data);
+                        mAdapter.setNewData(bean.data);
 
 
                     }
                 });
-
-        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-
-                String id=((List<FavoriteBean.DataBean>)adapter.getData()).get(position).f_value;
-                String name=((List<FavoriteBean.DataBean>)adapter.getData()).get(position).f_name;
-                startFragment(DetailFragment.getInstance(id,name));
-
-            }
-        });
 
     }
 
@@ -244,25 +257,32 @@ public class Home2Fragment extends BaseFragment {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+
+    }
+
+    @Override
     public void onStop() {
         super.onStop();
         mFlipper.stopFlipping();
+
     }
 
     @OnClick({R.id.root, R.id.root2, R.id.root3, R.id.root4, R.id.tvMore})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.root:
-                startFragment(ProductFragment.getInstance(mBean.data.get(0).t_name,mBean.data.get(0).t_type,AppUrl.prjList));
+                startFragment(ProductFragment.getInstance(mBean.data.get(0).t_name,mBean.data.get(0).t_id,AppUrl.prjList));
                 break;
             case R.id.root2:
-                startFragment(ProductFragment.getInstance(mBean.data.get(1).t_name,mBean.data.get(1).t_type,AppUrl.prjList));
+                startFragment(ProductFragment.getInstance(mBean.data.get(1).t_name,mBean.data.get(1).t_id,AppUrl.prjList));
                 break;
             case R.id.root3:
-                startFragment(ProductFragment.getInstance(mBean.data.get(2).t_name,mBean.data.get(2).t_type,AppUrl.prjList));
+                startFragment(ProductFragment.getInstance(mBean.data.get(2).t_name,mBean.data.get(2).t_id,AppUrl.prjList));
                 break;
             case R.id.root4:
-                startFragment(ProductFragment.getInstance(mBean.data.get(3).t_name,mBean.data.get(3).t_type,AppUrl.prjList));
+                startFragment(ProductFragment.getInstance(mBean.data.get(3).t_name,mBean.data.get(3).t_id,AppUrl.prjList));
                 break;
             case R.id.tvMore:
                 startFragment(new FavoriteFragment());
@@ -325,4 +345,11 @@ public class Home2Fragment extends BaseFragment {
 
 
     }
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(MessageFavorite event) {
+        getData();
+
+     }
 }

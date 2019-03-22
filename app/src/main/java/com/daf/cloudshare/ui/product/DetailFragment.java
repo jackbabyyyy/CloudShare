@@ -13,7 +13,10 @@ import com.alibaba.fastjson.JSON;
 import com.daf.cloudshare.R;
 import com.daf.cloudshare.base.BaseFragment;
 
+import com.daf.cloudshare.event.MessageFavorite;
 import com.daf.cloudshare.model.DetailBean;
+import com.daf.cloudshare.model.FavoriteBean;
+import com.daf.cloudshare.model.FavoriteResBean;
 import com.daf.cloudshare.net.AppUrl;
 import com.daf.cloudshare.net.HttpUtil;
 import com.daf.cloudshare.ui.web.WebFragment;
@@ -21,6 +24,7 @@ import com.daf.cloudshare.utils.Const;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 import com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton;
 
+import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -32,6 +36,7 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.sharesdk.onekeyshare.OnekeyShare;
 import okhttp3.Request;
 
 /**
@@ -76,6 +81,7 @@ public class DetailFragment extends BaseFragment {
     private DetailBean mDetailBean;
 
     private boolean isFlag=false;
+    private String fid="0";
 
     @Override
     protected int getLayoutId() {
@@ -163,9 +169,7 @@ public class DetailFragment extends BaseFragment {
         }else{
             mFavorite.setImageResource(R.mipmap.favorite_dark);
         }
-
         mTvRange.setText("额度范围：" + detailBean.data.p_limitdown+ "-" + detailBean.data.p_limitup + "万元");
-
         for (int i = 0; i < detailBean.data.p_label.size(); i++) {
             mTvLabel.append(detailBean.data.p_label.get(i) + "、");
         }
@@ -192,22 +196,49 @@ public class DetailFragment extends BaseFragment {
             case R.id.favorite:
 
                 if (isFlag){
-                    cancelFavorite(mDetailBean.data.p_isfavorite+"");
+
+
+                    if (mDetailBean.data.p_isfavorite==0){
+                        cancelFavorite(fid);
+                    }else{
+                        cancelFavorite(mDetailBean.data.p_isfavorite+"");
+                    }
+
+
 
                 }else{
                     addToFavorite();
                 }
-
-
                 break;
             case R.id.share:
-
-
+                showShare();
                 break;
         }
     }
 
+    private void showShare() {
+        OnekeyShare oks = new OnekeyShare();
+        //关闭sso授权
+        oks.disableSSOWhenAuthorize();
+
+        // title标题，微信、QQ和QQ空间等平台使用
+        oks.setTitle("微信分享");
+        // titleUrl QQ和QQ空间跳转链接
+        oks.setTitleUrl("http://sharesdk.cn");
+        // text是分享文本，所有平台都需要这个字段
+        oks.setText("我是分享文本");
+        // imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
+        oks.setImagePath("/sdcard/test.jpg");//确保SDcard下面存在此张图片
+        // url在微信、微博，Facebook等平台中使用
+        oks.setUrl("http://sharesdk.cn");
+        // comment是我对这条分享的评论，仅在人人网使用
+        oks.setComment("我是测试评论文本");
+        // 启动分享GUI
+        oks.show(getActivity());
+    }
+
     private void cancelFavorite(String id){
+
 
         Map<String,String > map=new HashMap<>();
         map.put("id",id);
@@ -225,6 +256,8 @@ public class DetailFragment extends BaseFragment {
                     if (jsonObject.getString("code").equals(Const.getFavorite_cancel)){
                         mFavorite.setImageResource(R.mipmap.favorite_dark);
                         isFlag=false;
+                        //
+                        postEvent();
                     }else{
                         mFavorite.setImageResource(R.mipmap.favorite);
                     }
@@ -254,22 +287,29 @@ public class DetailFragment extends BaseFragment {
 
                     @Override
                     public void onResponse(String response) throws IOException {
-                        try {
-                            JSONObject jsonObject=new JSONObject(response);
-                            showToast(jsonObject.getString("msg"));
-                            if (jsonObject.getString("code").equals(Const.favorite_ok)){
-                                mFavorite.setImageResource(R.mipmap.favorite);
-                                isFlag=true;
-                            }else{
-                                mFavorite.setImageResource(R.mipmap.favorite_dark);
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+
+
+                        FavoriteResBean bean=JSON.parseObject(response, FavoriteResBean.class);
+                        showToast(bean.msg);
+                        if (bean.code.equals(Const.favorite_ok)){
+                            mFavorite.setImageResource(R.mipmap.favorite);
+                            isFlag=true;
+                            //
+                            postEvent();
+                            fid=bean.data.f_id;
+                        }else{
+                            mFavorite.setImageResource(R.mipmap.favorite_dark);
                         }
+
+
 
                     }
                 });
 
 
+    }
+
+    private void postEvent(){
+        EventBus.getDefault().post(new MessageFavorite());
     }
 }

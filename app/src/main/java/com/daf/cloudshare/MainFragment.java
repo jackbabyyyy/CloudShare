@@ -11,6 +11,7 @@ import com.daf.cloudshare.base.BaseFragment;
 import com.daf.cloudshare.ui.home.Home2Fragment;
 import com.daf.cloudshare.ui.mine.MineFragment;
 import com.daf.cloudshare.net.AppUrl;
+import com.daf.cloudshare.ui.mine.MyPrjFragment;
 import com.daf.cloudshare.ui.product.ProductFragment;
 import com.daf.cloudshare.ui.tool.ToolFragment;
 import com.qmuiteam.qmui.util.QMUIResHelper;
@@ -65,7 +66,7 @@ public class MainFragment extends BaseFragment {
         QMUITabSegment.Tab tab2=new QMUITabSegment.Tab(getActivity().getDrawable(R.mipmap.tab2),
                 getActivity().getDrawable(R.mipmap.tab2_),"产品",false);
         QMUITabSegment.Tab tab3=new QMUITabSegment.Tab(getActivity().getDrawable(R.mipmap.tab3),
-                getActivity().getDrawable(R.mipmap.tab3_),"工具",false);
+                getActivity().getDrawable(R.mipmap.tab3_),"订单",false);
         QMUITabSegment.Tab tab4=new QMUITabSegment.Tab(getActivity().getDrawable(R.mipmap.tab4),
                 getActivity().getDrawable(R.mipmap.tab4_),"我的",false);
 
@@ -97,7 +98,7 @@ public class MainFragment extends BaseFragment {
                     case 1:
                         return  ProductFragment.getInstance("产品","", AppUrl.prjList);
                     case 2:
-                        return new ToolFragment();
+                        return new MyPrjFragment();
                     case 3:
                         return new MineFragment();
                     default:

@@ -57,7 +57,7 @@ public class BaseProductAdapter extends BaseQuickAdapter<ProductBean.DataBean, B
                 .setText(R.id.bottom2, label2)
                 .setText(R.id.tv_over,item.getP_passrate())
                 .setText(R.id.tv_body, item.getP_quantity() + "人已借款")
-                .addOnClickListener(R.id.tv_apply);
+              ;
 
         String text=((TextView)helper.getView(R.id.bottom)).getText().toString();
         String text2=((TextView)helper.getView(R.id.bottom2)).getText().toString();

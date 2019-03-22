@@ -49,17 +49,16 @@ public class MyPrjFragment extends BaseFragment implements BaseQuickAdapter.Requ
     }
 
 
+    @Override
+    protected boolean canDragBack() {
+        return false;
+    }
 
     @Override
     protected void init() {
 
         mTopBarLayout.setTitle("我的订单");
-        mTopBarLayout.addLeftBackImageButton().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                popBackStack();
-            }
-        });
+
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mAdapter = new MyPrjAdapter(mDatas);
         mAdapter.setOnLoadMoreListener(this,mRecyclerView);

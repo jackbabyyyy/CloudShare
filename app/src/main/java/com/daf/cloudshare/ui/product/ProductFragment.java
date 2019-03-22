@@ -1,8 +1,10 @@
 package com.daf.cloudshare.ui.product;
 
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.BoringLayout;
@@ -23,6 +25,7 @@ import com.daf.cloudshare.model.ProductBean;
 import com.daf.cloudshare.net.HttpUtil;
 import com.daf.cloudshare.utils.AnimationUtil;
 import com.daf.cloudshare.utils.Const;
+import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 
 import org.json.JSONException;
@@ -117,23 +120,28 @@ public class ProductFragment extends BaseFragment implements BaseQuickAdapter.Re
 
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mAdapter = new BaseProductAdapter(mProductBeanList);
-        mAdapter.setOnLoadMoreListener(this, mRecyclerView);
-        mAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+        mRecyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
             @Override
-            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-
+            public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
+                super.getItemOffsets(outRect, view, parent, state);
+                if (parent.getChildAdapterPosition(view)==0){
+                    outRect.top= QMUIDisplayHelper.dp2px(getActivity(),16);
+                }
             }
         });
-        mRecyclerView.setAdapter(mAdapter);
-        mAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+        mAdapter = new BaseProductAdapter(mProductBeanList);
+        mAdapter.setOnLoadMoreListener(this, mRecyclerView);
+        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
-            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 String pid = ((List<ProductBean.DataBean>) adapter.getData()).get(position).getP_id();
                 String name=((List<ProductBean.DataBean>) adapter.getData()).get(position).getP_name();
                 startFragment(DetailFragment.getInstance(pid,name));
+
             }
         });
+
+        mRecyclerView.setAdapter(mAdapter);
 
 
         getData();
@@ -154,7 +162,7 @@ public class ProductFragment extends BaseFragment implements BaseQuickAdapter.Re
     private void getData() {
         Map<String, String> map = new HashMap<>();
         map.put("page", mPage + "");
-        map.put("type", mType);
+        map.put("protype", mType);
         if (mIsNew) {
             map.put("order", "3");
         }
@@ -207,10 +215,12 @@ public class ProductFragment extends BaseFragment implements BaseQuickAdapter.Re
     }
 
     private void showIndex(View v){
-        if (mPopupWindow.isShowing()){
 
+
+        if (mPopupWindow.isShowing()){
             mPopupWindow.dismiss();
         }
+
         View view=LayoutInflater.from(getActivity()).inflate(R.layout.index,null);
         View root = view.findViewById(R.id.root);
         RecyclerView recyclerView=view.findViewById(R.id.recyclerView);

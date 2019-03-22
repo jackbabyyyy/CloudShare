@@ -20,6 +20,7 @@ import com.daf.cloudshare.base.BaseFragment;
 import com.daf.cloudshare.net.AppUrl;
 import com.daf.cloudshare.net.HttpUtil;
 import com.daf.cloudshare.ui.favorite.FavoriteFragment;
+import com.daf.cloudshare.ui.tool.ToolFragment;
 import com.daf.cloudshare.utils.DataCleanManager;
 import com.daf.cloudshare.utils.ImageUtils;
 import com.daf.cloudshare.utils.SP;
@@ -103,10 +104,10 @@ public class MineFragment extends BaseFragment {
                         startFragment(new FavoriteFragment());
                         break;
                     case 1:
-                        startFragment(new MyPrjFragment());
+                        startFragment(new ToolFragment());
                         break;
                     case 2:
-                        startFragment( MyQrFragment.getInstance(mS,mName));
+                        startFragment(MyQrFragment.getInstance(mS,mName));
                         break;
                     case 3:
                         startFragment(new ModifyPassFragment());
@@ -187,6 +188,30 @@ public class MineFragment extends BaseFragment {
                 });
     }
 
+    private void freshMyInfo(){
+        HttpUtil.getInstance(getActivity())
+                .postForm(AppUrl.getMyInfo, null, new HttpUtil.ResultCallback() {
+                    @Override
+                    public void onError(Request request, Exception e) {
+
+                    }
+
+                    @Override
+                    public void onResponse(String response) throws IOException {
+                        try {
+                            JSONObject jsonObject=new JSONObject(response);
+                            JSONObject data=new JSONObject(jsonObject.getString("data"));
+                            mS = data.getString("u_avatar");
+
+                        } catch (JSONException e) {
+
+
+                        }
+
+                    }
+                });
+    }
+
     private void photoPicker() {
         PhotoPicker.builder()
                 .setPhotoCount(1)
@@ -249,6 +274,10 @@ public class MineFragment extends BaseFragment {
                                         try {
                                             JSONObject jsonObject=new JSONObject(response);
                                             showToast(jsonObject.getString("msg"));
+                                            if (jsonObject.getString("code").equals("90003")){
+                                                freshMyInfo();
+                                            }
+
                                         } catch (JSONException e) {
                                             e.printStackTrace();
                                         }

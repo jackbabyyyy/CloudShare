@@ -44,7 +44,7 @@ public class ToolFragment extends BaseFragment {
 
     @Override
     protected boolean canDragBack() {
-        return false;
+        return true;
     }
 
     @Override
@@ -58,6 +58,12 @@ public class ToolFragment extends BaseFragment {
 
 
         mTopBarLayout.setTitle("工具");
+       mTopBarLayout.addLeftBackImageButton().setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               popBackStack();
+           }
+       });
 
         mAdapter = new ToolAdapter(mDataBeans);
         mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3));

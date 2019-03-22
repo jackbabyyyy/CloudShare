@@ -1,5 +1,6 @@
 package com.daf.cloudshare.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,7 +17,7 @@ public class FavoriteBean {
 
     public String code;
     public String msg;
-    public List<DataBean> data;
+    public List<DataBean> data=new ArrayList<>();
 
     public static class DataBean {
         /**

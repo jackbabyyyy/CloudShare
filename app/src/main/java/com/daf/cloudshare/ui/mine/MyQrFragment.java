@@ -31,7 +31,6 @@ public class MyQrFragment extends BaseFragment {
     ImageView mImageView;
     @BindView(R.id.topbar)
     QMUITopBarLayout mTopBarLayout;
-
     @BindView(R.id.ivHead)
     CircleImageView mHead;
     @BindView(R.id.tvName)
