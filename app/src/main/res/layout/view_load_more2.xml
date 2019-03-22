@@ -6,6 +6,10 @@
 
     <TextView
 
+
+        android:textColor="#888888"
+        android:gravity="center"
+        android:text="我是有底线的"
         android:id="@+id/normal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

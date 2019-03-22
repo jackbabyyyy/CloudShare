@@ -25,6 +25,7 @@ import com.daf.cloudshare.model.ProductBean;
 import com.daf.cloudshare.net.HttpUtil;
 import com.daf.cloudshare.utils.AnimationUtil;
 import com.daf.cloudshare.utils.Const;
+import com.daf.cloudshare.utils.MyLoadView2;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 
@@ -140,6 +141,8 @@ public class ProductFragment extends BaseFragment implements BaseQuickAdapter.Re
 
             }
         });
+
+        mAdapter.setLoadMoreView(new MyLoadView2());
 
         mRecyclerView.setAdapter(mAdapter);
 

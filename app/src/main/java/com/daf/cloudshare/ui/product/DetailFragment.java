@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
+import com.chad.library.adapter.base.loadmore.SimpleLoadMoreView;
 import com.daf.cloudshare.R;
 import com.daf.cloudshare.base.BaseFragment;
 
@@ -22,6 +23,7 @@ import com.daf.cloudshare.net.HttpUtil;
 import com.daf.cloudshare.ui.web.WebFragment;
 import com.daf.cloudshare.utils.Const;
 import com.daf.cloudshare.utils.MoneyUtils;
+import com.daf.cloudshare.utils.MyLoadView2;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 import com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton;
 
@@ -117,6 +119,8 @@ public class DetailFragment extends BaseFragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         adapter = new DetailDesAdapter(mData);
         mRecyclerView.setAdapter(adapter);
+
+
 
 
         String id = getArguments().getString(PID);
@@ -237,7 +241,6 @@ public class DetailFragment extends BaseFragment {
 
     private void cancelFavorite(String id){
 
-
         Map<String,String > map=new HashMap<>();
         map.put("id",id);
         HttpUtil.getInstance(getActivity()).postForm(AppUrl.cancelFavorite, map, new HttpUtil.ResultCallback() {
@@ -285,8 +288,6 @@ public class DetailFragment extends BaseFragment {
 
                     @Override
                     public void onResponse(String response) throws IOException {
-
-
                         FavoriteResBean bean=JSON.parseObject(response, FavoriteResBean.class);
                         showToast(bean.msg);
                         if (bean.code.equals(Const.favorite_ok)){

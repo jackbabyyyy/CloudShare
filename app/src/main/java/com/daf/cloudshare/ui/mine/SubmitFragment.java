@@ -11,6 +11,7 @@ import com.daf.cloudshare.base.BaseFragment;
 import com.daf.cloudshare.net.AppUrl;
 import com.daf.cloudshare.net.HttpUtil;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
+import com.tencent.bugly.crashreport.CrashReport;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -60,6 +61,10 @@ public class SubmitFragment extends BaseFragment {
 
     @OnClick(R.id.btn_commit)
     public void onViewClicked() {
+
+
+
+
         String title=mTitle.getText().toString();
         String content=mText.getText().toString();
         if (TextUtils.isEmpty(title)){

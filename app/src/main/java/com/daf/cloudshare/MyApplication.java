@@ -8,6 +8,7 @@ import com.daf.cloudshare.utils.SP;
 
 import com.mob.MobSDK;
 import com.qmuiteam.qmui.arch.QMUISwipeBackActivityManager;
+import com.tencent.bugly.crashreport.CrashReport;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,6 +30,8 @@ public class MyApplication extends Application {
 
 
         MobSDK.init(this);
+
+        CrashReport.initCrashReport(getApplicationContext(), "d45ff59552", true);
 
     }
 
