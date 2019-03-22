@@ -61,7 +61,7 @@
                     <TextView
                         android:layout_gravity="bottom"
                         android:textColor="@color/white"
-                        android:text="  (万元)"
+                        android:text="  (元)"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
 
@@ -188,7 +188,7 @@
                     android:id="@+id/tv_range"
                     android:textStyle="bold"
 
-                    tools:text="额度范围：0.00-0.00万元"
+                    tools:text="额度范围：0.00-0.00元"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 

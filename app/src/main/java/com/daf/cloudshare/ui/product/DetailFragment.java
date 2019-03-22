@@ -21,6 +21,7 @@ import com.daf.cloudshare.net.AppUrl;
 import com.daf.cloudshare.net.HttpUtil;
 import com.daf.cloudshare.ui.web.WebFragment;
 import com.daf.cloudshare.utils.Const;
+import com.daf.cloudshare.utils.MoneyUtils;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 import com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton;
 
@@ -104,7 +105,6 @@ public class DetailFragment extends BaseFragment {
 
     @Override
     protected void init() {
-
         mTopBarLayout.setTitle(getArguments().getString("title")+"产品");
         mTopBarLayout.addLeftBackImageButton().setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,9 +124,9 @@ public class DetailFragment extends BaseFragment {
         map.put("proid", id);
         HttpUtil.getInstance(getActivity())
                 .postForm(AppUrl.prjInfo, map, new HttpUtil.ResultCallback() {
-
                     @Override
                     public void onError(Request request, Exception e) {
+
 
                     }
 
@@ -160,7 +160,7 @@ public class DetailFragment extends BaseFragment {
 
     private void setView(DetailBean detailBean) {
 
-        mTvAmount.setText(detailBean.data.p_limitdown + "~" + detailBean.data.p_limitup);
+        mTvAmount.setText(MoneyUtils.get(detailBean.data.p_limitdown) + "~" + MoneyUtils.get(detailBean.data.p_limitup));
         mTvLilv.setText(detailBean.data.p_rate);
         mTvPeriods.setText(detailBean.data.p_periods);
         mTvSpeed.setText(detailBean.data.p_speed);
@@ -169,7 +169,7 @@ public class DetailFragment extends BaseFragment {
         }else{
             mFavorite.setImageResource(R.mipmap.favorite_dark);
         }
-        mTvRange.setText("额度范围：" + detailBean.data.p_limitdown+ "-" + detailBean.data.p_limitup + "万元");
+        mTvRange.setText("额度范围：" +MoneyUtils.get( detailBean.data.p_limitdown)+ "-" + MoneyUtils.get(detailBean.data.p_limitup) + "元");
         for (int i = 0; i < detailBean.data.p_label.size(); i++) {
             mTvLabel.append(detailBean.data.p_label.get(i) + "、");
         }
@@ -178,9 +178,7 @@ public class DetailFragment extends BaseFragment {
         mLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 startFragment(WebFragment.getInstance(detailBean.data.p_jumpurl));
-
             }
         });
 

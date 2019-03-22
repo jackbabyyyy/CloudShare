@@ -15,7 +15,9 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.daf.cloudshare.R;
 import com.daf.cloudshare.model.ProductBean;
+import com.daf.cloudshare.utils.MoneyUtils;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class BaseProductAdapter extends BaseQuickAdapter<ProductBean.DataBean, BaseViewHolder> {
@@ -50,15 +52,14 @@ public class BaseProductAdapter extends BaseQuickAdapter<ProductBean.DataBean, B
 
         Glide.with(mContext).load(item.getP_logo()).into((ImageView) helper.getView(R.id.iv));
         helper.setText(R.id.tv_name, item.getP_name())
-                .setText(R.id.tv_money, item.getP_limitdown() + "-" + item.getP_limitup())
-                .setText(R.id.tv_lilv, item.getP_rate())
+                .setText(R.id.tv_money, MoneyUtils.get(item.getP_limitup()))
+                .setText(R.id.tv_lilv, item.getP_rate()+"%")
                 .setText(R.id.tv_rate_type, item.getP_ratetype())
                 .setText(R.id.bottom, label)
                 .setText(R.id.bottom2, label2)
                 .setText(R.id.tv_over,item.getP_passrate())
                 .setText(R.id.tv_body, item.getP_quantity() + "人已借款")
               ;
-
         String text=((TextView)helper.getView(R.id.bottom)).getText().toString();
         String text2=((TextView)helper.getView(R.id.bottom2)).getText().toString();
         if(TextUtils.isEmpty(text)){
@@ -68,11 +69,6 @@ public class BaseProductAdapter extends BaseQuickAdapter<ProductBean.DataBean, B
             helper.getView(R.id.bottom2).setVisibility(View.INVISIBLE);
 
         }
-
-
-
-
-
 
 
 

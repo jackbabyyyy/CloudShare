@@ -55,7 +55,7 @@
             android:layout_alignParentRight="true"
             android:textColor="@color/white"
             android:id="@+id/tv_apply"
-            android:text="申请"
+            android:text="办理"
             android:layout_width="66dp"
             android:layout_height="27dp"/>
 
@@ -92,7 +92,7 @@
             <TextView
                 android:textSize="11sp"
                 android:textColor="#888888"
-                android:text="额度范围(万元)"
+                android:text="额度(元)"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 

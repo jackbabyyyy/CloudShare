@@ -160,15 +160,12 @@ public class LoginFragment extends BaseFragment {
             @Override
             public void onResponse(String s) throws IOException {
                 try {
-
-
                     JSONObject login=new JSONObject(s);
                     if (login.getString("code").equals(Const.login_success)){
                         LoginBean loginBean= JSON.parseObject(s,LoginBean.class);
                         //save token
                         SP.put(getActivity(),Const.token,loginBean.getData().getToken());
                         SP.saveUser(getActivity(),account,password);
-
 
                         startActivity(new Intent(getActivity(),MainActivity.class));
                         getActivity().finish();

@@ -165,6 +165,7 @@ public class Home2Fragment extends BaseFragment {
                             mAdapter.addHeaderView(mHeadView);
                         }else{
                             mTvMore.setVisibility(View.VISIBLE);
+                            mAdapter.removeHeaderView(mHeadView);
                         }
                         mAdapter.setNewData(bean.data);
 

@@ -36,6 +36,7 @@ public class FavoriteFragment extends BaseFragment {
     @BindView(R.id.bar)
     QMUITopBarLayout mBar;
     private List<FavoriteBean.DataBean> mData=new ArrayList<>();
+    private FavoriteAdapter mAdapter;
 
     @Override
     protected int getLayoutId() {
@@ -74,8 +75,8 @@ public class FavoriteFragment extends BaseFragment {
             }
         });
 
-        FavoriteAdapter adapter=new FavoriteAdapter(mData);
-        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+        mAdapter = new FavoriteAdapter(mData);
+        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 String id=((List<FavoriteBean.DataBean>)adapter.getData()).get(position).f_value;
@@ -85,7 +86,13 @@ public class FavoriteFragment extends BaseFragment {
 
             }
         });
-        mRecyclerView.setAdapter(adapter);
+        mRecyclerView.setAdapter(mAdapter);
+
+
+
+    }
+
+    private void getFavorite(){
         HttpUtil.getInstance(getActivity()).postForm(AppUrl.getFavorite, null, new HttpUtil.ResultCallback() {
             @Override
             public void onError(Request request, Exception e) {
@@ -95,14 +102,16 @@ public class FavoriteFragment extends BaseFragment {
             @Override
             public void onResponse(String response) throws IOException {
                 FavoriteBean bean= JSON.parseObject(response,FavoriteBean.class);
-
-                adapter.setNewData(bean.data);
-
-
+                mAdapter.setNewData(bean.data);
 
             }
         });
 
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getFavorite();
     }
 }
