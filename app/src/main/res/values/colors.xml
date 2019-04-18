@@ -21,7 +21,7 @@
     <color name="app_color_blue_disabled">#8000A8E1</color>
     <color name="app_color_blue_pressed">#c000A8E1</color>
 
-    <color name="app_color_blue_2">#4a84f7</color>
+    <color name="app_color_blue_2">#2b4e8c</color>
     <color name="app_color_blue_2_disabled">#7F31BDF3</color>
     <color name="app_color_blue_2_pressed">#7F31BDF3</color>
 
@@ -56,4 +56,16 @@
     <color name="divider_bg">#f1f1f1</color>
     <color name="red">#e15867</color>
     <color name="white">#ffffff</color>
+
+    <color name="lab">#fb6620</color>
+    <color name="lab_bg">#ffebd4</color>
+    <color name="lab2">#1993fc</color>
+    <color name="lab2_bg">#d3f9fd</color>
+
+    <color name="cl_tran">#00ffffff</color>
+
+    <color name="detail_bg">#405f98</color>
+
+
+
 </resources>

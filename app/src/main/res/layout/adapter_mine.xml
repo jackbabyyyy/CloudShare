@@ -12,16 +12,46 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
+
+
+        <RelativeLayout
             android:background="@drawable/qmui_divider_bottom_bitmap"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:gravity="center_vertical"
-            android:id="@+id/tv"
-            android:drawableRight="@drawable/ic_chevron_right_black_24dp"
-            tools:text="shfshef"
             android:layout_width="match_parent"
-            android:layout_height="48dp"/>
+            android:layout_height="48dp">
+
+            <TextView
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:gravity="center_vertical"
+                android:id="@+id/tv"
+                tools:text="版本号"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"/>
+
+            <ImageView
+                android:layout_marginLeft="12dp"
+                android:layout_toRightOf="@+id/tv"
+                android:layout_centerVertical="true"
+                android:id="@+id/icon"
+                android:layout_width="16dp"
+                android:layout_height="16dp"/>
+
+            <TextView
+                android:id="@+id/tvVersion"
+                android:drawablePadding="12dp"
+                android:drawableRight="@drawable/ic_chevron_right_black_24dp"
+                android:gravity="center_vertical"
+                android:layout_alignParentRight="true"
+                tools:text="122"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"/>
+
+        </RelativeLayout>
+
+
+
+
+
 
     </FrameLayout>
 

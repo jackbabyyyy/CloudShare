@@ -16,21 +16,28 @@
 
 package com.daf.cloudshare.base;
 
+import android.Manifest;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
 
+import com.daf.cloudshare.R;
 import com.qmuiteam.qmui.arch.QMUIFragment;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 
+import java.util.List;
+
 import butterknife.ButterKnife;
+import pub.devrel.easypermissions.AfterPermissionGranted;
+import pub.devrel.easypermissions.EasyPermissions;
 
 
 /**
  * Created by cgspine on 2018/1/7.
  */
 
-public abstract class BaseFragment extends QMUIFragment {
+public abstract class BaseFragment extends QMUIFragment   {
 
     public BaseFragment() {
     }
@@ -60,11 +67,6 @@ public abstract class BaseFragment extends QMUIFragment {
     protected void showToast(String msg){
         Toast.makeText(getActivity(),msg,Toast.LENGTH_SHORT).show();
     }
-
-
-
-
-
 
 
 
@@ -98,4 +100,7 @@ public abstract class BaseFragment extends QMUIFragment {
 //                    });
 //        }
 //    }
+
+
+
 }

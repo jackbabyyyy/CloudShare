@@ -72,6 +72,15 @@ public class ProductBean {
         private List<String> p_label;
         private String p_resume;
 
+        public String getP_ishot() {
+            return p_ishot;
+        }
+
+        public void setP_ishot(String p_ishot) {
+            this.p_ishot = p_ishot;
+        }
+
+        private String p_ishot;
         private String p_passrate;
 
         public String getP_passrate() {

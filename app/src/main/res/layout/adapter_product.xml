@@ -9,7 +9,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:zhy="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:layout_marginTop="14dp"
@@ -31,12 +32,28 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content">
 
-            <TextView
-                android:textSize="16sp"
-                android:id="@+id/tv_name"
-                tools:text="sjfef"
+
+            <LinearLayout
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textSize="16sp"
+                    android:id="@+id/tv_name"
+                    tools:text="sjfef"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <ImageView
+
+                    android:id="@+id/hot"
+                    android:layout_marginLeft="10dp"
+                    android:src="@mipmap/hot"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
 
             <View
                 android:layout_marginTop="6dp"
@@ -50,7 +67,7 @@
         <TextView
             android:layout_marginRight="12dp"
             android:layout_gravity="center_vertical"
-            android:background="@mipmap/bg_apply"
+            android:background="@drawable/bg_apply"
             android:gravity="center"
             android:layout_alignParentRight="true"
             android:textColor="@color/white"
@@ -70,7 +87,7 @@
     <LinearLayout
 
         android:layout_marginTop="8dp"
-        android:layout_marginLeft="12dp"
+        android:layout_marginLeft="80dp"
         android:layout_marginRight="80dp"
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -153,47 +170,39 @@
 
 
     </LinearLayout>
-    <RelativeLayout
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginRight="11dp"
-        android:layout_marginLeft="11dp"
+        android:layout_marginLeft="80dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-           android:paddingLeft="4dp"
-           android:paddingRight="4dp"
-            android:background="#ffebd4"
-            android:textColor="#fb6620"
-            android:textSize="12sp"
-            android:id="@+id/bottom"
-            android:text="利息低"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <TextView
-            android:paddingRight="4dp"
-            android:paddingLeft="4dp"
-            android:background="#d4f8fd"
-            android:id="@+id/bottom2"
-            android:layout_marginLeft="16dp"
-            android:textColor="#1993fc"
-            android:textSize="12sp"
-            android:layout_toRightOf="@+id/bottom"
-            android:text="通过率高"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+        <com.zhy.view.flowlayout.TagFlowLayout
+            android:layout_marginRight="4dp"
+           android:layout_weight="1"
+            android:id="@+id/flow"
+            zhy:max_select="-1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+           >
+        </com.zhy.view.flowlayout.TagFlowLayout>
+
+
+
 
         <TextView
+            android:layout_gravity="bottom"
             android:textColor="#888888"
             android:textSize="12sp"
             android:id="@+id/tv_body"
-            android:layout_alignParentRight="true"
+
             tools:text="221人已借款"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-    </RelativeLayout>
+    </LinearLayout>
 
 
 </LinearLayout>

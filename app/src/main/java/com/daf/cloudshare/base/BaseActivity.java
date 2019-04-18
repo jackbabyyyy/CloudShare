@@ -8,6 +8,8 @@ import com.qmuiteam.qmui.util.QMUIDisplayHelper;
  */
 public class BaseActivity extends QMUIActivity {
 
+
+
     @Override
     protected int backViewInitOffset() {
         return QMUIDisplayHelper.dp2px(this, 100);

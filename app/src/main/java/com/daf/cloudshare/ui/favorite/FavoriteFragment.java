@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 import com.alibaba.fastjson.JSON;
@@ -15,12 +16,18 @@ import com.daf.cloudshare.model.FavoriteBean;
 import com.daf.cloudshare.net.AppUrl;
 import com.daf.cloudshare.net.HttpUtil;
 import com.daf.cloudshare.ui.product.DetailFragment;
+import com.daf.cloudshare.utils.Const;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import okhttp3.Request;
@@ -60,7 +67,11 @@ public class FavoriteFragment extends BaseFragment {
             @Override
             public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
                 super.getItemOffsets(outRect, view, parent, state);
-                outRect.top= space;
+
+                if (parent.getChildAdapterPosition(view)<3){
+                    outRect.top=space;
+                }
+                outRect.bottom= space;
                 if (parent.getChildAdapterPosition(view)%3==1){
                     outRect.left=space;
                     outRect.right=space;
@@ -72,6 +83,8 @@ public class FavoriteFragment extends BaseFragment {
                 if (parent.getChildAdapterPosition(view)%3==2){
                     outRect.right=space*2;
                 }
+
+
             }
         });
 
@@ -84,6 +97,35 @@ public class FavoriteFragment extends BaseFragment {
                 startFragment(DetailFragment.getInstance(id,name));
 
 
+            }
+        });
+
+        mAdapter.setOnItemLongClickListener(new BaseQuickAdapter.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(BaseQuickAdapter adapter, View view, int position) {
+
+                mAdapter.show=true;
+                mAdapter.setNewData(mData);
+                mBar.addRightTextButton("完成",R.id.topbar_right_about_button).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mBar.removeAllRightViews();
+                        mAdapter.show=false;
+                        mAdapter.setNewData(mAdapter.getData());
+
+                    }
+                });
+
+                return false;
+            }
+        });
+
+        mAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+
+
+                cancelFavorite(mData.get(position).f_id,position);
             }
         });
         mRecyclerView.setAdapter(mAdapter);
@@ -102,7 +144,9 @@ public class FavoriteFragment extends BaseFragment {
             @Override
             public void onResponse(String response) throws IOException {
                 FavoriteBean bean= JSON.parseObject(response,FavoriteBean.class);
+                mData=bean.data;
                 mAdapter.setNewData(bean.data);
+
 
             }
         });
@@ -113,5 +157,38 @@ public class FavoriteFragment extends BaseFragment {
     public void onResume() {
         super.onResume();
         getFavorite();
+    }
+
+    private void cancelFavorite(String id,int pos) {
+
+        Map<String, String> map = new HashMap<>();
+        map.put("id", id);
+
+        HttpUtil.getInstance(getActivity()).postForm(AppUrl.cancelFavorite, map, new HttpUtil.ResultCallback() {
+            @Override
+            public void onError(Request request, Exception e) {
+
+            }
+
+            @Override
+            public void onResponse(String response) throws IOException {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    showToast(jsonObject.getString("msg"));
+                    if (jsonObject.getString("code").equals(Const.getFavorite_cancel)) {
+
+                        mAdapter.remove(pos);
+
+                        //
+                      //  postEvent();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
+
     }
 }

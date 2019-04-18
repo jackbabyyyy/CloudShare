@@ -12,17 +12,27 @@
 
 
 
+<android.support.v4.widget.SwipeRefreshLayout
+
+    android:fitsSystemWindows="true"
+    android:layout_marginTop="?attr/qmui_topbar_height"
+    android:id="@+id/swipe"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <android.support.v7.widget.RecyclerView
 
-        android:layout_marginTop="?attr/qmui_topbar_height"
+
         android:background="@color/white"
-        android:fitsSystemWindows="true"
+
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
     </android.support.v7.widget.RecyclerView>
+
+
+</android.support.v4.widget.SwipeRefreshLayout>
 
     <com.qmuiteam.qmui.widget.QMUITopBarLayout
 

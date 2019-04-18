@@ -1,80 +1,187 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.qmuiteam.qmui.widget.QMUIWindowInsetLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@color/divider_bg"
-    android:fitsSystemWindows="true"
-    android:layout_height="match_parent">
-
-
+    android:fitsSystemWindows="true">
 
 
     <ScrollView
-        android:scrollbars="none"
+        android:fitsSystemWindows="true"
+        android:layout_marginTop="?attr/qmui_topbar_height"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-
-    <LinearLayout
-        android:background="@drawable/bg"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="120dp"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:scrollbars="none">
 
 
         <LinearLayout
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_margin="16dp"
-                android:id="@+id/ivHead"
-                android:layout_width="60dp"
-                android:layout_height="60dp"/>
+
+        <LinearLayout
+            android:id="@+id/root"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bg"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/ivHead"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="16dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        tools:text="sjfhbsfsfbsjd"/>
+
+                    <TextView
+                        android:id="@+id/tvCompany"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxEms="15"
+                        android:singleLine="false"
+                        android:textSize="13sp"
+                        tools:text="我的哈康师傅收款方"/>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <ImageView
+
+                android:id="@+id/iv"
+
+                android:layout_width="200dp"
+
+                android:layout_height="200dp"
+                android:layout_gravity="center_horizontal"/>
 
             <TextView
-                android:id="@+id/tvName"
+                android:id="@+id/tvDes"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
+                android:text="扫一扫可获取产品列表"/>
 
 
         </LinearLayout>
 
-        <ImageView
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
 
-            android:id="@+id/iv"
+                android:orientation="vertical">
 
-            android:layout_gravity="center_horizontal"
+                <Button
+                    android:id="@+id/btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_marginTop="24dp"
+                    android:background="@mipmap/qr_btn"
+                    android:text="我要推广"
+                    android:textColor="@color/white"/>
 
-            android:layout_width="250dp"
-            android:layout_height="250dp"/>
+                <LinearLayout
 
-        <TextView
-            android:layout_marginBottom="20dp"
-            android:layout_marginTop="20dp"
-            android:text="扫一扫可获取产品列表"
-            android:layout_gravity="center_horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+                    android:layout_marginBottom="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp">
+
+                    <LinearLayout
+                        android:id="@+id/left"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:padding="4dp"
+                            android:id="@+id/ivLeft"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/qr_pro"/>
+
+                        <TextView
+                            android:textSize="12sp"
+                            android:textColor="@color/app_color_blue"
+                            android:id="@+id/tvLeft"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="产品二维码"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/right"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:padding="4dp"
+                            android:id="@+id/ivRight"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/qr_register_un"/>
+
+                        <TextView
+                            android:textSize="12sp"
+                            android:id="@+id/tvRight"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="注册二维码"/>
+
+                    </LinearLayout>
+                </LinearLayout>
 
 
+            </LinearLayout>
 
-    </LinearLayout>
+        </LinearLayout>
 
     </ScrollView>
 
 
     <com.qmuiteam.qmui.widget.QMUITopBarLayout
-        android:fitsSystemWindows="true"
         android:id="@+id/topbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true">
 
     </com.qmuiteam.qmui.widget.QMUITopBarLayout>
+
+
 
 </com.qmuiteam.qmui.widget.QMUIWindowInsetLayout>

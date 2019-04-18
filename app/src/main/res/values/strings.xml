@@ -1,4 +1,10 @@
 <resources>
-    <string name="app_name">达飞云享</string>
-    <string name="app_name2">智富云贷</string>
+    <string name="app_name">云享科技</string>
+
+
+    <string-array name="segment_control_arrays_1">
+        <item>重置</item>
+        <item>确定</item>
+
+    </string-array>
 </resources>

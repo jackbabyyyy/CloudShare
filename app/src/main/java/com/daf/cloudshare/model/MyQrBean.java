@@ -9,60 +9,28 @@ public class MyQrBean {
     /**
      * code : 80001
      * msg : 获取数据成功！
-     * data : {"imgName":"产品申请列表","imgUrl":"https://www.dafyun.cn/api.php?c=public&a=shareQRCode&url=aHR0cHM6Ly93d3cuZGFmeXVuLmNuL2luZGV4LnBocD9hPWxpc3Rwcm8maWQ9MTA2Mjc="}
+     * data : {"imgName":"产品申请列表","imgUrl":"https://www.winsharecn.cn/api.php?c=public&a=shareQRCode&url=aHR0cHM6Ly93d3cud2luc2hhcmVjbi5jbi9pbmRleC5waHA/YT1saXN0cHJvJmlkPTEwNjI3","regName":"账号注册","regUrl":"https://www.winsharecn.cn/api.php?c=public&a=shareQRCode&url=aHR0cHM6Ly93d3cud2luc2hhcmVjbi5jbi9pbmRleC5waHA/Yz1sb2dpbiZyZWc9MTA2Mjc=","proImg":"https://www.winsharecn.cn/Public/images/proHD.jpg","userImg":"https://www.winsharecn.cn/Public/images/regHD.jpg"}
      */
 
-    private String code;
-    private String msg;
-    private DataBean data;
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
-    public DataBean getData() {
-        return data;
-    }
-
-    public void setData(DataBean data) {
-        this.data = data;
-    }
+    public String code;
+    public String msg;
+    public DataBean data;
 
     public static class DataBean {
         /**
          * imgName : 产品申请列表
-         * imgUrl : https://www.dafyun.cn/api.php?c=public&a=shareQRCode&url=aHR0cHM6Ly93d3cuZGFmeXVuLmNuL2luZGV4LnBocD9hPWxpc3Rwcm8maWQ9MTA2Mjc=
+         * imgUrl : https://www.winsharecn.cn/api.php?c=public&a=shareQRCode&url=aHR0cHM6Ly93d3cud2luc2hhcmVjbi5jbi9pbmRleC5waHA/YT1saXN0cHJvJmlkPTEwNjI3
+         * regName : 账号注册
+         * regUrl : https://www.winsharecn.cn/api.php?c=public&a=shareQRCode&url=aHR0cHM6Ly93d3cud2luc2hhcmVjbi5jbi9pbmRleC5waHA/Yz1sb2dpbiZyZWc9MTA2Mjc=
+         * proImg : https://www.winsharecn.cn/Public/images/proHD.jpg
+         * userImg : https://www.winsharecn.cn/Public/images/regHD.jpg
          */
 
-        private String imgName;
-        private String imgUrl;
-
-        public String getImgName() {
-            return imgName;
-        }
-
-        public void setImgName(String imgName) {
-            this.imgName = imgName;
-        }
-
-        public String getImgUrl() {
-            return imgUrl;
-        }
-
-        public void setImgUrl(String imgUrl) {
-            this.imgUrl = imgUrl;
-        }
+        public String imgName;
+        public String imgUrl;
+        public String regName;
+        public String regUrl;
+        public String proImg;
+        public String userImg;
     }
 }

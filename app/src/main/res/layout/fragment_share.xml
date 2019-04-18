@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.qmuiteam.qmui.widget.QMUIWindowInsetLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_marginTop="?attr/qmui_topbar_height"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:layout_weight="1"
+            android:layout_margin="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+            <ImageView
+                android:scaleType="center"
+                android:id="@+id/iv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </ImageView>
+
+
+            <LinearLayout
+
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:layout_margin="20dp"
+                android:layout_gravity="bottom"
+                android:layout_width="match_parent"
+                android:layout_height="60dp">
+
+                <ImageView
+                    android:id="@+id/qrcode"
+
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"/>
+                <LinearLayout
+                    android:layout_marginLeft="10dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/name"
+                        android:textSize="12sp"
+                        android:gravity="center_vertical"
+                        android:layout_weight="1"
+                        tools:text="adas"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"/>
+                    <TextView
+                        android:id="@+id/phone"
+                        android:textSize="12sp"
+                        android:gravity="center_vertical"
+                        android:layout_weight="1"
+                        tools:text="adas"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"/>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+
+        <LinearLayout
+          android:layout_marginBottom="20dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+
+                android:id="@+id/pyq"
+                android:gravity="center_horizontal"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:src="@mipmap/pyq"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"/>
+                <TextView
+                    android:textSize="12sp"
+                    android:text="朋友圈"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/wx"
+                android:gravity="center_horizontal"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:src="@mipmap/wx"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"/>
+                <TextView
+                    android:textSize="12sp"
+                    android:text="微信"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/bc"
+                android:gravity="center_horizontal"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:src="@mipmap/bc"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"/>
+                <TextView
+                    android:textSize="12sp"
+                    android:text="保存图片"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/fz"
+                android:gravity="center_horizontal"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:src="@mipmap/fz"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"/>
+                <TextView
+                    android:textSize="12sp"
+                    android:text="复制链接"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <com.qmuiteam.qmui.widget.QMUITopBarLayout
+        android:fitsSystemWindows="true"
+        android:id="@+id/bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </com.qmuiteam.qmui.widget.QMUITopBarLayout>
+</com.qmuiteam.qmui.widget.QMUIWindowInsetLayout>

@@ -1,6 +1,8 @@
 package com.daf.cloudshare.ui.mine;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -38,6 +40,9 @@ public class MyPrjDataListFragment extends BaseFragment implements BaseQuickAdap
     @BindView(R.id.topbar)
     QMUITopBarLayout mTopBar;
 
+    @BindView(R.id.swipe)
+    SwipeRefreshLayout mSwipe;
+
     private List<MyPrjDataListBean.DataBean> mDatas=new ArrayList<>();
     private MyPrjDataListAdapter mAdapter;
     private int mPage=1;
@@ -58,7 +63,26 @@ public class MyPrjDataListFragment extends BaseFragment implements BaseQuickAdap
         return R.layout.fragment_my_prj;
     }
 
+    private void initSwipe() {
+        mSwipe.setColorSchemeResources(R.color.app_color_blue);
 
+        mSwipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+                mPage=1;
+                mAdapter.getData().clear();
+                getData();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mSwipe.setRefreshing(false);
+                    }
+                },1500);
+
+            }
+        });
+    }
 
     @Override
     protected void init() {
@@ -86,6 +110,8 @@ public class MyPrjDataListFragment extends BaseFragment implements BaseQuickAdap
 
 
         getData();
+
+        initSwipe();
 
 
 
@@ -120,8 +146,11 @@ public class MyPrjDataListFragment extends BaseFragment implements BaseQuickAdap
                             JSONObject jsonObject = new JSONObject(response);
                             if (jsonObject.getString("code").equals(Const.body_success)) {
                                 MyPrjDataListBean myPrjBean = JSON.parseObject(response, MyPrjDataListBean.class);
-                                if (myPrjBean.getData().size() != 0) {
-                                    mAdapter.addData(myPrjBean.getData());
+
+
+
+                                if (myPrjBean.data.size() != 0) {
+                                    mAdapter.addData(myPrjBean.data);
                                     mAdapter.loadMoreComplete();
                                 } else {
                                     mAdapter.loadMoreEnd();

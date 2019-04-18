@@ -24,46 +24,101 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
+
+
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+
+
+                android:text="sjdfbsjfb"
+                android:textSize="16sp"
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_marginLeft="36dp"
+                tools:text="sjefksdjf"
+                android:id="@+id/tvPhone"
+                android:textSize="14sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+
+
         <View
 
-            android:visibility="gone"
-            android:layout_marginBottom="4dp"
+
+            android:layout_marginBottom="8dp"
             android:layout_marginTop="4dp"
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:background="#ffdddddd"/>
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+
+                android:textSize="13sp"
+                android:layout_marginTop="4dp"
+                tools:text="121212212"
+                android:textColor="#7a7a7a"
+                android:id="@+id/tvCard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+
+                android:id="@+id/tvStatus"
+                android:textSize="14sp"
+                android:textColor="#375691"
+                tools:text="skfsdkhfsh"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
+
+        </RelativeLayout>
 
 
     <TextView
-
-        android:text="sjdfbsjfb"
-        android:textSize="16sp"
-        android:id="@+id/tvName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <TextView
-
-        android:layout_marginTop="4dp"
-        tools:text="121212212"
-        android:textColor="#9b9b9b"
-        android:id="@+id/tvCard"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <TextView
+        android:textSize="13sp"
         android:layout_marginTop="4dp"
         android:layout_marginBottom="12dp"
         tools:text="121212212"
-        android:textColor="#9b9b9b"
+        android:textColor="#7a7a7a"
         android:id="@+id/tvId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+        <RelativeLayout
+            android:layout_marginBottom="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:textColor="#494949"
+                android:textSize="13sp"
+                tools:text="ajdasdhadja"
+                android:id="@+id/tvTime"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </RelativeLayout>
     </LinearLayout>
     <View
-        android:background="#f1f1f1"
+        android:background="@color/divider_bg"
         android:layout_width="match_parent"
-        android:layout_height="6dp"/>
+        android:layout_height="10dp"/>
 
 
 

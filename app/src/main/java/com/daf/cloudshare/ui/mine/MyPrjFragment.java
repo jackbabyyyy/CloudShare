@@ -1,5 +1,7 @@
 package com.daf.cloudshare.ui.mine;
 
+import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -37,6 +39,8 @@ public class MyPrjFragment extends BaseFragment implements BaseQuickAdapter.Requ
     RecyclerView mRecyclerView;
     @BindView(R.id.topbar)
     QMUITopBarLayout mTopBarLayout;
+    @BindView(R.id.swipe)
+    SwipeRefreshLayout mSwipe;
 
     private int PAGE=1;
 
@@ -52,6 +56,27 @@ public class MyPrjFragment extends BaseFragment implements BaseQuickAdapter.Requ
     @Override
     protected boolean canDragBack() {
         return false;
+    }
+
+    private void initSwipe() {
+        mSwipe.setColorSchemeResources(R.color.app_color_blue);
+
+        mSwipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+                PAGE=1;
+                mAdapter.getData().clear();
+                getData();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mSwipe.setRefreshing(false);
+                    }
+                },1500);
+
+            }
+        });
     }
 
     @Override
@@ -75,6 +100,8 @@ public class MyPrjFragment extends BaseFragment implements BaseQuickAdapter.Requ
         mAdapter.setLoadMoreView(new MyLoadMoreView());
 
         getData();
+
+        initSwipe();
 
     }
 

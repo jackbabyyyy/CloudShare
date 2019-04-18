@@ -1,12 +1,15 @@
 package com.daf.cloudshare.net;
 
+import android.os.StatFs;
+
+import com.daf.cloudshare.utils.StringUtil;
+
 /**
  * Created by PP on 2019/2/20.
  */
 public class AppUrl {
     public static final String base="https://www.dafyun.cn/";
     public static final String login=base+"api.php?c=public&a=checkLogin";
-
 
 
     public static final String banner=base+"api.php?c=common&a=getIndexBanner";
@@ -37,6 +40,15 @@ public class AppUrl {
     public static final String cancelFavorite=base+"api.php?c=favorite&a=removeFromFavorite";
     public static final String getFavorite=base+"api.php?c=favorite&a=getFavorite";
     public static final String getIndexTip=base+"api.php?c=project&a=getIndexTip";
+
+    public static final String getDialog=base+"api.php?c=common&a=getIndexTip";
+
+//    public static final String getProSetJson=base+"index.php?c=index&a=getProSetJson";
+    public static final String getSearchConfig=base+"api.php?c=common&a=getSearchConfig";
+    public static final String searchProject=base+"api.php?c=project&a=searchProject";
+
+    public static final String getPoster=base+"api.php?c=project&a=getPoster";
+
 
 
 }

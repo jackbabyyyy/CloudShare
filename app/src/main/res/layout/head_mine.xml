@@ -38,17 +38,22 @@
 
 
         <TextView
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:maxEms="15"
+            android:id="@+id/tvCompany"
             android:textColor="@color/qmui_config_color_white"
-            android:text="我的余额"
+            tools:text="我的天蚕我的看卡输入法烤肉饭烤肉烤肉饭"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <TextView
+
             android:id="@+id/tvMoney"
-            android:textSize="26sp"
+            android:textSize="15sp"
             android:textColor="@color/qmui_config_color_white"
             android:layout_marginBottom="10dp"
 
-            android:text="0.00"
+            android:text="余额"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
@@ -74,6 +79,7 @@
 
         <LinearLayout
 
+            android:elevation="6dp"
             android:background="@drawable/bg"
             android:layout_marginBottom="20dp"
             android:layout_marginTop="-15dp"
@@ -99,7 +105,7 @@
                 android:textSize="12sp"
                 android:paddingRight="6dp"
                 android:textColor="@color/app_color_blue"
-                android:text="记录"
+                android:text="提现"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         </LinearLayout>

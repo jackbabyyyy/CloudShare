@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+
+
+    android:background="#33000000"
+    android:id="@+id/root"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <LinearLayout
+
+
+        android:layout_marginTop="95dp"
+        android:background="@drawable/bg3"
+        android:orientation="vertical"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_marginTop="12dp"
+            android:layout_marginLeft="8dp"
+            android:id="@+id/recycler"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </android.support.v7.widget.RecyclerView>
+
+        <TextView
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp"
+            android:text="额度（万元）"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:layout_marginLeft="12dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:inputType="numberDecimal"
+                android:id="@+id/min"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:textSize="11sp"
+                android:background="@drawable/edit_bg"
+                android:hint="最低价"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <View
+
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:background="#b3b3b3"
+                android:layout_width="20dp"
+                android:layout_height="1dp"/>
+            <EditText
+                android:inputType="numberDecimal"
+                android:id="@+id/max"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:textSize="11sp"
+                android:background="@drawable/edit_bg"
+                android:hint="最高价"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <View
+           android:layout_margin="12dp"
+            android:background="@color/divider_bg"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+        <TextView
+            android:layout_marginLeft="12dp"
+
+            android:text="期数"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <android.support.v7.widget.RecyclerView
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="6dp"
+            android:id="@+id/recycler2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </android.support.v7.widget.RecyclerView>
+
+
+        <com.daf.cloudshare.view.SegmentControlView
+
+            app:scv_TextSize="12sp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:id="@+id/segment"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            app:scv_FrameCornerRadius="16dp"
+            app:scv_FrameWidth="0dp"
+            app:scv_Gradient="true"
+            app:scv_SegmentPaddingVertical="2dp"
+            app:scv_TextNormalColor="@color/white"
+            app:scv_TextSelectedColor="@color/white"
+            app:scv_TextArray="@array/segment_control_arrays_1"/>
+    </LinearLayout>
+
+</RelativeLayout>

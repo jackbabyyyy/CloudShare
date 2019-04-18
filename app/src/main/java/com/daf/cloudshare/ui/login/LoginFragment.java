@@ -18,6 +18,7 @@ import com.daf.cloudshare.model.LoginBean;
 import com.daf.cloudshare.net.AppUrl;
 import com.daf.cloudshare.net.HttpUtil;
 import com.daf.cloudshare.utils.Const;
+import com.daf.cloudshare.utils.GradientView;
 import com.daf.cloudshare.utils.SP;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 import com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton;
@@ -52,6 +53,8 @@ public class LoginFragment extends BaseFragment {
     private boolean canSee;
 
 
+
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_login;
@@ -60,6 +63,8 @@ public class LoginFragment extends BaseFragment {
 
     @Override
     protected void init() {
+
+
 
         mTopBar.setTitle("员工登录");
         mTopBar.addRightImageButton(R.mipmap.close,R.id.topbar_right_close_button).setOnClickListener(new View.OnClickListener() {
@@ -128,8 +133,6 @@ public class LoginFragment extends BaseFragment {
 //                    }
 //                })
 //        ;
-
-
 
 
     }

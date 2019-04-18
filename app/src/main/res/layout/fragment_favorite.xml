@@ -7,6 +7,7 @@
     android:layout_height="match_parent">
 
     <android.support.v7.widget.RecyclerView
+
         android:fitsSystemWindows="true"
         android:layout_marginTop="?attr/qmui_topbar_height"
         android:id="@+id/recycler"

@@ -115,6 +115,7 @@ public class ModifyPassFragment extends BaseFragment {
                         try {
                             JSONObject jsonObject=new JSONObject(response);
                             showToast(jsonObject.getString("msg"));
+                            popBackStack();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

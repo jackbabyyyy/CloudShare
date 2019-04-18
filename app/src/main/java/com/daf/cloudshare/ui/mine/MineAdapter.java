@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.daf.cloudshare.R;
+import com.daf.cloudshare.utils.StringUtil;
 
 import java.util.List;
 
@@ -19,6 +20,13 @@ public class MineAdapter extends BaseQuickAdapter<String , BaseViewHolder> {
     @Override
     protected void convert(BaseViewHolder helper, String item) {
         helper.setText(R.id.tv,item);
+
+        if (item.equals("版本号")){
+            helper.setImageResource(R.id.icon,R.mipmap.version);
+            helper.setText(R.id.tvVersion, StringUtil.getVersion(mContext));
+        }
+
+
 
     }
 

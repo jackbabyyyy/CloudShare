@@ -35,5 +35,7 @@ public class FavoriteBean {
         public String f_type;
         public String f_logo;
         public String f_order;
+
+
     }
 }

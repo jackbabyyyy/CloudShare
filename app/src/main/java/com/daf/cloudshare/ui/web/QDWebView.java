@@ -61,6 +61,10 @@ public class QDWebView extends QMUIWebView {
         webSettings.setDomStorageEnabled(true);
         webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
         webSettings.setTextZoom(100);
+        //协议
+        webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
+
+
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE);

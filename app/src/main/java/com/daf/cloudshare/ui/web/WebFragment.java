@@ -135,6 +135,8 @@ public class WebFragment extends BaseFragment {
         mWebView = new QDWebView(getContext());
         boolean needDispatchSafeAreaInset = needDispatchSafeAreaInset();
         mWebViewContainer.addWebView(mWebView, needDispatchSafeAreaInset);
+        mWebView.addJavascriptInterface(new JSInterface(mWebView,getActivity()), "appDeAndroidjs");//AndroidtoJS类对象映射到js的test对象
+
         mWebViewContainer.setCustomOnScrollChangeListener(new QMUIWebView.OnScrollChangeListener() {
             @Override
             public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {

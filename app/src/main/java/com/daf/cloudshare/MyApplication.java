@@ -31,7 +31,9 @@ public class MyApplication extends Application {
 
         MobSDK.init(this);
 
-        CrashReport.initCrashReport(getApplicationContext(), "d45ff59552", true);
+        CrashReport.initCrashReport(getApplicationContext(), "bddf3d2e48", true);
+
+
 
     }
 

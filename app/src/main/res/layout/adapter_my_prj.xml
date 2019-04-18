@@ -1,8 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+
+<LinearLayout
+
+    android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+
+
+
+<android.support.constraint.ConstraintLayout
+    android:layout_marginBottom="12dp"
+
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -28,10 +41,10 @@
     <TextView
         android:padding="2dp"
         android:id="@+id/tvLook"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="66dp"
+        android:layout_height="27dp"
         android:layout_marginEnd="24dp"
-        android:background="@mipmap/bg_apply"
+        android:background="@drawable/bg_apply"
         android:gravity="center"
         android:text="查看"
         android:textColor="@color/white"
@@ -50,4 +63,26 @@
         app:layout_constraintBottom_toTopOf="@+id/tvLook"
         app:layout_constraintEnd_toEndOf="@+id/tvLook"
         app:layout_constraintStart_toStartOf="@+id/tvLook"/>
+
+    <TextView
+        android:textSize="12sp"
+        android:textColor="#375691"
+        android:id="@+id/tvLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="10dp"
+
+        app:layout_constraintEnd_toStartOf="@+id/tvLook"
+        app:layout_constraintStart_toStartOf="@+id/tvName"
+        app:layout_constraintTop_toBottomOf="@+id/tvName"/>
+
+
 </android.support.constraint.ConstraintLayout>
+
+    <View
+        android:background="@color/divider_bg"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
+
+</LinearLayout>

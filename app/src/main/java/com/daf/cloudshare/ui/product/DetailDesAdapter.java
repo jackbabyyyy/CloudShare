@@ -16,7 +16,8 @@ public class DetailDesAdapter extends BaseQuickAdapter<DetailBean.DataBean.PAppS
 
     @Override
     protected void convert(BaseViewHolder helper, DetailBean.DataBean.PAppShowBean item) {
-        helper.setText(R.id.tv,item.name+":  "+item.desc);
+        helper.setText(R.id.tv,item.desc)
+        .setText(R.id.title,item.name);
 
 
     }

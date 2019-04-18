@@ -2,7 +2,22 @@
 
 
 
+<com.qmuiteam.qmui.widget.QMUIWindowInsetLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+
+    android:layout_width="match_parent">
+
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 <ScrollView
+    android:background="#ffffff"
+
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -303,6 +318,7 @@ android:clipChildren="false"
             android:layout_height="wrap_content">
 
             <TextView
+                android:drawableLeft="@mipmap/section_head"
                 android:drawablePadding="6dp"
                 android:drawableRight="@mipmap/favorite"
                 android:layout_width="wrap_content"
@@ -326,10 +342,46 @@ android:clipChildren="false"
 
         <View
 
+            android:layout_marginBottom="10dp"
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:background="#ffdddddd"/>
 
+        <RelativeLayout
+            android:id="@+id/head"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:background="@mipmap/favorite_bg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+
+            <LinearLayout
+                android:layout_centerInParent="true"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_marginTop="12dp"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@mipmap/favorite_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_margin="12dp"
+                    android:textColor="#c9c9c9"
+                    android:text="暂无收藏可去添加喜欢的产品"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
 
         <android.support.v7.widget.RecyclerView
 
@@ -353,6 +405,19 @@ android:clipChildren="false"
 </LinearLayout>
 
 </ScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+
+    <com.daf.cloudshare.view.DragView
+        android:id="@+id/pop"
+        android:layout_marginRight="6dp"
+        android:layout_marginBottom="100dp"
+        android:layout_gravity="bottom|right"
+        android:src="@mipmap/home_pop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</com.qmuiteam.qmui.widget.QMUIWindowInsetLayout>
 
 
 

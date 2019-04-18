@@ -2,6 +2,7 @@ package com.daf.cloudshare.ui.mine;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -11,8 +12,10 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.daf.cloudshare.AppData;
+import com.daf.cloudshare.event.MessageNewTip;
 import com.daf.cloudshare.ui.login.LoginActivity;
 import com.daf.cloudshare.R;
 import com.daf.cloudshare.base.BaseFragment;
@@ -24,10 +27,12 @@ import com.daf.cloudshare.ui.tool.ToolFragment;
 import com.daf.cloudshare.utils.DataCleanManager;
 import com.daf.cloudshare.utils.ImageUtils;
 import com.daf.cloudshare.utils.SP;
+import com.daf.cloudshare.utils.StringUtil;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
 import com.walkermanx.photopicker.PhotoPicker;
 
+import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -56,6 +61,9 @@ public class MineFragment extends BaseFragment {
     private TextView mTvMoney;
     private String mS;
     private String mName;
+    private TextView mTvCompany;
+    private String mCompany;
+
 
 
     @Override
@@ -68,12 +76,14 @@ public class MineFragment extends BaseFragment {
     @Override
     protected void init() {
 
+
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         MineAdapter adapter=new MineAdapter(AppData.getMineBody());
         View head=LayoutInflater.from(getActivity()).inflate(R.layout.head_mine,null);
         mTvName = head.findViewById(R.id.tvName);
         mTvMoney = head.findViewById(R.id.tvMoney);
         mHeadView = head.findViewById(R.id.head);
+        mTvCompany = head.findViewById(R.id.tvCompany);
         mHeadView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,7 +117,7 @@ public class MineFragment extends BaseFragment {
                         startFragment(new ToolFragment());
                         break;
                     case 2:
-                        startFragment(MyQrFragment.getInstance(mS,mName));
+                        startFragment(MyQrFragment.getInstance(mS,mName,mCompany));
                         break;
                     case 3:
                         startFragment(new ModifyPassFragment());
@@ -118,9 +128,22 @@ public class MineFragment extends BaseFragment {
                     case 5:
                         showClearDialog();
                         break;
+                    case 6:
+                        EventBus.getDefault().post(new MessageNewTip());
+                        startFragment(new VersionFragment());
+                        break;
                 }
             }
         });
+
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//               TextView tv= (TextView) adapter.getViewByPosition(mRecyclerView,7,R.id.tvVersion);
+//               tv.setText(StringUtil.getVersion(getActivity()));
+//
+//            }
+//        },100);
 
         getMyInfoData();
 
@@ -172,11 +195,26 @@ public class MineFragment extends BaseFragment {
                             mS = data.getString("u_avatar");
 
                             mName = data.getString("u_name");
+                            String phone=data.getString("u_tel");
                             String money=data.getString("u_money");
+                            mCompany = data.getString("a_company");
                             mTvName.setText(mName);
-                            mTvMoney.setText(money);
+                            mTvMoney.setText("余额: "+money);
+                            mTvCompany.setText(mCompany);
 
-                            Glide.with(getActivity()).load(ImageUtils.stringToBitmap(mS)).into(mHeadView);
+
+                            RequestOptions options = new RequestOptions()
+                                    .placeholder(R.mipmap.ic_photo)//图片加载出来前，显示的图片
+                                    .fallback( R.mipmap.ic_photo) //url为空的时候,显示的图片
+                                    .error(R.mipmap.ic_photo);//图片加载失败后，显示的图片
+
+                            Glide.with(getActivity())
+                                    .load(ImageUtils.stringToBitmap(mS))
+                                    .apply(options)
+                                    .into(mHeadView);
+
+                            SP.put(getActivity(),"name",mName);
+                            SP.put(getActivity(),"phone",phone);
 
 
                         } catch (JSONException e) {

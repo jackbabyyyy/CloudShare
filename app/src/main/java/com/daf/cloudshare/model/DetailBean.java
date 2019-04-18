@@ -49,6 +49,8 @@ public class DetailBean {
          * p_isfavorite : 1
          */
 
+        public String p_isappadd;
+        public String p_outline;
         public String p_id;
         public String p_name;
         public String p_logo;
@@ -76,6 +78,7 @@ public class DetailBean {
         public int p_isfavorite;
         public List<String> p_label;
         public List<PAppShowBean> p_appShow;
+        public String p_jumpimg;
 
         public static class PAppShowBean {
             /**

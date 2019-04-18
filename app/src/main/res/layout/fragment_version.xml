@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.qmuiteam.qmui.widget.QMUIWindowInsetLayout
+    android:background="@color/white"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <LinearLayout
+        android:layout_marginTop="?attr/qmui_topbar_height"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_marginTop="50dp"
+            android:src="@mipmap/logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/version"
+            tools:text="sjfdgsdfsdf"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_marginTop="36dp"
+            android:drawableLeft="@mipmap/section_head"
+            android:drawablePadding="6dp"
+
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="(版本号)优化概述"
+            android:textColor="#333333"
+          />
+
+        <TextView
+
+
+            android:scrollbars="vertical"
+            android:padding="10dp"
+
+            android:id="@+id/content"
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+
+
+
+    </LinearLayout>
+
+    <com.qmuiteam.qmui.widget.QMUITopBarLayout
+        android:fitsSystemWindows="true"
+        android:id="@+id/bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </com.qmuiteam.qmui.widget.QMUITopBarLayout>
+
+
+
+</com.qmuiteam.qmui.widget.QMUIWindowInsetLayout>

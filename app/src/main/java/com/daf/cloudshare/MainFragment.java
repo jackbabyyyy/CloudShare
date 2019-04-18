@@ -5,19 +5,25 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.daf.cloudshare.base.BaseFragment;
 
-import com.daf.cloudshare.ui.home.Home2Fragment;
+import com.daf.cloudshare.event.MessageFavorite;
+import com.daf.cloudshare.event.MessageNewTip;
+import com.daf.cloudshare.ui.home.HomeFragment;
 import com.daf.cloudshare.ui.mine.MineFragment;
 import com.daf.cloudshare.net.AppUrl;
 import com.daf.cloudshare.ui.mine.MyPrjFragment;
 import com.daf.cloudshare.ui.product.ProductFragment;
-import com.daf.cloudshare.ui.tool.ToolFragment;
 import com.qmuiteam.qmui.util.QMUIResHelper;
 import com.qmuiteam.qmui.widget.QMUIPagerAdapter;
 import com.qmuiteam.qmui.widget.QMUITabSegment;
 import com.qmuiteam.qmui.widget.QMUIViewPager;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 
@@ -47,6 +53,8 @@ public class MainFragment extends BaseFragment {
         initTabs();
         initPagers();
 
+        EventBus.getDefault().register(this);
+
 
     }
 
@@ -69,6 +77,8 @@ public class MainFragment extends BaseFragment {
                 getActivity().getDrawable(R.mipmap.tab3_),"订单",false);
         QMUITabSegment.Tab tab4=new QMUITabSegment.Tab(getActivity().getDrawable(R.mipmap.tab4),
                 getActivity().getDrawable(R.mipmap.tab4_),"我的",false);
+        tab4.showSignCountView(getActivity(),0);
+
 
 
 
@@ -86,6 +96,7 @@ public class MainFragment extends BaseFragment {
 
     private void initPagers() {
         mViewPager.setSwipeable(false);
+        mViewPager.setOffscreenPageLimit(4);
         QMUIPagerAdapter adapter = new QMUIPagerAdapter() {
             private FragmentTransaction mCurrentTransaction;
             private Fragment mCurrentPrimaryItem = null;
@@ -94,7 +105,7 @@ public class MainFragment extends BaseFragment {
             protected Object hydrate(ViewGroup container, int position) {
                 switch (position) {
                     case 0:
-                        return new Home2Fragment();
+                        return new HomeFragment();
                     case 1:
                         return  ProductFragment.getInstance("产品","", AppUrl.prjList);
                     case 2:
@@ -102,7 +113,7 @@ public class MainFragment extends BaseFragment {
                     case 3:
                         return new MineFragment();
                     default:
-                        return new Home2Fragment();
+                        return new HomeFragment();
 
                 }
             }
@@ -195,4 +206,13 @@ public class MainFragment extends BaseFragment {
     protected boolean canDragBack() {
         return false;
     }
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(MessageNewTip event) {
+
+       mTabSegment.getTab(3).hideSignCountView();
+
+    }
+
 }
