@@ -408,14 +408,19 @@ android:clipChildren="false"
     </android.support.v4.widget.SwipeRefreshLayout>
 
 
-    <com.daf.cloudshare.view.DragView
-        android:id="@+id/pop"
-        android:layout_marginRight="6dp"
-        android:layout_marginBottom="100dp"
-        android:layout_gravity="bottom|right"
-        android:src="@mipmap/home_pop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+
+
+    <!--<com.cxmax.library.FloatingView-->
+        <!--android:id="@+id/pop"-->
+        <!--android:layout_marginRight="2dp"-->
+        <!--android:layout_marginBottom="100dp"-->
+        <!--android:layout_gravity="bottom|right"-->
+        <!--android:src="@mipmap/home_pop"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"/>-->
+
+
+
 
 </com.qmuiteam.qmui.widget.QMUIWindowInsetLayout>
 

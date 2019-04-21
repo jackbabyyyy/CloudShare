@@ -8,32 +8,38 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
+
+        android:layout_marginBottom="88dp"
+
         android:orientation="vertical"
         android:layout_marginTop="?attr/qmui_topbar_height"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <FrameLayout
-            android:layout_weight="1"
+            android:id="@+id/shareView"
+           android:layout_gravity="center_horizontal"
             android:layout_margin="40dp"
-            android:layout_width="match_parent"
-            android:layout_height="0dp">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
             <ImageView
-                android:scaleType="center"
-                android:id="@+id/iv"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
 
-            </ImageView>
+                android:layout_gravity="center|bottom"
+                android:scaleType="fitXY"
+                android:id="@+id/iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </ImageView
+>
 
 
             <LinearLayout
-
-                android:background="@color/white"
+                android:background="@drawable/bg4"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:layout_margin="20dp"
-                android:layout_gravity="bottom"
+                android:layout_gravity="center_horizontal|bottom"
                 android:layout_width="match_parent"
                 android:layout_height="60dp">
 
@@ -43,6 +49,7 @@
                     android:layout_width="60dp"
                     android:layout_height="60dp"/>
                 <LinearLayout
+                    android:paddingRight="10dp"
                     android:layout_marginLeft="10dp"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
@@ -73,87 +80,7 @@
         </FrameLayout>
 
 
-        <LinearLayout
-          android:layout_marginBottom="20dp"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
-            <LinearLayout
-
-                android:id="@+id/pyq"
-                android:gravity="center_horizontal"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:src="@mipmap/pyq"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"/>
-                <TextView
-                    android:textSize="12sp"
-                    android:text="朋友圈"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/wx"
-                android:gravity="center_horizontal"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:src="@mipmap/wx"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"/>
-                <TextView
-                    android:textSize="12sp"
-                    android:text="微信"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/bc"
-                android:gravity="center_horizontal"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:src="@mipmap/bc"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"/>
-                <TextView
-                    android:textSize="12sp"
-                    android:text="保存图片"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/fz"
-                android:gravity="center_horizontal"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:src="@mipmap/fz"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"/>
-                <TextView
-                    android:textSize="12sp"
-                    android:text="复制链接"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-
-            </LinearLayout>
-
-        </LinearLayout>
 
     </LinearLayout>
 
@@ -164,4 +91,90 @@
         android:layout_height="wrap_content">
 
     </com.qmuiteam.qmui.widget.QMUITopBarLayout>
+
+
+    <LinearLayout
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="20dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+
+            android:id="@+id/pyq"
+            android:gravity="center_horizontal"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@mipmap/pyq"
+                android:layout_width="48dp"
+                android:layout_height="48dp"/>
+            <TextView
+                android:textSize="12sp"
+                android:text="朋友圈"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/wx"
+            android:gravity="center_horizontal"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@mipmap/wx"
+                android:layout_width="48dp"
+                android:layout_height="48dp"/>
+            <TextView
+                android:textSize="12sp"
+                android:text="微信"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/bc"
+            android:gravity="center_horizontal"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@mipmap/bc"
+                android:layout_width="48dp"
+                android:layout_height="48dp"/>
+            <TextView
+                android:textSize="12sp"
+                android:text="保存图片"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/fz"
+            android:gravity="center_horizontal"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@mipmap/fz"
+                android:layout_width="48dp"
+                android:layout_height="48dp"/>
+            <TextView
+                android:textSize="12sp"
+                android:text="复制链接"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
 </com.qmuiteam.qmui.widget.QMUIWindowInsetLayout>

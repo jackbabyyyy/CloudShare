@@ -1,8 +1,10 @@
 package com.daf.cloudshare.view;
 
 import android.content.Context;
+import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
@@ -10,7 +12,7 @@ import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 /**
  * Created by PP on 2019/4/17.
  */
-public class DragView extends android.support.v7.widget.AppCompatImageView {
+public class DragView extends ImageView{
     public DragView(Context context,AttributeSet attrs) {
         super(context);
         this.context=context;
@@ -29,6 +31,7 @@ public class DragView extends android.support.v7.widget.AppCompatImageView {
     public boolean isDrag() {
         return isDrag;
     }
+
 
 
 

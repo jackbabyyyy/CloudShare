@@ -11,6 +11,7 @@ import com.daf.cloudshare.base.BaseFragment;
 
 import com.daf.cloudshare.event.MessageFavorite;
 import com.daf.cloudshare.event.MessageNewTip;
+import com.daf.cloudshare.event.MessagePop;
 import com.daf.cloudshare.ui.home.HomeFragment;
 import com.daf.cloudshare.ui.mine.MineFragment;
 import com.daf.cloudshare.net.AppUrl;
@@ -91,6 +92,7 @@ public class MainFragment extends BaseFragment {
                 .addTab(tab2)
                 .addTab(tab3)
                 .addTab(tab4);
+
 
     }
 
@@ -210,7 +212,6 @@ public class MainFragment extends BaseFragment {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(MessageNewTip event) {
-
        mTabSegment.getTab(3).hideSignCountView();
 
     }

@@ -8,7 +8,9 @@ import com.daf.cloudshare.utils.StringUtil;
  * Created by PP on 2019/2/20.
  */
 public class AppUrl {
-    public static final String base="https://www.dafyun.cn/";
+
+    public static  String base="https://www.dafyun.cn/";
+
     public static final String login=base+"api.php?c=public&a=checkLogin";
 
 

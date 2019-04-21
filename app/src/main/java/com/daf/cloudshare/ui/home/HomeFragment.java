@@ -21,6 +21,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -32,11 +33,13 @@ import com.alibaba.fastjson.JSON;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 
+
 import com.daf.cloudshare.BuildConfig;
 import com.daf.cloudshare.MainActivity;
 import com.daf.cloudshare.R;
 import com.daf.cloudshare.base.BaseFragment;
 import com.daf.cloudshare.event.MessageFavorite;
+import com.daf.cloudshare.event.MessagePop;
 import com.daf.cloudshare.model.CheckBean;
 import com.daf.cloudshare.model.DialogBean;
 import com.daf.cloudshare.model.FavoriteBean;
@@ -57,9 +60,11 @@ import com.daf.cloudshare.utils.HomeDialog;
 import com.daf.cloudshare.utils.SP;
 import com.daf.cloudshare.utils.StringUtil;
 import com.daf.cloudshare.view.DragView;
+import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialogBuilder;
+import com.sonnyjack.widget.dragview.SonnyJackDragView;
 import com.youth.banner.Banner;
 import com.youth.banner.listener.OnBannerListener;
 import com.youth.banner.loader.ImageLoader;
@@ -134,8 +139,6 @@ public class HomeFragment extends BaseFragment implements EasyPermissions.Permis
     SwipeRefreshLayout mSwipe;
     @BindView(R.id.head)
     View mHead;
-    @BindView(R.id.pop)
-    DragView mPop;
 
 
     private List<FavoriteBean.DataBean> mData = new ArrayList<>();
@@ -145,6 +148,7 @@ public class HomeFragment extends BaseFragment implements EasyPermissions.Permis
 
     private AlertDialog.Builder mBuilder;
     private DialogBean mBean1;
+    private SonnyJackDragView mSonnyJackDragView;
 
     @Override
     protected int getLayoutId() {
@@ -166,14 +170,51 @@ public class HomeFragment extends BaseFragment implements EasyPermissions.Permis
 
         //  定位服务是否开启
         if (!GpsUtils.isLocServiceEnable(getActivity())) {
-           GpsUtils.openGPSSettings(getActivity());
+            GpsUtils.openGPSSettings(getActivity());
             return;
         }
 
 
 
+        ImageView imageView = new ImageView(getActivity());
+        imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+        imageView.post(new Runnable() {
+            @Override
+            public void run() {
+                ViewGroup.LayoutParams params = imageView.getLayoutParams();
+                params.width = ViewGroup.LayoutParams.WRAP_CONTENT;
+                params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                imageView.setLayoutParams(params);
+            }
+        });
+        imageView.setImageResource(R.mipmap.home_pop);
+        imageView.setOnClickListener(v -> showAdDialog(mBean1));
+//
+//        View v = LayoutInflater.from(getActivity()).inflate(R.layout.dragview, null);
+//        v.findViewById(R.id.pop).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                showAdDialog(mBean1);
+//            }
+//        });
+
+        //当前Activity，不可为空
+//初始位置左边距
+//初始位置上边距
+//拖动停止后，是否移到边沿
+//                .setSize(100)//DragView大小
+//设置自定义的DragView，切记不可为空
+        mSonnyJackDragView = new SonnyJackDragView.Builder()
+                .setActivity(getActivity())//当前Activity，不可为空
+                .setDefaultLeft(30)//初始位置左边距
+                .setDefaultTop(300)//初始位置上边距
+                .setNeedNearEdge(false)//拖动停止后，是否移到边沿
+//                .setSize(100)//DragView大小
+                .setView(imageView)//设置自定义的DragView，切记不可为空
+                .build();
     }
-    private void showAdDialog(DialogBean bean){
+
+    private void showAdDialog(DialogBean bean) {
         String url = bean.data.url;
         String type = bean.data.type;
         String icon = bean.data.icon;
@@ -364,8 +405,7 @@ public class HomeFragment extends BaseFragment implements EasyPermissions.Permis
         mRecycler.setAdapter(mAdapter);
 
 
-
-    //    getData();
+        //    getData();
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
@@ -496,9 +536,13 @@ public class HomeFragment extends BaseFragment implements EasyPermissions.Permis
 
     }
 
+
     @Override
     public void onStart() {
         super.onStart();
+
+
+        mSonnyJackDragView.getDragView().setVisibility(View.VISIBLE);
 
     }
 
@@ -507,9 +551,11 @@ public class HomeFragment extends BaseFragment implements EasyPermissions.Permis
         super.onStop();
         mFlipper.stopFlipping();
 
+        mSonnyJackDragView.getDragView().setVisibility(View.GONE);
+
     }
 
-    @OnClick({R.id.root, R.id.root2, R.id.root3, R.id.root4, R.id.tvMore,R.id.pop})
+    @OnClick({R.id.root, R.id.root2, R.id.root3, R.id.root4, R.id.tvMore})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.root:
@@ -527,9 +573,7 @@ public class HomeFragment extends BaseFragment implements EasyPermissions.Permis
             case R.id.tvMore:
                 startFragment(new FavoriteFragment());
                 break;
-            case R.id.pop:
-                showAdDialog(mBean1);
-                break;
+
         }
     }
 
@@ -547,9 +591,9 @@ public class HomeFragment extends BaseFragment implements EasyPermissions.Permis
 
             @Override
             public void onPageScrollStateChanged(int i) {
-                if (i==1){
+                if (i == 1) {
                     mSwipe.setEnabled(false);
-                }else if (i==2){
+                } else if (i == 2) {
                     mSwipe.setEnabled(true);
                 }
 
@@ -621,9 +665,9 @@ public class HomeFragment extends BaseFragment implements EasyPermissions.Permis
                 });
 
 
-
-
     }
+
+
 
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -631,6 +675,8 @@ public class HomeFragment extends BaseFragment implements EasyPermissions.Permis
         getData();
 
     }
+
+
 
 
     private void installApk(File file) {
@@ -652,7 +698,7 @@ public class HomeFragment extends BaseFragment implements EasyPermissions.Permis
 
     public void checkPermission() {
 
-        String[] perms = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.ACCESS_FINE_LOCATION};
+        String[] perms = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION};
 
         if (EasyPermissions.hasPermissions(getContext(), perms)) {
 
@@ -689,5 +735,19 @@ public class HomeFragment extends BaseFragment implements EasyPermissions.Permis
 
         EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
 
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        try{
+            if(getUserVisibleHint()){//界面可见时
+              mSonnyJackDragView.getDragView().setVisibility(View.VISIBLE);
+            }else {
+                mSonnyJackDragView.getDragView().setVisibility(View.GONE);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

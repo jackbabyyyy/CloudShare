@@ -3,6 +3,7 @@ package com.daf.cloudshare;
 import android.app.Application;
 import android.content.res.Resources;
 
+import com.daf.cloudshare.net.AppUrl;
 import com.daf.cloudshare.utils.Const;
 import com.daf.cloudshare.utils.SP;
 
@@ -33,6 +34,12 @@ public class MyApplication extends Application {
 
         CrashReport.initCrashReport(getApplicationContext(), "bddf3d2e48", true);
 
+        if (BuildConfig.APPLICATION_ID.equals("cn.dafyun.app.salesmantoc")){
+
+            AppUrl.base="https://www.dafyun.cn/";
+        }else{
+            AppUrl.base="";
+        }
 
 
     }

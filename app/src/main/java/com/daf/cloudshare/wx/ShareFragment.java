@@ -63,6 +63,8 @@ public class ShareFragment extends BaseFragment implements IWXAPIEventHandler {
     TextView mName;
     @BindView(R.id.phone)
     TextView mPhone;
+    @BindView(R.id.shareView)
+    View mShareView;
     private WXshare mWXshare;
     private String mImgUrl;
     private String mJumpUrl;
@@ -132,11 +134,11 @@ public class ShareFragment extends BaseFragment implements IWXAPIEventHandler {
     }
     @OnClick({R.id.pyq, R.id.wx, R.id.bc, R.id.fz})
     public void onViewClicked(View view) {
-        Bitmap bitmap = Bitmap.createBitmap(view.getMeasuredWidth(),
-                view.getMeasuredHeight(),
+        Bitmap bitmap = Bitmap.createBitmap(mShareView.getMeasuredWidth(),
+                mShareView.getMeasuredHeight(),
                 Bitmap.Config.ARGB_8888);
         Canvas c = new Canvas(bitmap);
-        view.draw(c);
+        mShareView.draw(c);
 
         switch (view.getId()) {
             case R.id.pyq:
@@ -154,6 +156,7 @@ public class ShareFragment extends BaseFragment implements IWXAPIEventHandler {
                 break;
         }
     }
+
 
     @Override
     public void onReq(BaseReq baseReq) {
