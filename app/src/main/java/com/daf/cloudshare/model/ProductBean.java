@@ -80,7 +80,7 @@ public class ProductBean {
             this.p_ishot = p_ishot;
         }
 
-        private String p_ishot;
+        private String p_ishot="";
         private String p_passrate;
 
         public String getP_passrate() {

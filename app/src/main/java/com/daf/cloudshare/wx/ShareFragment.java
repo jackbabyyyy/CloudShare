@@ -5,9 +5,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +22,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.daf.cloudshare.R;
 import com.daf.cloudshare.base.BaseFragment;
 import com.daf.cloudshare.utils.SP;
@@ -65,6 +72,8 @@ public class ShareFragment extends BaseFragment implements IWXAPIEventHandler {
     TextView mPhone;
     @BindView(R.id.shareView)
     View mShareView;
+    @BindView(R.id.add)
+    View mAdd;
     private WXshare mWXshare;
     private String mImgUrl;
     private String mJumpUrl;
@@ -92,7 +101,13 @@ public class ShareFragment extends BaseFragment implements IWXAPIEventHandler {
         if (TextUtils.isEmpty(mJumpUrl)){
             mJumpUrl=mImgUrl;
         }
-        Glide.with(getActivity()).load(mImgUrl).into(mIv);
+        Glide.with(getActivity()).load(mImgUrl).into(new SimpleTarget<Drawable>() {
+            @Override
+            public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+                mIv.setImageDrawable(resource);
+                mAdd.setVisibility(View.VISIBLE);
+            }
+        });
         mBar.addLeftBackImageButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,7 +136,7 @@ public class ShareFragment extends BaseFragment implements IWXAPIEventHandler {
         new Handler().post(new Runnable() {
             @Override
             public void run() {
-                Bitmap bitmap= QRCodeEncoder.syncEncodeQRCode(mJumpUrl, QMUIDisplayHelper.dp2px(getActivity(),60));
+                Bitmap bitmap= QRCodeEncoder.syncEncodeQRCode(mJumpUrl, QMUIDisplayHelper.dp2px(getActivity(),40));
                 Glide.with(getActivity()).load(bitmap).into(mQrcode);
             }
         });
@@ -188,7 +203,9 @@ public class ShareFragment extends BaseFragment implements IWXAPIEventHandler {
         String fileName = StringUtil.getFileName(mImgUrl) + ".png";
 
 
-        String parent = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getAbsolutePath();
+       String parent =  Environment.getExternalStorageDirectory()
+                + File.separator + Environment.DIRECTORY_DCIM
+                + File.separator + "Camera" + File.separator;
         File f = new File(parent + "/", fileName);
         if (f.exists()) {
             f.delete();
@@ -198,7 +215,11 @@ public class ShareFragment extends BaseFragment implements IWXAPIEventHandler {
             bm.compress(Bitmap.CompressFormat.PNG, 90, out);
             out.flush();
             out.close();
-
+            MediaStore.Images.Media.insertImage(getActivity().getContentResolver(),bm,fileName,null);
+            Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+            Uri uri = Uri.fromFile(f);
+            intent.setData(uri);
+            getActivity().sendBroadcast(intent);
             showToast("已保存至相册");
 
         } catch (FileNotFoundException e) {

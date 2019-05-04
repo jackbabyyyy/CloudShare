@@ -3,20 +3,21 @@ package com.daf.cloudshare;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.daf.cloudshare.base.BaseFragment;
-
-import com.daf.cloudshare.event.MessageFavorite;
 import com.daf.cloudshare.event.MessageNewTip;
-import com.daf.cloudshare.event.MessagePop;
+import com.daf.cloudshare.event.MessageTabIndex;
 import com.daf.cloudshare.ui.home.HomeFragment;
+import com.daf.cloudshare.ui.home.HomeFragmentToc;
 import com.daf.cloudshare.ui.mine.MineFragment;
 import com.daf.cloudshare.net.AppUrl;
-import com.daf.cloudshare.ui.mine.MyPrjFragment;
+import com.daf.cloudshare.ui.mine.MineFragmentToc;
+import com.daf.cloudshare.ui.order.MyPrjFragment;
 import com.daf.cloudshare.ui.product.ProductFragment;
+import com.daf.cloudshare.utils.SP;
 import com.qmuiteam.qmui.util.QMUIResHelper;
 import com.qmuiteam.qmui.widget.QMUIPagerAdapter;
 import com.qmuiteam.qmui.widget.QMUITabSegment;
@@ -47,47 +48,58 @@ public class MainFragment extends BaseFragment {
     }
 
 
-
     @Override
     protected void init() {
 
-        initTabs();
-        initPagers();
+
+
+
+
+
 
         EventBus.getDefault().register(this);
 
 
-    }
 
+        initTabs();
+        initPagers();
+
+
+    }
 
     private void initTabs() {
         int normalColor = QMUIResHelper.getAttrColor(getActivity(), R.attr.qmui_config_color_gray_6);
         int selectColor = QMUIResHelper.getAttrColor(getActivity(), R.attr.qmui_config_color_blue);
         mTabSegment.setDefaultNormalColor(normalColor);
         mTabSegment.setDefaultSelectedColor(selectColor);
-//        mTabSegment.setDefaultTabIconPosition(QMUITabSegment.ICON_POSITION_BOTTOM);
 
 
+        QMUITabSegment.Tab tab = new QMUITabSegment.Tab(getActivity().getDrawable(R.mipmap.tab),
+                getActivity().getDrawable(R.mipmap.tab_), "首页", false);
+        QMUITabSegment.Tab tab2 = new QMUITabSegment.Tab(getActivity().getDrawable(R.mipmap.tab2),
+                getActivity().getDrawable(R.mipmap.tab2_), "产品", false);
+        QMUITabSegment.Tab tab3 = new QMUITabSegment.Tab(getActivity().getDrawable(R.mipmap.tab3),
+                getActivity().getDrawable(R.mipmap.tab3_), "订单", false);
+        QMUITabSegment.Tab tab4 = new QMUITabSegment.Tab(getActivity().getDrawable(R.mipmap.tab4),
+                getActivity().getDrawable(R.mipmap.tab4_), "我的", false);
 
 
-        QMUITabSegment.Tab tab=new QMUITabSegment.Tab(getActivity().getDrawable(R.mipmap.tab),
-                getActivity().getDrawable(R.mipmap.tab_),"首页",false);
-        QMUITabSegment.Tab tab2=new QMUITabSegment.Tab(getActivity().getDrawable(R.mipmap.tab2),
-                getActivity().getDrawable(R.mipmap.tab2_),"产品",false);
-        QMUITabSegment.Tab tab3=new QMUITabSegment.Tab(getActivity().getDrawable(R.mipmap.tab3),
-                getActivity().getDrawable(R.mipmap.tab3_),"订单",false);
-        QMUITabSegment.Tab tab4=new QMUITabSegment.Tab(getActivity().getDrawable(R.mipmap.tab4),
-                getActivity().getDrawable(R.mipmap.tab4_),"我的",false);
-        tab4.showSignCountView(getActivity(),0);
+        if (!VersionManager.isNewVerionHasLook(getActivity())) {
+            tab4.showSignCountView(getActivity(), 0);
+        }
+
+        mTabSegment.setOnTabClickListener(new QMUITabSegment.OnTabClickListener() {
+            @Override
+            public void onTabClick(int index) {
+                if (index == 0)
+                    EventBus.getDefault().post(new MessageTabIndex(true));
+                else
+                    EventBus.getDefault().post(new MessageTabIndex(false));
+
+            }
+        });
 
 
-
-
-
-        // 如果你的 icon 显示大小和实际大小不吻合:
-        // 通过 tab.setTabIconBounds 重新设置 bounds
-//        int iconShowSize = QMUIDisplayHelper.dp2px(getContext(), 20);
-//        component.setTabIconBounds(0, 0, iconShowSize, iconShowSize);
         mTabSegment.addTab(tab)
                 .addTab(tab2)
                 .addTab(tab3)
@@ -107,18 +119,33 @@ public class MainFragment extends BaseFragment {
             protected Object hydrate(ViewGroup container, int position) {
                 switch (position) {
                     case 0:
-                        return new HomeFragment();
+                        if (VersionManager.isToc(getActivity())) {
+                            return new HomeFragmentToc();
+                        } else {
+                            return new HomeFragment();
+                        }
+
                     case 1:
-                        return  ProductFragment.getInstance("产品","", AppUrl.prjList);
+                        return ProductFragment.getInstance("产品", "", AppUrl.prjList);
                     case 2:
                         return new MyPrjFragment();
                     case 3:
-                        return new MineFragment();
+                        if (VersionManager.isToc(getActivity())) {
+                            return new MineFragmentToc();
+                        } else {
+                            return new MineFragment();
+                        }
+
                     default:
-                        return new HomeFragment();
+                        if (VersionManager.isToc(getActivity())) {
+                            return new HomeFragmentToc();
+                        } else {
+                            return new HomeFragment();
+                        }
 
                 }
             }
+
             @Override
             public void startUpdate(ViewGroup container) {
                 if (container.getId() == View.NO_ID) {
@@ -126,6 +153,7 @@ public class MainFragment extends BaseFragment {
                             + " requires a view id");
                 }
             }
+
             @Override
             public void finishUpdate(ViewGroup container) {
                 if (mCurrentTransaction != null) {
@@ -197,8 +225,7 @@ public class MainFragment extends BaseFragment {
 
         mViewPager.setAdapter(adapter);
 
-        mTabSegment.setupWithViewPager(mViewPager,false);
-
+        mTabSegment.setupWithViewPager(mViewPager, false);
 
 
     }
@@ -212,7 +239,7 @@ public class MainFragment extends BaseFragment {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(MessageNewTip event) {
-       mTabSegment.getTab(3).hideSignCountView();
+        mTabSegment.getTab(3).hideSignCountView();
 
     }
 

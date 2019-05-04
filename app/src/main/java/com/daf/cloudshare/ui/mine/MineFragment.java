@@ -2,7 +2,6 @@ package com.daf.cloudshare.ui.mine;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -15,6 +14,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.daf.cloudshare.AppData;
+import com.daf.cloudshare.BuildConfig;
+import com.daf.cloudshare.VersionManager;
 import com.daf.cloudshare.event.MessageNewTip;
 import com.daf.cloudshare.ui.login.LoginActivity;
 import com.daf.cloudshare.R;
@@ -22,12 +23,11 @@ import com.daf.cloudshare.base.BaseFragment;
 
 import com.daf.cloudshare.net.AppUrl;
 import com.daf.cloudshare.net.HttpUtil;
-import com.daf.cloudshare.ui.favorite.FavoriteFragment;
-import com.daf.cloudshare.ui.tool.ToolFragment;
+import com.daf.cloudshare.ui.mine.favorite.FavoriteFragment;
+import com.daf.cloudshare.ui.mine.tool.ToolFragment;
 import com.daf.cloudshare.utils.DataCleanManager;
 import com.daf.cloudshare.utils.ImageUtils;
 import com.daf.cloudshare.utils.SP;
-import com.daf.cloudshare.utils.StringUtil;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
 import com.walkermanx.photopicker.PhotoPicker;
@@ -63,7 +63,7 @@ public class MineFragment extends BaseFragment {
     private String mName;
     private TextView mTvCompany;
     private String mCompany;
-
+    private MineAdapter mAdapter;
 
 
     @Override
@@ -78,7 +78,7 @@ public class MineFragment extends BaseFragment {
 
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        MineAdapter adapter=new MineAdapter(AppData.getMineBody());
+        mAdapter = new MineAdapter(AppData.getMineBody());
         View head=LayoutInflater.from(getActivity()).inflate(R.layout.head_mine,null);
         mTvName = head.findViewById(R.id.tvName);
         mTvMoney = head.findViewById(R.id.tvMoney);
@@ -93,7 +93,7 @@ public class MineFragment extends BaseFragment {
 
             }
         });
-        adapter.addHeaderView(head);
+        mAdapter.addHeaderView(head);
         View foot=LayoutInflater.from(getActivity()).inflate(R.layout.foot_mine,null);
         foot.findViewById(R.id.login_out).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,11 +102,11 @@ public class MineFragment extends BaseFragment {
                 showLoginDialog();
             }
         });
-        adapter.addFooterView(foot);
+        mAdapter.addFooterView(foot);
 
-        mRecyclerView.setAdapter(adapter);
+        mRecyclerView.setAdapter(mAdapter);
 
-        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 switch (position){
@@ -117,19 +117,27 @@ public class MineFragment extends BaseFragment {
                         startFragment(new ToolFragment());
                         break;
                     case 2:
-                        startFragment(MyQrFragment.getInstance(mS,mName,mCompany));
+                        startFragment(new TeamFragmentToc());
                         break;
                     case 3:
-                        startFragment(new ModifyPassFragment());
+                        startFragment(MyQrFragment.getInstance(mS,mName,mCompany));
                         break;
                     case 4:
-                        startFragment(new SubmitFragment());
+                        startFragment(new ModifyPassFragment());
                         break;
                     case 5:
-                        showClearDialog();
+                        startFragment(new SubmitFragment());
                         break;
                     case 6:
+                        showClearDialog();
+                        break;
+                    case 7:
+                        if (BuildConfig.APPLICATION_ID.equals("cn.dafyun.app.salesmanqxpc")){
+                            return;
+                        }
                         EventBus.getDefault().post(new MessageNewTip());
+                        VersionManager.setNewVersionHasLook(getActivity());
+                        mAdapter.notifyItemChanged(mAdapter.getData().size());
                         startFragment(new VersionFragment());
                         break;
                 }
@@ -148,6 +156,8 @@ public class MineFragment extends BaseFragment {
         getMyInfoData();
 
     }
+
+
 
     private void showClearDialog() {
         String cache="";

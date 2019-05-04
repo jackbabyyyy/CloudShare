@@ -123,7 +123,7 @@ public class HttpUtil {
                 public void onResponse(Call call, Response response) throws IOException {
 
                     if (response==null||!response.isSuccessful()){
-                        Log.d("http", "onResponse: is null or fail"
+                        Log.d("http", request.url()+"||||"
                                         +response.body().string()
                          );
                     }
@@ -133,6 +133,10 @@ public class HttpUtil {
                         Log.d("http", "response: "+s);
                         try {
                             JSONObject jsonObject=new JSONObject(s);
+
+                            if (jsonObject.getString("code").equals("90009")){
+                                return;
+                            }
 
                             if (jsonObject.getString("code").equals(Const.token_error)){
                                 //重新登录

@@ -23,6 +23,9 @@ import okhttp3.Protocol;
  */
 public class MyApplication extends Application {
 
+
+
+    public static String BASEURL="https://www.winsharecn.cn/api.php?";//默认
     @Override
     public void onCreate() {
         super.onCreate();
@@ -34,20 +37,10 @@ public class MyApplication extends Application {
 
         CrashReport.initCrashReport(getApplicationContext(), "bddf3d2e48", true);
 
-        if (BuildConfig.APPLICATION_ID.equals("cn.dafyun.app.salesmantoc")){
 
-            AppUrl.base="https://www.dafyun.cn/";
-        }else{
-            AppUrl.base="";
-        }
-
+         BASEURL=SP.get(this,"baseurl","https://www.winsharecn.cn/api.php?").toString();
 
     }
-
-
-
-
-
 
 
 }

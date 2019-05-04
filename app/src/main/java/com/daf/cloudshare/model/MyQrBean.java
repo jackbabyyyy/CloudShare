@@ -32,5 +32,6 @@ public class MyQrBean {
         public String regUrl;
         public String proImg;
         public String userImg;
+        public String shareUrl;
     }
 }

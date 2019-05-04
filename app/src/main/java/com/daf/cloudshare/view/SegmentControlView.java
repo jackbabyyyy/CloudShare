@@ -43,7 +43,7 @@ public class SegmentControlView extends View {
 	private static final float TOUCHED_BACKGROUND_DARK_COEFFICIENT = 0.95F;
 	
 	private static final int COLOR_PRIMARY_NORMAL = 0Xff4f6185;
-	private static final int COLOR_PRIMARY_SELECTED =  0Xff2b4e8c;
+	private static final int COLOR_PRIMARY_SELECTED =  0Xff4f6185;
 	
 	private static final int DEFAULT_COLOR_BACKGROUND_SELECTED = COLOR_PRIMARY_SELECTED;
 	private static final int DEFAULT_COLOR_BACKGROUND_NORMAL = COLOR_PRIMARY_NORMAL;

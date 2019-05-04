@@ -36,12 +36,16 @@ android {
             storeFile file('/Users/PP/Desktop/CloudShare/otf.jks')
             storePassword 'dafyun'
         }
-        toc{
-            keyAlias 'toc'
+
+        qxpc {
+            keyAlias 'qxpc'
             keyPassword 'dafyun'
-            storeFile file('/Users/PP/Desktop/CloudShare/toc.jks')
+            storeFile file('/Users/PP/Desktop/CloudShare/qxpc.jks')
             storePassword 'dafyun'
         }
+
+
+
     }
 
     buildTypes {
@@ -61,9 +65,9 @@ android {
                 winshare {
                     applicationId "com.dafyun.app.salesman"
                     versionCode 20
-                    versionName "1.0.6"
+                    versionName "1.5"
                     buildConfigField "String","WX_ID" ,'"wx5a033a5cfab7f384"'
-                    buildConfigField "String","APP_ID" ,'"YUNDAIDIYYUNAPP"'
+                    buildConfigField "String","APP_ID" ,'"WINSHARECNTOC"'
 
                     manifestPlaceholders = [
                             WX : "wx5a033a5cfab7f384"
@@ -74,8 +78,8 @@ android {
 
                 rich{
                     applicationId "cn.dafyun.app.salesmanzfyd"
-                    versionCode 16
-                    versionName "1.1.6"
+                    versionCode 20
+                    versionName "1.5"
                     buildConfigField "String","WX_ID" ,'"wxbf6b89838d205cfb"'
                     buildConfigField "String","APP_ID" ,'"ZHIFUDIYYUNAPP"'
                     manifestPlaceholders = [
@@ -86,8 +90,8 @@ android {
 
                 otf{
                     applicationId "cn.dafyun.app.salesmanotf"
-                    versionCode 18
-                    versionName "1.0.5"
+                    versionCode 20
+                    versionName "1.5"
                     buildConfigField "String","WX_ID" ,'"wx6b02389adf6d24a7"'
                     buildConfigField "String","APP_ID" ,'"JR124DIYYUNAPP"'
                     manifestPlaceholders = [
@@ -96,17 +100,20 @@ android {
                     signingConfig signingConfigs.otf
                 }
 
-                toc{
-                    applicationId "cn.dafyun.app.salesmantoc"
-                    versionCode 1
-                    versionName "1.0.0"
-                    buildConfigField "String","WX_ID" ,'"wx6b02389adf6d24a7"'
-                    buildConfigField "String","APP_ID" ,'"WINSHARECNTOC"'
+                qxpc{
+                    applicationId "cn.dafyun.app.salesmanqxpc"
+                    versionCode 10
+                    versionName "1.0"
+                    buildConfigField "String","WX_ID" ,'"wxc67cf3baf39d8c17"'
+                    buildConfigField "String","APP_ID" ,'"QXPCIDENTIFY"'
                     manifestPlaceholders = [
-                            WX : "wx6b02389adf6d24a7"
+                            WX : "wxc67cf3baf39d8c17"
                     ]
-                    signingConfig signingConfigs.toc
+                    signingConfig signingConfigs.qxpc
                 }
+
+
+
 
             }
 
@@ -183,4 +190,5 @@ dependencies {
     implementation 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
     implementation 'cn.bingoogolapple:bga-qrcode-zxing:1.3.6'
     implementation 'com.sonnyjack.widget:DragView:0.1.0'
+    implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
 }

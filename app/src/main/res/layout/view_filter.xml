@@ -97,7 +97,8 @@
 
 
         <com.daf.cloudshare.view.SegmentControlView
-
+            app:scv_BackgroundNormalColor="@color/app_color_blue"
+            app:scv_BackgroundSelectedColor="@color/app_color_blue"
             app:scv_TextSize="12sp"
             android:layout_marginBottom="20dp"
             android:layout_marginTop="20dp"
@@ -107,6 +108,7 @@
             android:layout_gravity="center_horizontal"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
+            app:scv_FrameColor="@color/white"
             app:scv_FrameCornerRadius="16dp"
             app:scv_FrameWidth="0dp"
             app:scv_Gradient="true"

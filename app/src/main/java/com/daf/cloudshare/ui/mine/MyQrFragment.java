@@ -1,11 +1,15 @@
 package com.daf.cloudshare.ui.mine;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -16,12 +20,15 @@ import com.alibaba.fastjson.JSON;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.daf.cloudshare.R;
+import com.daf.cloudshare.VersionManager;
 import com.daf.cloudshare.base.BaseFragment;
 
+import com.daf.cloudshare.model.InfoBeanToc;
 import com.daf.cloudshare.model.MyQrBean;
 import com.daf.cloudshare.net.AppUrl;
 import com.daf.cloudshare.net.HttpUtil;
 import com.daf.cloudshare.utils.ImageUtils;
+import com.daf.cloudshare.utils.SP;
 import com.daf.cloudshare.wx.ShareFragment;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
@@ -173,7 +180,7 @@ public class MyQrFragment extends BaseFragment {
                 mIvRight.setImageResource(R.mipmap.qr_register);
                 mTvRight.setTextColor(getResources().getColor(R.color.app_color_blue));
                 mTvDes.setText("扫一扫可进行注册");
-                Glide.with(getActivity()).load(mMyQrBean.data.regUrl).into(mImageView);
+                Glide.with(getActivity()).load(mMyQrBean.data.shareUrl).into(mImageView);
                 isFisrt = false;
             }
         });
@@ -181,31 +188,31 @@ public class MyQrFragment extends BaseFragment {
         mAd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-                new Handler().post(new Runnable() {
-                    @Override
-                    public void run() {
-                        Bitmap bitmap = Bitmap.createBitmap(mImageView.getMeasuredWidth(),
-                                mImageView.getMeasuredHeight(),
-                                Bitmap.Config.ARGB_8888);
-                        Canvas c = new Canvas(bitmap);
-                        mImageView.draw(c);
-                        String jump = QRCodeDecoder.syncDecodeQRCode(bitmap);
-                        if (isFisrt) {
-                            startFragment(ShareFragment.getInstance(mMyQrBean.data.proImg, jump));
-                        } else {
-                            startFragment(ShareFragment.getInstance(mMyQrBean.data.userImg, jump));
-                        }
-
-                    }
-                });
-
-
+                goShare();
             }
         });
 
 
+    }
+
+    private void goShare(){
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                Bitmap bitmap = Bitmap.createBitmap(mImageView.getMeasuredWidth(),
+                        mImageView.getMeasuredHeight(),
+                        Bitmap.Config.ARGB_8888);
+                Canvas c = new Canvas(bitmap);
+                mImageView.draw(c);
+                String jump = QRCodeDecoder.syncDecodeQRCode(bitmap);
+                if (isFisrt) {
+                    startFragment(ShareFragment.getInstance(mMyQrBean.data.proImg, jump));
+                } else {
+                    startFragment(ShareFragment.getInstance(mMyQrBean.data.userImg, jump));
+                }
+
+            }
+        });
     }
 
     private QMUIPopup mNormalPopup;
@@ -254,7 +261,9 @@ public class MyQrFragment extends BaseFragment {
         v.draw(canvas);
 
 
-        String parent = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getAbsolutePath();
+        String parent =  Environment.getExternalStorageDirectory()
+                + File.separator + Environment.DIRECTORY_DCIM
+                + File.separator + "Camera" + File.separator;
         File f = new File(parent + "/", fileName);
         if (f.exists()) {
             f.delete();
@@ -264,6 +273,12 @@ public class MyQrFragment extends BaseFragment {
             bm.compress(Bitmap.CompressFormat.PNG, 90, out);
             out.flush();
             out.close();
+
+            MediaStore.Images.Media.insertImage(getActivity().getContentResolver(),bm,fileName,null);
+            Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+            Uri uri = Uri.fromFile(f);
+            intent.setData(uri);
+            getActivity().sendBroadcast(intent);
 
             showToast("已保存至相册");
 

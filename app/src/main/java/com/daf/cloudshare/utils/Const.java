@@ -1,5 +1,9 @@
 package com.daf.cloudshare.utils;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.daf.cloudshare.model.LoginBean;
+
 /**
  * Created by PP on 2019/2/20.
  */
@@ -15,6 +19,8 @@ public class Const  {
 
     public static final String appid="ZHIFUDIYYUNAPP";
     //public static final String appid="YUNDAIDIYYUNAPP";
+
+
 
 
 }

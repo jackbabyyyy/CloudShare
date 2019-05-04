@@ -13,6 +13,13 @@
 
 
 
+    <com.qmuiteam.qmui.widget.QMUITopBarLayout
+        android:id="@+id/bar"
+        android:fitsSystemWindows="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </com.qmuiteam.qmui.widget.QMUITopBarLayout>
 
     <android.support.v7.widget.RecyclerView
         android:background="#f0f0f0"

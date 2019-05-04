@@ -26,16 +26,20 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSON;
 import com.bumptech.glide.Glide;
 import com.daf.cloudshare.R;
+import com.daf.cloudshare.VersionManager;
 import com.daf.cloudshare.base.BaseFragment;
 
 import com.daf.cloudshare.event.MessageFavorite;
 import com.daf.cloudshare.model.DetailBean;
 import com.daf.cloudshare.model.DialogBean;
 import com.daf.cloudshare.model.FavoriteResBean;
+import com.daf.cloudshare.model.InfoBeanToc;
 import com.daf.cloudshare.model.PosterBean;
 import com.daf.cloudshare.net.AppUrl;
 import com.daf.cloudshare.net.HttpUtil;
+import com.daf.cloudshare.ui.mine.OauthFragmentToc;
 import com.daf.cloudshare.ui.web.WebFragment;
+import com.daf.cloudshare.utils.SP;
 import com.daf.cloudshare.utils.TipDialog;
 import com.daf.cloudshare.utils.Const;
 import com.daf.cloudshare.utils.MoneyUtils;
@@ -232,11 +236,8 @@ public class DetailFragment extends BaseFragment implements QbSdk.PreInitCallbac
             @Override
             public void onResponse(String response) throws IOException {
                 mPoster = response;
-
-
             }
         });
-
 
     }
 
@@ -250,11 +251,9 @@ public class DetailFragment extends BaseFragment implements QbSdk.PreInitCallbac
             }
         }
         startFragment(ShareFragment.getInstance(img,bean.data.jumpUrl));
-
     }
 
     private void setView(DetailBean detailBean) {
-
         //title 补充
         mTopBarLayout.setTitle(detailBean.data.p_name);
 
@@ -337,7 +336,21 @@ public class DetailFragment extends BaseFragment implements QbSdk.PreInitCallbac
                 break;
 
             case R.id.share:
-                goShare(mPoster);
+
+                if (VersionManager.isToc(getActivity())){
+                    InfoBeanToc beanToc=JSON.parseObject(SP.getInfo(getActivity()),InfoBeanToc.class);
+                    String idcard=beanToc.data.i_idcard;
+                    if(TextUtils.isEmpty(idcard)){
+                        startFragment(new OauthFragmentToc());
+                    }else{
+                        goShare(mPoster);
+                    }
+
+                }else{
+                    goShare(mPoster);
+                }
+
+
 //                BottomSheetDialog dialog = new BottomSheetDialog(getActivity());
 //                View v = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_share, null);
 //                v.findViewById(R.id.wx).setOnClickListener(new View.OnClickListener() {
@@ -410,8 +423,6 @@ public class DetailFragment extends BaseFragment implements QbSdk.PreInitCallbac
 
 
     private void showTbsDialog() {
-
-
         TbsReaderView tbsReaderView = new TbsReaderView(getActivity(), new TbsReaderView.ReaderCallback() {
             @Override
             public void onCallBackAction(Integer integer, Object o, Object o1) {

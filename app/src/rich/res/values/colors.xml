@@ -65,6 +65,10 @@
     <color name="cl_tran">#00ffffff</color>
 
     <color name="detail_bg">#e33645</color>
+    <color name="team">#e1392a</color>
+    <color name="hot_label">#e23837</color>
+    <color name="toc_home_label_bg">#feded2</color>
+    <color name="toc_home_label">#df0010</color>
 
 
 </resources>

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -96,6 +95,9 @@ public class SP {
         return sp.getAll();
     }
 
+    public static void saveToken(Context context,String token){
+        SP.put(context,Const.token,token);
+    }
     public static String  getToken(Context context){
         return SP.get(context,Const.token,"").toString();
     }
@@ -111,6 +113,14 @@ public class SP {
         s[1]=SP.get(context,"password","").toString();
         return s;
 
+    }
+
+    public static void saveInfo(Context context,String infoString){
+        SP.put(context,"info",infoString);
+    }
+
+    public static String getInfo(Context context){
+        return SP.get(context,"info","").toString();
     }
 
 }

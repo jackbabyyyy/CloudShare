@@ -61,10 +61,13 @@
     <color name="lab_bg">#ffebd4</color>
     <color name="lab2">#1993fc</color>
     <color name="lab2_bg">#d3f9fd</color>
+    <color name="toc_home_label_bg">#CBE1F6</color>
+    <color name="toc_home_label">#4586C4</color>
 
     <color name="cl_tran">#00ffffff</color>
 
     <color name="detail_bg">#405f98</color>
+    <color name="team">#819ecf</color>
 
 
 

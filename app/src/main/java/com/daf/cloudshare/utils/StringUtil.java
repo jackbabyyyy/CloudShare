@@ -3,6 +3,7 @@ package com.daf.cloudshare.utils;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.util.Log;
 
 public class StringUtil {
     public static boolean checkPhone(String phone) {
@@ -23,6 +24,12 @@ public class StringUtil {
 
     public static String sublimitPhone(String phone) {
         return phone.substring(0, 3) + "****" + phone.substring(phone.length() - 4, phone.length());
+    }
+
+    public static String sublimitIdCard(String idCard) {
+      //  Log.d("chenzhiyuan", "sublimitIdCard: "+idCard);
+        int len=idCard.length();
+        return idCard.substring(0, 5) + "****" + idCard.substring(len - 5, len);
     }
 
 

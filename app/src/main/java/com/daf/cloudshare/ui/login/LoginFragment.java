@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
@@ -12,9 +13,12 @@ import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.daf.cloudshare.MainActivity;
+import com.daf.cloudshare.MyApplication;
 import com.daf.cloudshare.R;
+import com.daf.cloudshare.VersionManager;
 import com.daf.cloudshare.base.BaseFragment;
 import com.daf.cloudshare.model.LoginBean;
+import com.daf.cloudshare.model.LoginBeanToc;
 import com.daf.cloudshare.net.AppUrl;
 import com.daf.cloudshare.net.HttpUtil;
 import com.daf.cloudshare.utils.Const;
@@ -53,8 +57,6 @@ public class LoginFragment extends BaseFragment {
     private boolean canSee;
 
 
-
-
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_login;
@@ -65,24 +67,26 @@ public class LoginFragment extends BaseFragment {
     protected void init() {
 
 
+        mTopBar.setTitle("用户登录");
+        mAccount.setHint("请输入您的手机号");
+        mPassword.setHint("请输入密码");
 
-        mTopBar.setTitle("员工登录");
-        mTopBar.addRightImageButton(R.mipmap.close,R.id.topbar_right_close_button).setOnClickListener(new View.OnClickListener() {
+        mTopBar.addRightImageButton(R.mipmap.close, R.id.topbar_right_close_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getActivity().finish();
             }
         });
 
-        if (!TextUtils.isEmpty(SP.getUser(getActivity())[0])){
+        if (!TextUtils.isEmpty(SP.getUser(getActivity())[0])) {
             mAccount.setText(SP.getUser(getActivity())[0]);
             mPassword.setText(SP.getUser(getActivity())[1]);
         }
 
-        final Drawable eye=getResources().getDrawable(R.mipmap.password_open);
-        final Drawable noEye=getResources().getDrawable(R.mipmap.password_close);
-        final Drawable password=getResources().getDrawable(R.mipmap.password);
-        password.setBounds(0,0,password.getMinimumWidth(),password.getMinimumHeight());
+        final Drawable eye = getResources().getDrawable(R.mipmap.password_open);
+        final Drawable noEye = getResources().getDrawable(R.mipmap.password_close);
+        final Drawable password = getResources().getDrawable(R.mipmap.password);
+        password.setBounds(0, 0, password.getMinimumWidth(), password.getMinimumHeight());
         eye.setBounds(0, 0, eye.getMinimumWidth(), eye.getMinimumHeight());
         noEye.setBounds(0, 0, eye.getMinimumWidth(), eye.getMinimumHeight());
         mPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
@@ -97,17 +101,17 @@ public class LoginFragment extends BaseFragment {
                 if (event.getAction() != MotionEvent.ACTION_UP)
                     return false;
 
-                if (event.getX() > mPassword.getWidth() - mPassword.getPaddingRight() - drawable.getIntrinsicWidth()){
+                if (event.getX() > mPassword.getWidth() - mPassword.getPaddingRight() - drawable.getIntrinsicWidth()) {
 
-                  if (canSee){
-                      canSee=false;
-                      mPassword.setCompoundDrawables(password,null,noEye,null);
-                      mPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                  }else{
-                      canSee=true;
-                      mPassword.setCompoundDrawables(password,null,eye,null);
-                      mPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                  }
+                    if (canSee) {
+                        canSee = false;
+                        mPassword.setCompoundDrawables(password, null, noEye, null);
+                        mPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    } else {
+                        canSee = true;
+                        mPassword.setCompoundDrawables(password, null, eye, null);
+                        mPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    }
 
 
                 }
@@ -115,44 +119,23 @@ public class LoginFragment extends BaseFragment {
             }
         });
 
-
-
-
     }
 
-    private void initBar() {
 
-
-
-
-//        mTopBar.addLeftTextButton("注册",R.id.topbar_left_text_button)
-//                .setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//
-//                    }
-//                })
-//        ;
-
-
-    }
-
-    @OnClick(R.id.login)
-    public void login()  {
-        String account=mAccount.getText().toString();
-        String password=mPassword.getText().toString();
-        if (TextUtils.isEmpty(account)){
+    private void login(){
+        String account = mAccount.getText().toString();
+        String password = mPassword.getText().toString();
+        if (TextUtils.isEmpty(account)) {
             showToast("账号为空!");
             return;
         }
-        if (TextUtils.isEmpty(password)){
+        if (TextUtils.isEmpty(password)) {
             showToast("密码为空!");
             return;
         }
-        HashMap hashMap=new HashMap();
-        hashMap.put("telephone",account);
-        hashMap.put("password",password);
-
+        HashMap hashMap = new HashMap();
+        hashMap.put("telephone", account);
+        hashMap.put("password", password);
 
         HttpUtil.getInstance(getActivity()).postForm(AppUrl.login, hashMap, new HttpUtil.ResultCallback() {
             @Override
@@ -163,37 +146,61 @@ public class LoginFragment extends BaseFragment {
             @Override
             public void onResponse(String s) throws IOException {
                 try {
-                    JSONObject login=new JSONObject(s);
-                    if (login.getString("code").equals(Const.login_success)){
-                        LoginBean loginBean= JSON.parseObject(s,LoginBean.class);
-                        //save token
-                        SP.put(getActivity(),Const.token,loginBean.getData().getToken());
-                        SP.saveUser(getActivity(),account,password);
-
-                        startActivity(new Intent(getActivity(),MainActivity.class));
-                        getActivity().finish();
-                    }else{
-                        showToast(login.getString("msg"));
-
+                    JSONObject json = new JSONObject(s);
+                    //登陆失败
+                    if (!json.getString("code").equals(Const.login_success)) {
+                        showToast(json.getString("msg"));
+                        return;
                     }
+                    //登陆成功
+                    JSONObject jsonObject=json.getJSONObject("data");
+                    String userType = jsonObject.optString("user_type");
+                    Log.d("chenzhiyuan", "onResponse: "+userType);
+                    if (userType.equals("idle")) {
+                        //版本置成toc版
+                        VersionManager.setToc(getActivity(),true);
+                        LoginBeanToc beanToc = JSON.parseObject(s, LoginBeanToc.class);
+                        SP.saveToken(getActivity(), beanToc.data.token);
+
+                    } else {
+                        //版本为正常版
+                        VersionManager.setToc(getActivity(),false);
+                        LoginBean loginBean = JSON.parseObject(s, LoginBean.class);
+                        SP.put(getActivity(), Const.token, loginBean.getData().getToken());
+                    }
+
+
+
+                    SP.saveUser(getContext(), account, password);
+                    startActivity(new Intent(getActivity(), MainActivity.class));
+                    getActivity().finish();
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
+
             }
         });
+    }
+    @OnClick({R.id.login,R.id.forget})
+    public void onClick(View view) {
 
-
+        switch (view.getId()){
+            case R.id.login:
+                login();
+                break;
+            case R.id.forget:
+                startFragment(new ForgetPassFragment());
+                break;
+        }
 
 
 
     }
 
-
-
-
-
-
-
+    @Override
+    protected boolean canDragBack() {
+        return false;
+    }
 }

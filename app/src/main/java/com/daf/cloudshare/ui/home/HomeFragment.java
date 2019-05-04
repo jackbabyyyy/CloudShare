@@ -1,11 +1,8 @@
 package com.daf.cloudshare.ui.home;
 
 import android.Manifest;
-import android.arch.lifecycle.Observer;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
@@ -26,7 +23,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import com.alibaba.fastjson.JSON;
@@ -35,11 +31,10 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 
 
 import com.daf.cloudshare.BuildConfig;
-import com.daf.cloudshare.MainActivity;
 import com.daf.cloudshare.R;
 import com.daf.cloudshare.base.BaseFragment;
 import com.daf.cloudshare.event.MessageFavorite;
-import com.daf.cloudshare.event.MessagePop;
+import com.daf.cloudshare.event.MessageTabIndex;
 import com.daf.cloudshare.model.CheckBean;
 import com.daf.cloudshare.model.DialogBean;
 import com.daf.cloudshare.model.FavoriteBean;
@@ -48,23 +43,21 @@ import com.daf.cloudshare.model.TipBean;
 import com.daf.cloudshare.model.TypeBean;
 import com.daf.cloudshare.net.AppUrl;
 import com.daf.cloudshare.net.HttpUtil;
-import com.daf.cloudshare.ui.login.LoginActivity;
+import com.daf.cloudshare.ui.mine.favorite.FavoriteFragment;
 import com.daf.cloudshare.ui.product.DetailFragment;
-import com.daf.cloudshare.ui.favorite.FavoriteFragment;
+
 import com.daf.cloudshare.ui.web.WebFragment;
 import com.daf.cloudshare.model.BannerBean;
 import com.daf.cloudshare.ui.product.ProductFragment;
 import com.daf.cloudshare.utils.Const;
 import com.daf.cloudshare.utils.GpsUtils;
 import com.daf.cloudshare.utils.HomeDialog;
-import com.daf.cloudshare.utils.SP;
 import com.daf.cloudshare.utils.StringUtil;
-import com.daf.cloudshare.view.DragView;
-import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialogBuilder;
 import com.sonnyjack.widget.dragview.SonnyJackDragView;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.youth.banner.Banner;
 import com.youth.banner.listener.OnBannerListener;
 import com.youth.banner.loader.ImageLoader;
@@ -84,10 +77,9 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import butterknife.OnPageChange;
 import okhttp3.Request;
 import pub.devrel.easypermissions.EasyPermissions;
-
-import static com.daf.cloudshare.net.AppUrl.checkVersion;
 
 /**
  * Created by PP on 2019/3/15.
@@ -144,11 +136,14 @@ public class HomeFragment extends BaseFragment implements EasyPermissions.Permis
     private List<FavoriteBean.DataBean> mData = new ArrayList<>();
     private TypeBean mBean;
     private FavoriteHomeAdapter mAdapter;
+    private boolean mPopShow=true;
 
 
     private AlertDialog.Builder mBuilder;
     private DialogBean mBean1;
     private SonnyJackDragView mSonnyJackDragView;
+    private RxPermissions mRxPermissions;
+
 
     @Override
     protected int getLayoutId() {
@@ -157,6 +152,18 @@ public class HomeFragment extends BaseFragment implements EasyPermissions.Permis
 
     @Override
     protected void init() {
+
+        mRxPermissions = new RxPermissions(getActivity());
+        mRxPermissions.request(Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION)
+                .subscribe(granted -> {
+                    if (granted) {
+                        update();
+                        // All requested permissions are granted
+                    } else {
+                        // At least one permission is denied
+                    }
+                });
+        initPop();
         initBanner();
         initAd();
         initType();
@@ -166,7 +173,7 @@ public class HomeFragment extends BaseFragment implements EasyPermissions.Permis
 
         EventBus.getDefault().register(this);
 
-        checkPermission();
+   //     checkPermission();
 
         //  定位服务是否开启
         if (!GpsUtils.isLocServiceEnable(getActivity())) {
@@ -176,6 +183,10 @@ public class HomeFragment extends BaseFragment implements EasyPermissions.Permis
 
 
 
+
+    }
+
+    private void initPop(){
         ImageView imageView = new ImageView(getActivity());
         imageView.setScaleType(ImageView.ScaleType.FIT_XY);
         imageView.post(new Runnable() {
@@ -189,21 +200,7 @@ public class HomeFragment extends BaseFragment implements EasyPermissions.Permis
         });
         imageView.setImageResource(R.mipmap.home_pop);
         imageView.setOnClickListener(v -> showAdDialog(mBean1));
-//
-//        View v = LayoutInflater.from(getActivity()).inflate(R.layout.dragview, null);
-//        v.findViewById(R.id.pop).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                showAdDialog(mBean1);
-//            }
-//        });
 
-        //当前Activity，不可为空
-//初始位置左边距
-//初始位置上边距
-//拖动停止后，是否移到边沿
-//                .setSize(100)//DragView大小
-//设置自定义的DragView，切记不可为空
         mSonnyJackDragView = new SonnyJackDragView.Builder()
                 .setActivity(getActivity())//当前Activity，不可为空
                 .setDefaultLeft(30)//初始位置左边距
@@ -212,6 +209,7 @@ public class HomeFragment extends BaseFragment implements EasyPermissions.Permis
 //                .setSize(100)//DragView大小
                 .setView(imageView)//设置自定义的DragView，切记不可为空
                 .build();
+        mSonnyJackDragView.getDragView().setVisibility(View.VISIBLE);
     }
 
     private void showAdDialog(DialogBean bean) {
@@ -278,6 +276,8 @@ public class HomeFragment extends BaseFragment implements EasyPermissions.Permis
                             JSONObject jsonObject = new JSONObject(response);
                             if (jsonObject.getString("code").equals(Const.body_success)) {
                                 CheckBean checkBean = JSON.parseObject(response, CheckBean.class);
+                                if (checkBean.data.app_versions_android.version_id==null)return;
+
                                 //Integer.valueOf(checkBean.data.app_versions_android.version_id)
                                 if (Integer.valueOf(checkBean.data.app_versions_android.version_id) > StringUtil.getVersionCode(getActivity())) {
 
@@ -423,6 +423,20 @@ public class HomeFragment extends BaseFragment implements EasyPermissions.Permis
     public void onResume() {
         super.onResume();
         getData();
+
+        if (mPopShow)
+            mSonnyJackDragView.getDragView().setVisibility(View.VISIBLE);
+        else
+            mSonnyJackDragView.getDragView().setVisibility(View.GONE);
+
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        mSonnyJackDragView.getDragView().setVisibility(View.GONE);
+
     }
 
     private void getData() {
@@ -542,16 +556,17 @@ public class HomeFragment extends BaseFragment implements EasyPermissions.Permis
         super.onStart();
 
 
-        mSonnyJackDragView.getDragView().setVisibility(View.VISIBLE);
+
 
     }
+
 
     @Override
     public void onStop() {
         super.onStop();
         mFlipper.stopFlipping();
 
-        mSonnyJackDragView.getDragView().setVisibility(View.GONE);
+
 
     }
 
@@ -697,13 +712,9 @@ public class HomeFragment extends BaseFragment implements EasyPermissions.Permis
     }
 
     public void checkPermission() {
-
         String[] perms = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION};
-
         if (EasyPermissions.hasPermissions(getContext(), perms)) {
-
             update();
-
         } else {
             // Request one permission
 
@@ -749,5 +760,13 @@ public class HomeFragment extends BaseFragment implements EasyPermissions.Permis
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(MessageTabIndex event) {
+        if (event.show){
+            mPopShow=true;
+        }else mPopShow=false;
+
     }
 }
