@@ -23,36 +23,35 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import com.alibaba.fastjson.JSON;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
-
-
 import com.daf.cloudshare.BuildConfig;
+import com.daf.cloudshare.MainActivity;
 import com.daf.cloudshare.R;
 import com.daf.cloudshare.base.BaseFragment;
 import com.daf.cloudshare.event.MessageFavorite;
 import com.daf.cloudshare.event.MessageTabIndex;
+import com.daf.cloudshare.model.BannerBean;
 import com.daf.cloudshare.model.CheckBean;
 import com.daf.cloudshare.model.DialogBean;
 import com.daf.cloudshare.model.FavoriteBean;
-
 import com.daf.cloudshare.model.TipBean;
 import com.daf.cloudshare.model.TypeBean;
 import com.daf.cloudshare.net.AppUrl;
 import com.daf.cloudshare.net.HttpUtil;
 import com.daf.cloudshare.ui.mine.favorite.FavoriteFragment;
 import com.daf.cloudshare.ui.product.DetailFragment;
-
-import com.daf.cloudshare.ui.web.WebFragment;
-import com.daf.cloudshare.model.BannerBean;
 import com.daf.cloudshare.ui.product.ProductFragment;
+import com.daf.cloudshare.ui.web.WebFragment;
 import com.daf.cloudshare.utils.Const;
 import com.daf.cloudshare.utils.GpsUtils;
 import com.daf.cloudshare.utils.HomeDialog;
 import com.daf.cloudshare.utils.StringUtil;
+import com.daf.cloudshare.view.DragView;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialogBuilder;
@@ -77,7 +76,6 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import butterknife.OnPageChange;
 import okhttp3.Request;
 import pub.devrel.easypermissions.EasyPermissions;
 
@@ -143,7 +141,7 @@ public class HomeFragment extends BaseFragment implements EasyPermissions.Permis
     private DialogBean mBean1;
     private SonnyJackDragView mSonnyJackDragView;
     private RxPermissions mRxPermissions;
-
+    DragView iv_drag;
 
     @Override
     protected int getLayoutId() {
@@ -152,6 +150,18 @@ public class HomeFragment extends BaseFragment implements EasyPermissions.Permis
 
     @Override
     protected void init() {
+        iv_drag= (DragView) getActivity().findViewById(R.id.view);
+
+//        iv_drag.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if(!iv_drag.isDrag()){
+//                    Toast.makeText(getActivity(), "响应点击", Toast.LENGTH_SHORT).show();
+//                }
+//
+//            }
+//        });
+
 
         mRxPermissions = new RxPermissions(getActivity());
         mRxPermissions.request(Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION)

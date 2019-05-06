@@ -110,6 +110,9 @@ public class MineFragmentToc extends BaseFragment {
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+
+                InfoBeanToc beanToc = JSON.parseObject(SP.getInfo(getActivity()), InfoBeanToc.class);
+                String idcard = beanToc.data.i_idcard;
                 switch (position) {
                     case 3:
                         startFragment(new FavoriteFragment());
@@ -128,15 +131,19 @@ public class MineFragmentToc extends BaseFragment {
                         break;
                     case 0:
 
-                        startFragment(new TeamFragmentToc());
+                        if (TextUtils.isEmpty(idcard)) {
+                            startFragment(new OauthFragmentToc());
+                        } else {
+                            startFragment(new TeamFragmentToc());
+                        }
+
                         break;
                     case 2:
 
                         startFragment(new OauthFragmentToc());
                         break;
                     case 1:
-                        InfoBeanToc beanToc = JSON.parseObject(SP.getInfo(getActivity()), InfoBeanToc.class);
-                        String idcard = beanToc.data.i_idcard;
+
                         if (TextUtils.isEmpty(idcard)) {
                             startFragment(new OauthFragmentToc());
                         } else {

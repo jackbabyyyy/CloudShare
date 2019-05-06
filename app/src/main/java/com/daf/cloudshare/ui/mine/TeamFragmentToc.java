@@ -5,13 +5,10 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.net.Uri;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
@@ -21,7 +18,7 @@ import com.daf.cloudshare.base.BaseFragment;
 import com.daf.cloudshare.model.TeamBean;
 import com.daf.cloudshare.net.AppUrl;
 import com.daf.cloudshare.net.HttpUtil;
-import com.daf.cloudshare.utils.MyLoadMoreView;
+
 import com.daf.cloudshare.utils.MyLoadView2;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
@@ -32,8 +29,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
+
 import okhttp3.Request;
 import pub.devrel.easypermissions.EasyPermissions;
 

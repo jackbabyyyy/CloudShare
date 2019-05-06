@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
+import com.daf.cloudshare.BuildConfig;
 import com.daf.cloudshare.MainActivity;
 import com.daf.cloudshare.MyApplication;
 import com.daf.cloudshare.R;
@@ -136,6 +137,7 @@ public class LoginFragment extends BaseFragment {
         HashMap hashMap = new HashMap();
         hashMap.put("telephone", account);
         hashMap.put("password", password);
+        hashMap.put("appid", BuildConfig.APP_ID);
 
         HttpUtil.getInstance(getActivity()).postForm(AppUrl.login, hashMap, new HttpUtil.ResultCallback() {
             @Override

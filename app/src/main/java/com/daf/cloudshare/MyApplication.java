@@ -35,7 +35,7 @@ public class MyApplication extends Application {
 
         MobSDK.init(this);
 
-        CrashReport.initCrashReport(getApplicationContext(), "bddf3d2e48", true);
+   //     CrashReport.initCrashReport(getApplicationContext(), "bddf3d2e48", true);
 
 
          BASEURL=SP.get(this,"baseurl","https://www.winsharecn.cn/api.php?").toString();
