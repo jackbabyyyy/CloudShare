@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:background="@drawable/bg5"
+    android:background="@drawable/bg_radius5"
     android:layout_height="wrap_content"
     xmlns:zhy="http://schemas.android.com/apk/res-auto">
 

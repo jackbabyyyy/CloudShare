@@ -174,7 +174,7 @@ public class HomeFragmentToc extends BaseFragment implements EasyPermissions.Per
     private void getMyInfoData() {
 
         HttpUtil.getInstance(getActivity())
-                .postForm(AppUrl.getMyInfo, null, new HttpUtil.ResultCallback() {
+                .postForm(AppUrl.base+AppUrl.getMyInfo, null, new HttpUtil.ResultCallback() {
                     @Override
                     public void onError(Request request, Exception e) {
 
@@ -263,7 +263,7 @@ public class HomeFragmentToc extends BaseFragment implements EasyPermissions.Per
 
     private void initHomeDialog() {
         HttpUtil.getInstance(getActivity())
-                .postForm(AppUrl.getDialog, null, new HttpUtil.ResultCallback() {
+                .postForm(AppUrl.base+AppUrl.getDialog, null, new HttpUtil.ResultCallback() {
                     @Override
                     public void onError(Request request, Exception e) {
 
@@ -273,7 +273,6 @@ public class HomeFragmentToc extends BaseFragment implements EasyPermissions.Per
                     public void onResponse(String response) throws IOException {
                         mBean1 = JSON.parseObject(response, DialogBean.class);
                         showAdDialog(mBean1);
-
                     }
                 });
 
@@ -415,7 +414,7 @@ public class HomeFragmentToc extends BaseFragment implements EasyPermissions.Per
     private void getData() {
         HashMap<String, String> map = new HashMap<>();
 
-        HttpUtil.getInstance(getActivity()).postForm(AppUrl.getHotBank, null, new HttpUtil.ResultCallback() {
+        HttpUtil.getInstance(getActivity()).postForm(AppUrl.base+AppUrl.getHotBank, null, new HttpUtil.ResultCallback() {
             @Override
             public void onError(Request request, Exception e) {
 
@@ -525,7 +524,7 @@ public class HomeFragmentToc extends BaseFragment implements EasyPermissions.Per
 
     private void initAd() {
         HttpUtil.getInstance(getActivity())
-                .postForm(AppUrl.getIndexTip, null, new HttpUtil.ResultCallback() {
+                .postForm(AppUrl.base+AppUrl.getIndexTip, null, new HttpUtil.ResultCallback() {
                     @Override
                     public void onError(Request request, Exception e) {
 
@@ -618,7 +617,7 @@ public class HomeFragmentToc extends BaseFragment implements EasyPermissions.Per
         });
 
         HttpUtil.getInstance(getActivity())
-                .postForm(AppUrl.banner, null, new HttpUtil.ResultCallback() {
+                .postForm(AppUrl.base+AppUrl.banner, null, new HttpUtil.ResultCallback() {
                     @Override
                     public void onError(Request request, Exception e) {
 

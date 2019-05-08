@@ -12,6 +12,7 @@ import com.daf.cloudshare.event.MessageNewTip;
 import com.daf.cloudshare.event.MessageTabIndex;
 import com.daf.cloudshare.ui.home.HomeFragment;
 import com.daf.cloudshare.ui.home.HomeFragmentToc;
+import com.daf.cloudshare.ui.mine.MeFragment;
 import com.daf.cloudshare.ui.mine.MineFragment;
 import com.daf.cloudshare.net.AppUrl;
 import com.daf.cloudshare.ui.mine.MineFragmentToc;
@@ -130,11 +131,14 @@ public class MainFragment extends BaseFragment {
                     case 2:
                         return new MyPrjFragment();
                     case 3:
-                        if (VersionManager.isToc(getActivity())) {
-                            return new MineFragmentToc();
-                        } else {
-                            return new MineFragment();
-                        }
+                        return new MeFragment();
+
+
+//                        if (VersionManager.isToc(getActivity())) {
+//                            return new MineFragmentToc();
+//                        } else {
+//                            return new MineFragment();
+//                        }
 
                     default:
                         if (VersionManager.isToc(getActivity())) {

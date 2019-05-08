@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:paddingBottom="10dp"
+    android:paddingTop="10dp"
+    android:layout_marginRight="16dp"
+    android:layout_marginLeft="16dp"
+    android:background="@drawable/bg_radius5"
+    android:gravity="center_vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/btnOauth"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+
+    <LinearLayout
+
+        android:gravity="center_vertical"
+        android:layout_marginLeft="20dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="55dp">
+        
+        <ImageView
+            android:src="@mipmap/mine_oauth"
+            android:layout_width="20dp"
+            android:layout_height="20dp"/>
+
+        <TextView
+            android:textSize="14sp"
+            android:textColor="#333333"
+            android:layout_marginLeft="22dp"
+            android:text="实名认证"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        
+    </LinearLayout>
+    <View
+        android:id="@+id/div_mine_oauth"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:background="@drawable/shape_dash_line"
+        android:layerType="software"
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btnFavorite"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="20dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="55dp">
+
+        <ImageView
+            android:src="@mipmap/mine_favorite"
+            android:layout_width="20dp"
+            android:layout_height="20dp"/>
+
+        <TextView
+            android:textSize="14sp"
+            android:textColor="#333333"
+            android:layout_marginLeft="22dp"
+            android:text="我的收藏"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+    <View
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+
+
+        android:background="@drawable/shape_dash_line"
+        android:layerType="software"
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        />
+
+    <LinearLayout
+        android:id="@+id/btnProgress"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="20dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="55dp">
+
+        <ImageView
+            android:src="@mipmap/mine_progress"
+            android:layout_width="20dp"
+            android:layout_height="20dp"/>
+
+        <TextView
+            android:textSize="14sp"
+            android:textColor="#333333"
+            android:layout_marginLeft="22dp"
+            android:text="进度查询"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+    <View
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+
+
+        android:background="@drawable/shape_dash_line"
+        android:layerType="software"
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        />
+
+    <LinearLayout
+        android:id="@+id/btnPass"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="20dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="55dp">
+
+        <ImageView
+            android:src="@mipmap/mine_change_pass"
+            android:layout_width="20dp"
+            android:layout_height="20dp"/>
+
+        <TextView
+            android:textSize="14sp"
+            android:textColor="#333333"
+            android:layout_marginLeft="22dp"
+            android:text="修改密码"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+    <View
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+
+
+        android:background="@drawable/shape_dash_line"
+        android:layerType="software"
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        />
+    <LinearLayout
+        android:id="@+id/btnAdvice"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="20dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="55dp">
+
+        <ImageView
+            android:src="@mipmap/mine_advice"
+            android:layout_width="20dp"
+            android:layout_height="20dp"/>
+
+        <TextView
+            android:textSize="14sp"
+            android:textColor="#333333"
+            android:layout_marginLeft="22dp"
+            android:text="投诉建议"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+    <View
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+
+
+        android:background="@drawable/shape_dash_line"
+        android:layerType="software"
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        />
+
+    <LinearLayout
+        android:id="@+id/btnCache"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="20dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="55dp">
+
+        <ImageView
+            android:src="@mipmap/mine_clean_cahce"
+            android:layout_width="20dp"
+            android:layout_height="20dp"/>
+
+        <TextView
+            android:textSize="14sp"
+            android:textColor="#333333"
+            android:layout_marginLeft="22dp"
+            android:text="清理缓存"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+    <View
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+
+
+        android:background="@drawable/shape_dash_line"
+        android:layerType="software"
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        />
+
+    <LinearLayout
+        android:id="@+id/btnVersion"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="20dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="55dp">
+
+        <ImageView
+            android:src="@mipmap/mine_version"
+            android:layout_width="20dp"
+            android:layout_height="20dp"/>
+
+        <TextView
+            android:textSize="14sp"
+            android:textColor="#333333"
+            android:layout_marginLeft="22dp"
+            android:text="版本号"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <ImageView
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/version"
+            android:layout_width="20dp"
+            android:layout_height="20dp"/>
+        <Space
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_marginRight="16dp"
+            android:text="1.5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</LinearLayout>

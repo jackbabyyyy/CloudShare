@@ -77,6 +77,8 @@ public class MineFragment extends BaseFragment {
     protected void init() {
 
 
+
+
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mAdapter = new MineAdapter(AppData.getMineBody());
         View head=LayoutInflater.from(getActivity()).inflate(R.layout.head_mine,null);
@@ -198,7 +200,6 @@ public class MineFragment extends BaseFragment {
                     @Override
                     public void onResponse(String response) throws IOException {
                         try {
-
 
                             JSONObject jsonObject=new JSONObject(response);
                             JSONObject data=new JSONObject(jsonObject.getString("data"));

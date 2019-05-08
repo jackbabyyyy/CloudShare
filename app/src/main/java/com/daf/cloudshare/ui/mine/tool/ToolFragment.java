@@ -92,16 +92,16 @@ public class ToolFragment extends BaseFragment {
             }
         });
 
+
+
         HttpUtil.getInstance(getActivity())
-                .postForm(AppUrl.toolsList, null, new HttpUtil.ResultCallback() {
+                .postForm(AppUrl.base+AppUrl.toolsList, null, new HttpUtil.ResultCallback() {
                     @Override
                     public void onError(Request request, Exception e) {
 
                     }
-
                     @Override
                     public void onResponse(String response) throws IOException {
-
                         ToolListBean toolListBean= JSON.parseObject(response,ToolListBean.class);
                         mAdapter.setNewData(toolListBean.getData());
 

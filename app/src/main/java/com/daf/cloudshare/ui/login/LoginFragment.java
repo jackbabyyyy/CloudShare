@@ -137,7 +137,7 @@ public class LoginFragment extends BaseFragment {
         HashMap hashMap = new HashMap();
         hashMap.put("telephone", account);
         hashMap.put("password", password);
-        hashMap.put("appid", BuildConfig.APP_ID);
+   //     hashMap.put("appid", BuildConfig.APP_ID);
 
         HttpUtil.getInstance(getActivity()).postForm(AppUrl.login, hashMap, new HttpUtil.ResultCallback() {
             @Override

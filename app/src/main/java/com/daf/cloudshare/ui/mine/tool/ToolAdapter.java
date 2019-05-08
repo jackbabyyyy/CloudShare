@@ -15,22 +15,19 @@ import java.util.List;
  * Created by PP on 2019/3/1.
  */
 public class ToolAdapter extends BaseQuickAdapter<ToolListBean.DataBean, BaseViewHolder> {
-    public ToolAdapter( @Nullable List<ToolListBean.DataBean> data) {
-        super(R.layout.adapter_tool
-                , data);
+    public ToolAdapter(@Nullable List<ToolListBean.DataBean> data) {
+        super(R.layout.adapter_tool, data);
     }
 
     @Override
     protected void convert(BaseViewHolder helper, ToolListBean.DataBean item) {
 
 
-        Glide.with(mContext).load(item.getIcon()).into((ImageView)helper.getView(R.id.iv_pic));
-        helper.setText(R.id.tv_title,item.getTitle());
-
+        Glide.with(mContext).load(item.getIcon()).into((ImageView) helper.getView(R.id.iv_pic));
+        helper.setText(R.id.tv_title, item.getTitle());
 
 
     }
-
 
 
 }

@@ -44,6 +44,15 @@ android {
             storePassword 'dafyun'
         }
 
+        rice {
+            keyAlias 'rice'
+            keyPassword 'dafyun'
+            storeFile file('/Users/PP/Desktop/CloudShare/rice.jks')
+            storePassword 'dafyun'
+        }
+
+
+
 
 
     }
@@ -111,6 +120,19 @@ android {
                     ]
                     signingConfig signingConfigs.qxpc
                 }
+
+                rice{
+                    applicationId "cn.dafyun.app.salesmanymzj"
+                    versionCode 10
+                    versionName "1.0"
+                    buildConfigField "String","WX_ID" ,'"wxc67cf3baf39d8c17"'
+                    buildConfigField "String","APP_ID" ,'"QXPCIDENTIFY"'
+                    manifestPlaceholders = [
+                            WX : "wxc67cf3baf39d8c17"
+                    ]
+                    signingConfig signingConfigs.rice
+                }
+
 
 
 

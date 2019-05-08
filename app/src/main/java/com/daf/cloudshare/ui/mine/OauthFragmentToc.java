@@ -104,7 +104,7 @@ public class OauthFragmentToc extends BaseFragment {
         HashMap<String,String> map=new HashMap<>();
         map.put("name",name);
         map.put("idcard",pass);
-        HttpUtil.getInstance(getActivity()).postForm(AppUrl.changeInfo, map, new HttpUtil.ResultCallback() {
+        HttpUtil.getInstance(getActivity()).postForm(AppUrl.base+AppUrl.changeInfo, map, new HttpUtil.ResultCallback() {
             @Override
             public void onError(Request request, Exception e) {
 

@@ -99,7 +99,6 @@ public class MineFragmentToc extends BaseFragment {
         foot.findViewById(R.id.login_out).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 showLoginDialog();
             }
         });
@@ -143,7 +142,6 @@ public class MineFragmentToc extends BaseFragment {
                         startFragment(new OauthFragmentToc());
                         break;
                     case 1:
-
                         if (TextUtils.isEmpty(idcard)) {
                             startFragment(new OauthFragmentToc());
                         } else {

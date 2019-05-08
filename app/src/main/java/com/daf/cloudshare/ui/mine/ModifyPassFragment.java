@@ -103,7 +103,7 @@ public class ModifyPassFragment extends BaseFragment {
         map.put("newpwd",mEtPwdNew.getText().toString().trim());
         map.put("repwd",mEtPwdAgain.getText().toString().trim());
         HttpUtil.getInstance(getActivity())
-                .postForm(AppUrl.modifyPass, map, new HttpUtil.ResultCallback() {
+                .postForm(AppUrl.base+AppUrl.modifyPass, map, new HttpUtil.ResultCallback() {
                     @Override
                     public void onError(Request request, Exception e) {
 

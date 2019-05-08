@@ -133,7 +133,7 @@ public class MyPrjDataListFragment extends BaseFragment implements BaseQuickAdap
         map.put("proid",mPid);
 
         HttpUtil.getInstance(getActivity())
-                .postForm(AppUrl.myPrjDataList, map, new HttpUtil.ResultCallback() {
+                .postForm(AppUrl.base+AppUrl.myPrjDataList, map, new HttpUtil.ResultCallback() {
                     @Override
                     public void onError(Request request, Exception e) {
 

@@ -116,7 +116,7 @@ public class MyPrjFragment extends BaseFragment implements BaseQuickAdapter.Requ
         Map<String ,String> map=new HashMap<>();
         map.put("page",PAGE+"");
         HttpUtil.getInstance(getActivity())
-                .postForm(AppUrl.myPrj, map, new HttpUtil.ResultCallback() {
+                .postForm(AppUrl.base+AppUrl.myPrj, map, new HttpUtil.ResultCallback() {
                     @Override
                     public void onError(Request request, Exception e) {
 

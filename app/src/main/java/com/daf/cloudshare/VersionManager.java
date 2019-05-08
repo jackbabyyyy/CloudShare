@@ -13,18 +13,20 @@ public class VersionManager {
 
     public static void setToc(Context context,boolean isToc){
         SP.put(context,"toc",isToc);
+        String url=null;
         if (isToc){
-            String url="https://www.winsharecn.cn/diffuse.php?";
+             url="https://www.winsharecn.cn/diffuse.php?";
             SP.put(context,"baseurl",url);
             MyApplication.BASEURL=url;
 
+
         }else{
-            String url="https://www.winsharecn.cn/api.php?";
+             url="https://www.winsharecn.cn/api.php?";
             SP.put(context,"baseurl",url);
             MyApplication.BASEURL=url;
         }
-
-        AppUrl.reset();
+        AppUrl.base=url;
+    //    AppUrl.reset();
 
 
     }

@@ -130,7 +130,7 @@ public class MyQrFragment extends BaseFragment {
         });
 
         HttpUtil.getInstance(getActivity())
-                .postForm(AppUrl.myQr, null, new HttpUtil.ResultCallback() {
+                .postForm(AppUrl.base+AppUrl.myQr, null, new HttpUtil.ResultCallback() {
                     @Override
                     public void onError(Request request, Exception e) {
 

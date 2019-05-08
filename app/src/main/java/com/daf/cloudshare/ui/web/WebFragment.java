@@ -20,6 +20,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -34,6 +35,8 @@ import android.widget.ZoomButtonsController;
 import com.daf.cloudshare.R;
 import com.daf.cloudshare.base.BaseFragment;
 
+import com.daf.cloudshare.net.AppUrl;
+import com.daf.cloudshare.net.HttpUtil;
 import com.qmuiteam.qmui.util.QMUILangHelper;
 import com.qmuiteam.qmui.util.QMUIResHelper;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
@@ -43,11 +46,14 @@ import com.qmuiteam.qmui.widget.webview.QMUIWebView;
 import com.qmuiteam.qmui.widget.webview.QMUIWebViewClient;
 import com.qmuiteam.qmui.widget.webview.QMUIWebViewContainer;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
 import java.net.URLDecoder;
+import java.util.HashMap;
 
 import butterknife.BindView;
+import okhttp3.Request;
 
 /**
  * Created by cgspine on 2017/12/4.
@@ -107,6 +113,20 @@ public class WebFragment extends BaseFragment {
 
         initTopbar();
         initWebView();
+
+        HashMap<String,String > map=new HashMap<>();
+        map.put("url", bundle.getString(EXTRA_URL));
+        HttpUtil.getInstance(getActivity()).postForm(AppUrl.base+AppUrl.getUrlGetConfig, map, new HttpUtil.ResultCallback() {
+            @Override
+            public void onError(Request request, Exception e) {
+
+            }
+
+            @Override
+            public void onResponse(String response) throws IOException {
+
+            }
+        });
 
     }
 

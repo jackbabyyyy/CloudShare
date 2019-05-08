@@ -80,7 +80,7 @@ public class SubmitFragment extends BaseFragment {
         map.put("title",title);
         map.put("content",content);
         HttpUtil.getInstance(getActivity())
-                .postForm(AppUrl.addAdvice, map, new HttpUtil.ResultCallback() {
+                .postForm(AppUrl.base+AppUrl.addAdvice, map, new HttpUtil.ResultCallback() {
                     @Override
                     public void onError(Request request, Exception e) {
 

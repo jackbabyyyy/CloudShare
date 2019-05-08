@@ -15,6 +15,8 @@ import android.widget.ImageView;
 @SuppressLint("AppCompatCustomView")
 public class DragView extends ImageView {
 
+
+
     private int width;
     private int height;
     private int screenWidth;
@@ -57,6 +59,8 @@ public class DragView extends ImageView {
         Log.e("kid", "onLayout: dsds"+left);
         super.onLayout(true, left, top, right, bottom);
     }
+
+
 
     @Override
     protected void onDraw(Canvas canvas) {

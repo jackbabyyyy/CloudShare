@@ -133,7 +133,7 @@ public class FavoriteFragment extends BaseFragment {
     }
 
     private void getFavorite(){
-        HttpUtil.getInstance(getActivity()).postForm(AppUrl.getFavorite, null, new HttpUtil.ResultCallback() {
+        HttpUtil.getInstance(getActivity()).postForm(AppUrl.base+AppUrl.getFavorite, null, new HttpUtil.ResultCallback() {
             @Override
             public void onError(Request request, Exception e) {
 
@@ -162,7 +162,7 @@ public class FavoriteFragment extends BaseFragment {
         Map<String, String> map = new HashMap<>();
         map.put("id", id);
 
-        HttpUtil.getInstance(getActivity()).postForm(AppUrl.cancelFavorite, map, new HttpUtil.ResultCallback() {
+        HttpUtil.getInstance(getActivity()).postForm(AppUrl.base+AppUrl.cancelFavorite, map, new HttpUtil.ResultCallback() {
             @Override
             public void onError(Request request, Exception e) {
 

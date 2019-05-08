@@ -254,7 +254,7 @@ public class HomeFragment extends BaseFragment implements EasyPermissions.Permis
 
     private void initHomeDialog() {
         HttpUtil.getInstance(getActivity())
-                .postForm(AppUrl.getDialog, null, new HttpUtil.ResultCallback() {
+                .postForm(AppUrl.base+AppUrl.getDialog, null, new HttpUtil.ResultCallback() {
                     @Override
                     public void onError(Request request, Exception e) {
 
@@ -407,7 +407,7 @@ public class HomeFragment extends BaseFragment implements EasyPermissions.Permis
         mHead.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startFragment(ProductFragment.getInstance("产品列表", "", AppUrl.prjList));
+                startFragment(ProductFragment.getInstance("产品列表", "", AppUrl.base+AppUrl.prjList));
             }
         });
         mRecycler.setLayoutManager(new GridLayoutManager(getActivity(), 4));
@@ -451,7 +451,7 @@ public class HomeFragment extends BaseFragment implements EasyPermissions.Permis
 
     private void getData() {
         HttpUtil.getInstance(getActivity())
-                .postForm(AppUrl.getTopFavorite, null, new HttpUtil.ResultCallback() {
+                .postForm(AppUrl.base+AppUrl.getTopFavorite, null, new HttpUtil.ResultCallback() {
                     @Override
                     public void onError(Request request, Exception e) {
 
@@ -484,7 +484,7 @@ public class HomeFragment extends BaseFragment implements EasyPermissions.Permis
 
     private void initType() {
         HttpUtil.getInstance(getActivity())
-                .postForm(AppUrl.getProType, null, new HttpUtil.ResultCallback() {
+                .postForm(AppUrl.base+AppUrl.getProType, null, new HttpUtil.ResultCallback() {
                     @Override
                     public void onError(Request request, Exception e) {
 
@@ -514,7 +514,7 @@ public class HomeFragment extends BaseFragment implements EasyPermissions.Permis
 
     private void initAd() {
         HttpUtil.getInstance(getActivity())
-                .postForm(AppUrl.getIndexTip, null, new HttpUtil.ResultCallback() {
+                .postForm(AppUrl.base+AppUrl.getIndexTip, null, new HttpUtil.ResultCallback() {
                     @Override
                     public void onError(Request request, Exception e) {
 
@@ -584,16 +584,16 @@ public class HomeFragment extends BaseFragment implements EasyPermissions.Permis
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.root:
-                startFragment(ProductFragment.getInstance(mBean.data.get(0).t_name, mBean.data.get(0).t_id, AppUrl.prjList));
+                startFragment(ProductFragment.getInstance(mBean.data.get(0).t_name, mBean.data.get(0).t_id,AppUrl.base+ AppUrl.prjList));
                 break;
             case R.id.root2:
-                startFragment(ProductFragment.getInstance(mBean.data.get(1).t_name, mBean.data.get(1).t_id, AppUrl.prjList));
+                startFragment(ProductFragment.getInstance(mBean.data.get(1).t_name, mBean.data.get(1).t_id,AppUrl.base+ AppUrl.prjList));
                 break;
             case R.id.root3:
-                startFragment(ProductFragment.getInstance(mBean.data.get(2).t_name, mBean.data.get(2).t_id, AppUrl.prjList));
+                startFragment(ProductFragment.getInstance(mBean.data.get(2).t_name, mBean.data.get(2).t_id,AppUrl.base+ AppUrl.prjList));
                 break;
             case R.id.root4:
-                startFragment(ProductFragment.getInstance(mBean.data.get(3).t_name, mBean.data.get(3).t_id, AppUrl.prjList));
+                startFragment(ProductFragment.getInstance(mBean.data.get(3).t_name, mBean.data.get(3).t_id,AppUrl.base+ AppUrl.prjList));
                 break;
             case R.id.tvMore:
                 startFragment(new FavoriteFragment());
@@ -626,7 +626,7 @@ public class HomeFragment extends BaseFragment implements EasyPermissions.Permis
         });
 
         HttpUtil.getInstance(getActivity())
-                .postForm(AppUrl.banner, null, new HttpUtil.ResultCallback() {
+                .postForm(AppUrl.base+AppUrl.banner, null, new HttpUtil.ResultCallback() {
                     @Override
                     public void onError(Request request, Exception e) {
 

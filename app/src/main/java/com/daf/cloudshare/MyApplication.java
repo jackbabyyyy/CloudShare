@@ -3,6 +3,7 @@ package com.daf.cloudshare;
 import android.app.Application;
 import android.content.res.Resources;
 
+import com.bumptech.glide.Glide;
 import com.daf.cloudshare.net.AppUrl;
 import com.daf.cloudshare.utils.Const;
 import com.daf.cloudshare.utils.SP;
@@ -31,6 +32,7 @@ public class MyApplication extends Application {
         super.onCreate();
 
         QMUISwipeBackActivityManager.init(this);
+
 
 
         MobSDK.init(this);

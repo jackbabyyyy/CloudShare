@@ -188,7 +188,7 @@ public class DetailFragment extends BaseFragment implements QbSdk.PreInitCallbac
         Map<String, String> map = new HashMap<>();
         map.put("proid", id);
         HttpUtil.getInstance(getActivity())
-                .postForm(AppUrl.prjInfo, map, new HttpUtil.ResultCallback() {
+                .postForm(AppUrl.base+AppUrl.prjInfo, map, new HttpUtil.ResultCallback() {
                     @Override
                     public void onError(Request request, Exception e) {
                         showDialog("获取数据出错");
@@ -227,7 +227,7 @@ public class DetailFragment extends BaseFragment implements QbSdk.PreInitCallbac
 
         HashMap hashMap = new HashMap();
         hashMap.put("proid", id);
-        HttpUtil.getInstance(getActivity()).postForm(AppUrl.getPoster, hashMap, new HttpUtil.ResultCallback() {
+        HttpUtil.getInstance(getActivity()).postForm(AppUrl.base+AppUrl.getPoster, hashMap, new HttpUtil.ResultCallback() {
             @Override
             public void onError(Request request, Exception e) {
 
@@ -466,7 +466,7 @@ public class DetailFragment extends BaseFragment implements QbSdk.PreInitCallbac
         Map<String, String> map = new HashMap<>();
         map.put("id", id);
         Log.d(TAG, "cancelFavorite: " + id);
-        HttpUtil.getInstance(getActivity()).postForm(AppUrl.cancelFavorite, map, new HttpUtil.ResultCallback() {
+        HttpUtil.getInstance(getActivity()).postForm(AppUrl.base+AppUrl.cancelFavorite, map, new HttpUtil.ResultCallback() {
             @Override
             public void onError(Request request, Exception e) {
 
@@ -503,7 +503,7 @@ public class DetailFragment extends BaseFragment implements QbSdk.PreInitCallbac
         map.put("logo", mDetailBean.data.p_logo);
         map.put("order", "0");
         HttpUtil.getInstance(getActivity())
-                .postForm(AppUrl.addToFavorite, map, new HttpUtil.ResultCallback() {
+                .postForm(AppUrl.base+AppUrl.addToFavorite, map, new HttpUtil.ResultCallback() {
                     @Override
                     public void onError(Request request, Exception e) {
 

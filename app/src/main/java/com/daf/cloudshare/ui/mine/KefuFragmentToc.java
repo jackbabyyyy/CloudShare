@@ -133,7 +133,7 @@ public class KefuFragmentToc extends BaseFragment implements EasyPermissions.Per
     }
 
     private void getData() {
-        HttpUtil.getInstance(getActivity()).postForm(AppUrl.getMyParent, null, new HttpUtil.ResultCallback() {
+        HttpUtil.getInstance(getActivity()).postForm(AppUrl.base+AppUrl.getMyParent, null, new HttpUtil.ResultCallback() {
             @Override
             public void onError(Request request, Exception e) {
 

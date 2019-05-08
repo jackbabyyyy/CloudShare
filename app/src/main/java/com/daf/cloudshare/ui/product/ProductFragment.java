@@ -287,7 +287,7 @@ public class ProductFragment extends BaseFragment implements BaseQuickAdapter.Re
 
 
     private void getFilter() {
-        HttpUtil.getInstance(getActivity()).postForm(AppUrl.getSearchConfig, null, new HttpUtil.ResultCallback() {
+        HttpUtil.getInstance(getActivity()).postForm(AppUrl.base+AppUrl.getSearchConfig, null, new HttpUtil.ResultCallback() {
             @Override
             public void onError(Request request, Exception e) {
 
@@ -391,7 +391,7 @@ public class ProductFragment extends BaseFragment implements BaseQuickAdapter.Re
 
         HashMap<String, String> map = new HashMap<>();
         map.put("keyword", keyword);
-        HttpUtil.getInstance(getActivity()).postForm(AppUrl.searchProject, map, new HttpUtil.ResultCallback() {
+        HttpUtil.getInstance(getActivity()).postForm(AppUrl.base+AppUrl.searchProject, map, new HttpUtil.ResultCallback() {
             @Override
             public void onError(Request request, Exception e) {
 

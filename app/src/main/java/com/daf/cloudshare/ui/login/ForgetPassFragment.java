@@ -81,7 +81,7 @@ public class ForgetPassFragment extends BaseFragment {
     private void getPass(String phone){
         HashMap<String,String> map=new HashMap<>();
         map.put("telephone",phone);
-        HttpUtil.getInstance(getActivity()).postForm(AppUrl.backPass, map, new HttpUtil.ResultCallback() {
+        HttpUtil.getInstance(getActivity()).postForm(AppUrl.base+AppUrl.backPass, map, new HttpUtil.ResultCallback() {
             @Override
             public void onError(Request request, Exception e) {
 
@@ -102,7 +102,7 @@ public class ForgetPassFragment extends BaseFragment {
     private void getPass2(String phone){
         HashMap<String,String> map=new HashMap<>();
         map.put("telephone",phone);
-        HttpUtil.getInstance(getActivity()).postForm(AppUrl.backPass2, map, new HttpUtil.ResultCallback() {
+        HttpUtil.getInstance(getActivity()).postForm(AppUrl.base+AppUrl.backPass2, map, new HttpUtil.ResultCallback() {
             @Override
             public void onError(Request request, Exception e) {
 
